@@ -1,12 +1,12 @@
-group = "app.template"
+group = "app.media"
 
 patches {
     // TODO: Update this section with your project details.
     about {
-        name = "UserXYZ Patches"
-        description = "Patches for apps I like"
-        source = "git@github.com:UserXYZ/morphe-patches.git"
-        author = "Awesome dev"
+        name = "Media Patches"
+        description = "Patches for media apps"
+        source = "git@github.com:HellLord77/media-patches.git"
+        author = "Hell Lord"
         contact = "na"
         website = "na"
         license = "GPLv3"

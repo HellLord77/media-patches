@@ -9,7 +9,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
 @Suppress("unused")
 val streamPatch = bytecodePatch(
-    name = "Stream Free Content",
+    name = "Stream Paid Content",
     description = "Stream podcasts and audiobooks for free.",
     default = true
 ) {
