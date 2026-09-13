@@ -21,7 +21,7 @@ object IsPaidGetterFingerprint : Fingerprint(
     ),
 )
 
-object AbstractFingerprint : Fingerprint(
+object FourArgumentMethodFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.ABSTRACT),
     returnType = "Ljava/lang/Object;",
     parameters = listOf(
