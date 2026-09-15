@@ -9,7 +9,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
 @Suppress("unused")
 val streamPatch = bytecodePatch(
-    name = "Stream Paid Content",
+    name = "Stream paid content",
     description = "Stream podcasts and audiobooks for free.",
     default = true
 ) {
@@ -18,26 +18,28 @@ val streamPatch = bytecodePatch(
     dependsOn(freeContentPatch)
 
     execute {
-        FourArgumentMethodFingerprint.matchAll().filter { match ->
+        val urlFetchers = FourParameterMethodFingerprint.matchAll().filter { match ->
             match.originalMethod.annotations.flatMap { it.elements }
                 .any { it.value.toString().endsWith("/streamings/url\"") }
-        }.map { it.originalMethod }.forEach { retrofitMethod ->
+        }
+        require(urlFetchers.size == 1)
+
+        urlFetchers[0].originalMethod.let { retrofitMethod ->
             val parameterIndex = retrofitMethod.parameters.indexOfFirst { parameter ->
                 parameter.annotations.flatMap { it.elements }
                     .any { it.value.toString() == "\"ContentType\"" }
             }
 
-            Fingerprint(filters = listOf(methodCall(retrofitMethod))).matchAll()
-                .forEach { methodInvoker ->
-                    val invokeInterface = methodInvoker.instructionMatches[0]
-                    val contentTypeReg = invokeInterface.getInstruction<FiveRegisterInstruction>()
-                        .let { listOf(it.registerD, it.registerE, it.registerF) }[parameterIndex]
+            Fingerprint(filters = listOf(methodCall(retrofitMethod))).matchAll().forEach { match ->
+                val invokeInterface = match.instructionMatches[0]
+                val contentTypeReg = invokeInterface.getInstruction<FiveRegisterInstruction>()
+                    .let { listOf(it.registerD, it.registerE, it.registerF) }[parameterIndex]
 
-                    methodInvoker.method.addInstruction(
-                        invokeInterface.index,
-                        "const-string v$contentTypeReg, \"S\"",
-                    )
-                }
+                match.method.addInstruction(
+                    invokeInterface.index,
+                    "const-string v$contentTypeReg, \"S\"",
+                )
+            }
         }
     }
 }
