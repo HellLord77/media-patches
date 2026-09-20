@@ -1,4 +1,4 @@
-package app.media.patches.shadhin
+package app.morphe.patches.shadhin
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.fieldAccess
@@ -21,7 +21,7 @@ object IsPaidGetterFingerprint : Fingerprint(
     ),
 )
 
-object FourArgumentMethodFingerprint : Fingerprint(
+object FourParameterMethodFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.ABSTRACT),
     returnType = "Ljava/lang/Object;",
     parameters = listOf(

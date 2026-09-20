@@ -1,14 +1,13 @@
-group = "app.media"
+group = "app.morphe"
 
 patches {
-    // TODO: Update this section with your project details.
     about {
         name = "Media Patches"
         description = "Patches for media apps"
         source = "git@github.com:HellLord77/media-patches.git"
         author = "Hell Lord"
         contact = "na"
-        website = "na"
+        website = "https://morphe.software"
         license = "GPLv3"
     }
 }
@@ -20,6 +19,8 @@ val patchListGeneratorClasspath = configurations.create("patchListGeneratorClass
 dependencies {
     compileOnly(libs.gson)
     patchListGeneratorClasspath(libs.gson)
+
+    implementation(libs.morphe.patches.library)
 }
 
 tasks {
