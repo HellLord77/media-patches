@@ -1,4 +1,4 @@
-package app.media.patches.shadhin
+package app.morphe.patches.shadhin
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.fieldAccess
