@@ -1,12 +1,12 @@
-package app.morphe.extension.bongo.utils.reflect.retrofit2;
+package reflect.retrofit2;
 
-import app.morphe.extension.bongo.utils.reflect.ReflectUtil;
 import java.lang.reflect.Method;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import reflect.Utils;
 
 public class Response {
-  private static final Method RAW = ReflectUtil.getMethod(retrofit2.Response.class, "raw", null);
+  private static final Method RAW = Utils.getMethod(retrofit2.Response.class, "raw", null);
 
   @Nullable
   public static Object raw(@NotNull Object self) throws Exception {

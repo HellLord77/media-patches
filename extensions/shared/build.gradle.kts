@@ -1,4 +1,6 @@
 dependencies {
+    compileOnly(project(":extensions:shared:stub"))
+
     implementation(project(":extensions:shared:library"))
 }
 

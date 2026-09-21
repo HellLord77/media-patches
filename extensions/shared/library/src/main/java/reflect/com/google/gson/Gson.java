@@ -1,13 +1,13 @@
-package app.morphe.extension.bongo.utils.reflect.com.google.gson;
+package reflect.com.google.gson;
 
-import app.morphe.extension.bongo.utils.reflect.ReflectUtil;
 import java.lang.reflect.Method;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import reflect.Utils;
 
 public class Gson {
   private static final Method FROM_JSON =
-      ReflectUtil.getMethod(
+      Utils.getMethod(
           com.google.gson.Gson.class, "fromJson", Object.class, String.class, Class.class);
 
   @SuppressWarnings("unchecked")

@@ -138,24 +138,16 @@ public class FreeContentPatch {
 
     if (response.code() == 403) {
       try {
-        var raw =
-            app.morphe.extension.bongo.utils.reflect.retrofit2.Response.raw((Object) response);
-        var request =
-            (Request)
-                Objects.requireNonNull(
-                    app.morphe.extension.bongo.utils.reflect.okhttp3.Response.request(raw));
+        var raw = reflect.retrofit2.Response.raw((Object) response);
+        var request = (Request) Objects.requireNonNull(reflect.okhttp3.Response.request(raw));
         Logger.printDebug(() -> String.format("request: %s", request));
 
         var authorization =
-            Objects.requireNonNull(
-                app.morphe.extension.bongo.utils.reflect.okhttp3.Request.header(
-                    request, Webb.HDR_AUTHORIZATION));
+            Objects.requireNonNull(reflect.okhttp3.Request.header(request, Webb.HDR_AUTHORIZATION));
         Logger.printDebug(() -> String.format("authorization: %s", authorization));
 
         var acceptLanguage =
-            Objects.requireNonNull(
-                app.morphe.extension.bongo.utils.reflect.okhttp3.Request.header(
-                    request, "Accept-Language"));
+            Objects.requireNonNull(reflect.okhttp3.Request.header(request, "Accept-Language"));
         Logger.printDebug(() -> String.format("acceptLanguage: %s", acceptLanguage));
 
         var contentDetails =

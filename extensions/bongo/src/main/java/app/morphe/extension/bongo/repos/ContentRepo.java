@@ -33,8 +33,7 @@ public class ContentRepo {
     var contentDetails = buildContentDetails(contentTrailer, content, acceptLanguage);
     Logger.printDebug(() -> String.format("contentDetails: %s", contentDetails));
 
-    return app.morphe.extension.bongo.utils.reflect.com.google.gson.Gson.fromJson(
-        GSON, contentDetails.toString(), classOfT);
+    return reflect.com.google.gson.Gson.fromJson(GSON, contentDetails.toString(), classOfT);
   }
 
   @NotNull

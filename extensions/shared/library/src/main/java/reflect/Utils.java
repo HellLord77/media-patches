@@ -1,4 +1,4 @@
-package app.morphe.extension.bongo.utils.reflect;
+package reflect;
 
 import app.morphe.extension.shared.Logger;
 import java.lang.reflect.Method;
@@ -7,7 +7,7 @@ import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ReflectUtil {
+public class Utils {
   @Nullable
   public static Method getMethod(
       @NotNull String className,

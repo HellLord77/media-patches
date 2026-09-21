@@ -1,7 +1,7 @@
 dependencies {
-    compileOnly(project(":extensions:shared:stub"))
-
-    api(libs.morphe.extensions.library)
+    api(libs.gson)
+    api(libs.okhttp)
+    api(libs.retrofit)
 }
 
 plugins {
