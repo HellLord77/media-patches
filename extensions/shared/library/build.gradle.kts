@@ -1,9 +1,13 @@
 dependencies {
-    implementation(project(":extensions:shared:library"))
+    api(libs.morphe.extensions.library)
+}
+
+plugins {
+    alias(libs.plugins.android.library)
 }
 
 android {
-    namespace = "app.morphe.extension"
+    namespace = "app.morphe.extension.shared"
     compileSdk = 36
 
     defaultConfig {

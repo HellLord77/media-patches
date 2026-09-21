@@ -21,8 +21,6 @@ public class ContentRepo {
       @NotNull String acceptLanguage,
       @NotNull Class<T> classOfT)
       throws Exception {
-    Utils.verifyOffMainThread();
-
     Utils.showToastShort(String.format("getContentDetails: %s", bongoId));
     var contentTrailer = getContentTrailer(bongoId, authorization, acceptLanguage);
     Logger.printDebug(() -> String.format("contentTrailer: %s", contentTrailer));
@@ -42,6 +40,7 @@ public class ContentRepo {
   @NotNull
   private static JSONObject getContentTrailer(
       @NotNull String systemId, @NotNull String authorization, @NotNull String acceptLanguage) {
+    Utils.verifyOffMainThread();
     var url =
         String.format(
             "https://api.bongo-solutions.com/ironman/api/v1/content/content-trailer/%s", systemId);
@@ -57,6 +56,7 @@ public class ContentRepo {
 
   @NotNull
   private static JSONObject getContent(@NotNull String contentId) {
+    Utils.verifyOffMainThread();
     var url =
         String.format("https://api.bongo-solutions.com/ironman/api/v1/contents/%s", contentId);
 
