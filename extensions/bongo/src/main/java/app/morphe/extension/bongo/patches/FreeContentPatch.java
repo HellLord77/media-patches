@@ -7,6 +7,9 @@ import com.bongo.bongobd.view.network.ApiServiceSaas;
 import com.goebl.david.Webb;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import kotlin.NotImplementedError;
 import kotlin.Result;
 import kotlin.coroutines.Continuation;
@@ -24,6 +27,7 @@ import saas.ott.smarttv.ui.details.model.ContentDetails;
 @SuppressWarnings("unused")
 public class FreeContentPatch {
   private static final String TAG = "com.app.extension.bongo";
+  private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
 
   @Nullable
   public static Object getContentDetails(
@@ -76,7 +80,13 @@ public class FreeContentPatch {
               @Override
               public void onResponse(
                   @NotNull Call<ContentDetails> call, @NotNull Response<ContentDetails> response) {
-                callback.onResponse(call, getResponse(id, response, ContentDetails.class));
+                try {
+                  callback.onResponse(
+                      call,
+                      EXECUTOR.submit(() -> getResponse(id, response, ContentDetails.class)).get());
+                } catch (ExecutionException | InterruptedException t) {
+                  callback.onFailure(call, t);
+                }
               }
 
               @Override
