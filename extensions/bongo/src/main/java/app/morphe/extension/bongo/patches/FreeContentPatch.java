@@ -1,7 +1,7 @@
 package app.morphe.extension.bongo.patches;
 
-import android.util.Log;
 import app.morphe.extension.bongo.repos.ContentRepo;
+import app.morphe.extension.shared.Logger;
 import com.bongo.bongobd.view.model.ContentDetailsResponse;
 import com.bongo.bongobd.view.network.ApiServiceSaas;
 import com.goebl.david.Webb;
@@ -26,7 +26,6 @@ import saas.ott.smarttv.ui.details.model.ContentDetails;
 
 @SuppressWarnings("unused")
 public class FreeContentPatch {
-  private static final String TAG = "com.app.extension.bongo";
   private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
 
   @Nullable
@@ -34,7 +33,7 @@ public class FreeContentPatch {
       @NotNull ApiServiceSaas self,
       @NotNull String bongoId,
       @NotNull Continuation<Response<ContentDetailsResponse>> continuation) {
-    Log.d(TAG, String.format("bongoId: %s", bongoId));
+    Logger.printDebug(() -> String.format("bongoId: %s", bongoId));
 
     return self.getContentDetails(
         bongoId,
@@ -63,7 +62,7 @@ public class FreeContentPatch {
   @NotNull
   public static Call<ContentDetails> getVideoDetailsData(
       @NotNull DetailsEndPoint self, @NotNull String id) {
-    Log.d(TAG, String.format("id: %s", id));
+    Logger.printDebug(() -> String.format("id: %s", id));
     var call = self.getVideoDetailsData(id);
 
     return new Call<>() {
@@ -134,7 +133,9 @@ public class FreeContentPatch {
   @NotNull
   private static <T> Response<T> getResponse(
       @NotNull String systemId, @NotNull Response<T> response, @NotNull Class<T> classOfT) {
-    Log.v(TAG, String.format("response: %s", response));
+    var finalResponse = response;
+    Logger.printDebug(() -> String.format("response: %s", finalResponse));
+
     if (response.code() == 403) {
       try {
         var raw =
@@ -143,27 +144,28 @@ public class FreeContentPatch {
             (Request)
                 Objects.requireNonNull(
                     app.morphe.extension.bongo.utils.reflect.okhttp3.Response.request(raw));
-        Log.v(TAG, String.format("request: %s", request));
+        Logger.printDebug(() -> String.format("request: %s", request));
 
         var authorization =
             Objects.requireNonNull(
                 app.morphe.extension.bongo.utils.reflect.okhttp3.Request.header(
                     request, Webb.HDR_AUTHORIZATION));
-        Log.v(TAG, String.format("authorization: %s", authorization));
+        Logger.printDebug(() -> String.format("authorization: %s", authorization));
 
         var acceptLanguage =
             Objects.requireNonNull(
                 app.morphe.extension.bongo.utils.reflect.okhttp3.Request.header(
                     request, "Accept-Language"));
-        Log.v(TAG, String.format("acceptLanguage: %s", acceptLanguage));
+        Logger.printDebug(() -> String.format("acceptLanguage: %s", acceptLanguage));
 
         var contentDetails =
             ContentRepo.getContentDetails(systemId, authorization, acceptLanguage, classOfT);
         if (contentDetails != null) {
           response = Response.success(contentDetails);
         }
+
       } catch (Exception e) {
-        Log.w(TAG, String.format("exception: %s", e.getClass()), e);
+        Logger.printException(() -> "getResponse failure", e);
       }
     }
     return response;

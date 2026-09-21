@@ -1,6 +1,6 @@
 package app.morphe.extension.bongo.utils.reflect;
 
-import android.util.Log;
+import app.morphe.extension.shared.Logger;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Objects;
@@ -8,8 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ReflectUtil {
-  private static final String TAG = "com.app.extension.bongo";
-
   @Nullable
   public static Method getMethod(
       @NotNull String className,
@@ -38,11 +36,12 @@ public class ReflectUtil {
             && Arrays.equals(publicMethod.getParameterTypes(), parameterTypes)) {
 
           if (method != null) {
-            Log.v(
-                TAG,
-                String.format(
-                    "getMethod: %s -> %s, %s",
-                    self.getName(), method.getName(), publicMethod.getName()));
+            var finalMethod = method;
+            Logger.printException(
+                () ->
+                    String.format(
+                        "getMethod: %s -> %s, %s",
+                        self.getName(), finalMethod.getName(), publicMethod.getName()));
             throw new NullPointerException();
           }
           method = publicMethod;
@@ -50,7 +49,9 @@ public class ReflectUtil {
       }
     }
 
-    Log.v(TAG, String.format("getMethod: %s.%s -> %s", self.getName(), name, method));
+    var finalMethod = method;
+    Logger.printDebug(
+        () -> String.format("getMethod: %s.%s -> %s", self.getName(), name, finalMethod));
     return Objects.requireNonNull(method);
   }
 }

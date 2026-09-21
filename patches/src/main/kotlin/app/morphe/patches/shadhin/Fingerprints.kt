@@ -21,7 +21,7 @@ object IsPaidGetterFingerprint : Fingerprint(
     ),
 )
 
-object FourParameterMethodFingerprint : Fingerprint(
+object FetchStreamingUrlFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.ABSTRACT),
     returnType = "Ljava/lang/Object;",
     parameters = listOf(
@@ -30,4 +30,8 @@ object FourParameterMethodFingerprint : Fingerprint(
         "Ljava/lang/String;",
         "L",
     ),
+    custom = { method, _ ->
+        method.annotations.flatMap { it.elements }
+            .any { it.value.toString().endsWith("/streamings/url\"") }
+    }
 )

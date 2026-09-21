@@ -1,7 +1,8 @@
 package app.morphe.extension.bongo.repos;
 
-import android.util.Log;
 import app.morphe.extension.bongo.utils.JSONUtil;
+import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.Utils;
 import com.goebl.david.Webb;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ContentRepo {
-  private static final String TAG = "com.app.extension.bongo";
   private static final Webb WEBB = Webb.create();
   private static final Gson GSON = new Gson();
 
@@ -21,14 +21,19 @@ public class ContentRepo {
       @NotNull String acceptLanguage,
       @NotNull Class<T> classOfT)
       throws Exception {
-    var contentTrailer = getContentTrailer(bongoId, authorization, acceptLanguage);
-    Log.v(TAG, String.format("contentTrailer: %s", contentTrailer));
+    Utils.verifyOffMainThread();
 
-    var content = getContent(contentTrailer.getJSONObject("content").getString("id"));
-    Log.v(TAG, String.format("content: %s", content));
+    Utils.showToastShort(String.format("getContentDetails: %s", bongoId));
+    var contentTrailer = getContentTrailer(bongoId, authorization, acceptLanguage);
+    Logger.printDebug(() -> String.format("contentTrailer: %s", contentTrailer));
+
+    var contentId = contentTrailer.getJSONObject("content").getString("id");
+    Utils.showToastShort(String.format("contentId: %s", contentId));
+    var content = getContent(contentId);
+    Logger.printDebug(() -> String.format("content: %s", content));
 
     var contentDetails = buildContentDetails(contentTrailer, content, acceptLanguage);
-    Log.v(TAG, String.format("contentDetails: %s", contentDetails));
+    Logger.printDebug(() -> String.format("contentDetails: %s", contentDetails));
 
     return app.morphe.extension.bongo.utils.reflect.com.google.gson.Gson.fromJson(
         GSON, contentDetails.toString(), classOfT);

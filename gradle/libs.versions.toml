@@ -11,6 +11,7 @@ smali = "d92701d947"
 [libraries]
 david-webb = { module = "com.goebl:david-webb", version.ref = "david-webb" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+morphe-extensions-library = { module = "app.morphe:morphe-extensions-library", version.ref = "morphe-library" }
 #noinspection UnusedVersionCatalogEntry
 morphe-patcher = { module = "app.morphe:morphe-patcher", version.ref = "morphe-patcher" }
 morphe-patches-library = { module = "app.morphe:morphe-patches-library", version.ref = "morphe-library" }

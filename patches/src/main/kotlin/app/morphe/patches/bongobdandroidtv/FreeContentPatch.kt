@@ -4,6 +4,7 @@ import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patches.bongobdandroidtv.misc.extension.sharedExtensionPatch
 import app.morphe.patches.shared.Constants.COMPATIBILITY_BONGOANDROIDTV
 import app.morphe.patches.shared.getRegisterName
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
@@ -17,7 +18,7 @@ val freeContentPatch = bytecodePatch(
 ) {
     compatibleWith(COMPATIBILITY_BONGOANDROIDTV)
 
-    extendWith("extensions/bongo.mpe")
+    dependsOn(sharedExtensionPatch)
 
     execute {
         GetVideoDetailsDataFingerprint.let { match ->

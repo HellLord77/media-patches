@@ -5,4 +5,5 @@ dependencies {
     compileOnly(project(":extensions:bongo:stub"))
 
     implementation(libs.david.webb)
+    implementation(libs.morphe.extensions.library)
 }

@@ -19,13 +19,7 @@ val streamPatch = bytecodePatch(
     dependsOn(freeContentPatch)
 
     execute {
-        val urlFetchers = FourParameterMethodFingerprint.matchAll().filter { match ->
-            match.originalMethod.annotations.flatMap { it.elements }
-                .any { it.value.toString().endsWith("/streamings/url\"") }
-        }
-        require(urlFetchers.size == 1)
-
-        urlFetchers[0].originalMethod.let { retrofitMethod ->
+        FetchStreamingUrlFingerprint.originalMethod.let { retrofitMethod ->
             val parameterIndex = retrofitMethod.parameters.indexOfFirst { parameter ->
                 parameter.annotations.flatMap { it.elements }
                     .any { it.value.toString() == "\"ContentType\"" }
