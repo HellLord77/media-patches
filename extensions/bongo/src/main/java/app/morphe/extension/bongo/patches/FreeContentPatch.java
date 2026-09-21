@@ -2,75 +2,160 @@ package app.morphe.extension.bongo.patches;
 
 import android.util.Log;
 import app.morphe.extension.bongo.repos.ContentRepo;
-import app.morphe.extension.bongo.utils.OkHttpUtil;
 import com.bongo.bongobd.view.model.ContentDetailsResponse;
 import com.bongo.bongobd.view.network.ApiServiceSaas;
 import com.goebl.david.Webb;
+import java.io.IOException;
 import java.util.Objects;
+import kotlin.NotImplementedError;
+import kotlin.Result;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
+import okhttp3.Request;
+import okio.Timeout;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
+import saas.ott.smarttv.ui.details.data.DetailsEndPoint;
+import saas.ott.smarttv.ui.details.model.ContentDetails;
 
 @SuppressWarnings("unused")
 public class FreeContentPatch {
+  private static final String TAG = "com.app.extension.bongo";
+
   @Nullable
   public static Object getContentDetails(
       @NotNull ApiServiceSaas self,
-      @Nullable String bongoId,
+      @NotNull String bongoId,
       @NotNull Continuation<Response<ContentDetailsResponse>> continuation) {
-    Log.d("com.app.extension.bongo", String.format("bongoId: %s", bongoId));
+    Log.d(TAG, String.format("bongoId: %s", bongoId));
 
-    var interceptingContinuation =
-        new Continuation<Response<ContentDetailsResponse>>() {
+    return self.getContentDetails(
+        bongoId,
+        new Continuation<>() {
           @NotNull
           @Override
           public CoroutineContext getContext() {
             return continuation.getContext();
           }
 
+          @SuppressWarnings("unchecked")
           @Override
           public void resumeWith(@NotNull Object result) {
-            Log.i("com.app.extension.bongo", String.format("result: %s", result));
-
-            if (result instanceof Response<?> response && response.code() == 403) {
-              String authorization = null;
-              String acceptLanguage = null;
-
-              try {
-                var request = OkHttpUtil.invokeResponseRequest(response.raw());
-                if (request != null) {
-                  authorization = OkHttpUtil.invokeRequestHeader(request, Webb.HDR_AUTHORIZATION);
-                  Log.v(
-                      "com.app.extension.bongo", String.format("authorization: %s", authorization));
-                  acceptLanguage = OkHttpUtil.invokeRequestHeader(request, "Accept-Language");
-                  Log.v(
-                      "com.app.extension.bongo",
-                      String.format("acceptLanguage: %s", acceptLanguage));
-                }
-
-                Objects.requireNonNull(bongoId);
-                Objects.requireNonNull(authorization);
-                Objects.requireNonNull(acceptLanguage);
-
-                var contentDetails =
-                    ContentRepo.getContentDetails(bongoId, authorization, acceptLanguage);
-                assert contentDetails != null;
-
-                Log.d(
-                    "com.app.extension.bongo", String.format("contentDetails: %s", contentDetails));
-                result = Response.success(contentDetails);
-              } catch (Exception e) {
-                Log.w("com.app.extension.bongo", String.format("exception: %s", e.getClass()), e);
-              }
+            if (!(result instanceof Result.Failure)) {
+              result =
+                  getResponse(
+                      bongoId,
+                      (Response<ContentDetailsResponse>) result,
+                      ContentDetailsResponse.class);
             }
-
-            Log.i("com.app.extension.bongo", String.format("result: %s", result));
             continuation.resumeWith(result);
           }
-        };
+        });
+  }
 
-    return self.getContentDetails(bongoId, interceptingContinuation);
+  @NotNull
+  public static Call<ContentDetails> getVideoDetailsData(
+      @NotNull DetailsEndPoint self, @NotNull String id) {
+    Log.d(TAG, String.format("id: %s", id));
+    var call = self.getVideoDetailsData(id);
+
+    return new Call<>() {
+      @NotNull
+      @Override
+      public Response<ContentDetails> execute() throws IOException {
+        return getResponse(id, call.execute(), ContentDetails.class);
+      }
+
+      @Override
+      public void enqueue(@NotNull Callback<ContentDetails> callback) {
+        call.enqueue(
+            new Callback<>() {
+              @Override
+              public void onResponse(
+                  @NotNull Call<ContentDetails> call, @NotNull Response<ContentDetails> response) {
+                callback.onResponse(call, getResponse(id, response, ContentDetails.class));
+              }
+
+              @Override
+              public void onFailure(@NotNull Call<ContentDetails> call, @NotNull Throwable t) {
+                callback.onFailure(call, t);
+              }
+            });
+      }
+
+      @Override
+      public boolean isExecuted() {
+        return call.isExecuted();
+      }
+
+      @Override
+      public void cancel() {
+        call.cancel();
+      }
+
+      @Override
+      public boolean isCanceled() {
+        return call.isCanceled();
+      }
+
+      @NotNull
+      @Override
+      public Call<ContentDetails> clone() {
+        throw new NotImplementedError();
+      }
+
+      @NotNull
+      @Override
+      public Request request() {
+        return call.request();
+      }
+
+      @NotNull
+      @Override
+      public Timeout timeout() {
+        return call.timeout();
+      }
+    };
+  }
+
+  @NotNull
+  private static <T> Response<T> getResponse(
+      @NotNull String systemId, @NotNull Response<T> response, @NotNull Class<T> classOfT) {
+    Log.v(TAG, String.format("response: %s", response));
+    if (response.code() == 403) {
+      try {
+        var raw =
+            app.morphe.extension.bongo.utils.reflect.retrofit2.Response.raw((Object) response);
+        var request =
+            (Request)
+                Objects.requireNonNull(
+                    app.morphe.extension.bongo.utils.reflect.okhttp3.Response.request(raw));
+        Log.v(TAG, String.format("request: %s", request));
+
+        var authorization =
+            Objects.requireNonNull(
+                app.morphe.extension.bongo.utils.reflect.okhttp3.Request.header(
+                    request, Webb.HDR_AUTHORIZATION));
+        Log.v(TAG, String.format("authorization: %s", authorization));
+
+        var acceptLanguage =
+            Objects.requireNonNull(
+                app.morphe.extension.bongo.utils.reflect.okhttp3.Request.header(
+                    request, "Accept-Language"));
+        Log.v(TAG, String.format("acceptLanguage: %s", acceptLanguage));
+
+        var contentDetails =
+            ContentRepo.getContentDetails(systemId, authorization, acceptLanguage, classOfT);
+        if (contentDetails != null) {
+          response = Response.success(contentDetails);
+        }
+      } catch (Exception e) {
+        Log.w(TAG, String.format("exception: %s", e.getClass()), e);
+      }
+    }
+    return response;
   }
 }

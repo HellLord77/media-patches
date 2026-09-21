@@ -1,4 +1,4 @@
-package app.morphe.patches.bongo
+package app.morphe.patches.bongobd
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
@@ -20,7 +20,7 @@ val freeContentPatch = bytecodePatch(
     extendWith("extensions/bongo.mpe")
 
     execute {
-        ContentDetailsGetterFingerprint.let { match ->
+        GetContentDetailsFingerprint.let { match ->
             Fingerprint(filters = listOf(methodCall(match.originalMethod))).matchAll()
                 .filterNot { it.originalClassDef.startsWith("Lapp/morphe/extension") }.forEach {
                     val invokeInterface = it.instructionMatches[0]

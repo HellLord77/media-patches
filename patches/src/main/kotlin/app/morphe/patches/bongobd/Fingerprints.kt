@@ -1,8 +1,8 @@
-package app.morphe.patches.bongo
+package app.morphe.patches.bongobd
 
 import app.morphe.patcher.Fingerprint
 
-object ContentDetailsGetterFingerprint : Fingerprint(
+object GetContentDetailsFingerprint : Fingerprint(
     definingClass = "Lcom/bongo/bongobd/view/network/ApiServiceSaas;",
     name = "getContentDetails",
     returnType = "Ljava/lang/Object;",

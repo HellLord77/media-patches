@@ -1,9 +1,7 @@
 package app.morphe.extension.bongo.repos;
 
 import android.util.Log;
-import app.morphe.extension.bongo.utils.GsonUtil;
 import app.morphe.extension.bongo.utils.JSONUtil;
-import com.bongo.bongobd.view.model.ContentDetailsResponse;
 import com.goebl.david.Webb;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
@@ -12,30 +10,38 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ContentRepo {
+  private static final String TAG = "com.app.extension.bongo";
   private static final Webb WEBB = Webb.create();
   private static final Gson GSON = new Gson();
 
   @Nullable
-  public static ContentDetailsResponse getContentDetails(
-      @NotNull String bongoId, @NotNull String authorization, @NotNull String acceptLanguage)
+  public static <T> T getContentDetails(
+      @NotNull String bongoId,
+      @NotNull String authorization,
+      @NotNull String acceptLanguage,
+      @NotNull Class<T> classOfT)
       throws Exception {
     var contentTrailer = getContentTrailer(bongoId, authorization, acceptLanguage);
-    Log.v("com.app.extension.bongo", String.format("contentTrailer: %s", contentTrailer));
+    Log.v(TAG, String.format("contentTrailer: %s", contentTrailer));
 
     var content = getContent(contentTrailer.getJSONObject("content").getString("id"));
-    Log.v("com.app.extension.bongo", String.format("content: %s", content));
+    Log.v(TAG, String.format("content: %s", content));
 
     var contentDetails = buildContentDetails(contentTrailer, content, acceptLanguage);
-    Log.v("com.app.extension.bongo", String.format("contentDetails: %s", contentDetails));
+    Log.v(TAG, String.format("contentDetails: %s", contentDetails));
 
-    return GsonUtil.invokeFromJson(GSON, contentDetails.toString(), ContentDetailsResponse.class);
+    return app.morphe.extension.bongo.utils.reflect.com.google.gson.Gson.fromJson(
+        GSON, contentDetails.toString(), classOfT);
   }
 
   @NotNull
   private static JSONObject getContentTrailer(
-      @NotNull String bongoId, @NotNull String authorization, @NotNull String acceptLanguage) {
-    return WEBB.get(
-            "https://api.bongo-solutions.com/ironman/api/v1/content/content-trailer/" + bongoId)
+      @NotNull String systemId, @NotNull String authorization, @NotNull String acceptLanguage) {
+    var url =
+        String.format(
+            "https://api.bongo-solutions.com/ironman/api/v1/content/content-trailer/%s", systemId);
+
+    return WEBB.get(url)
         .header(Webb.HDR_AUTHORIZATION, authorization)
         .header("Accept-Language", acceptLanguage)
         .header("Country-Code", "QkQ=")
@@ -46,10 +52,10 @@ public class ContentRepo {
 
   @NotNull
   private static JSONObject getContent(@NotNull String contentId) {
-    return WEBB.get("https://api.bongo-solutions.com/ironman/api/v1/contents/" + contentId)
-        .ensureSuccess()
-        .asJsonObject()
-        .getBody();
+    var url =
+        String.format("https://api.bongo-solutions.com/ironman/api/v1/contents/%s", contentId);
+
+    return WEBB.get(url).ensureSuccess().asJsonObject().getBody();
   }
 
   @NotNull
@@ -74,7 +80,7 @@ public class ContentRepo {
         while (keys.hasNext()) {
           var urlKey = keys.next();
           var url = urls.getJSONObject(urlKey);
-          url.put("url", "https://vod.bongobd.com/vod/vod" + url.getString("url"));
+          url.put("url", String.format("https://vod.bongobd.com/vod/vod%s", url.getString("url")));
         }
       } catch (JSONException ignored) {
       }

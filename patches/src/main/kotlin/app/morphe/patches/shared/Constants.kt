@@ -24,6 +24,17 @@ object Constants {
         )
     )
 
+    val COMPATIBILITY_BONGOANDROIDTV = Compatibility(
+        name = "Bongobdandroidtv",
+        packageName = "com.bongo.bongobdandroidtv",
+        apkFileType = ApkFileType.XAPK,
+        appIconColor = 0XD8062D,
+        signatures = setOf("92a69a62905e154dc817eb81d676dcb2b686aedb1346d49feb55424f96f8408e"),
+        targets = listOf(
+            AppTarget(version = "1.17.1", versionCode = 230011701, minSdk = 23)
+        )
+    )
+
     val COMPATIBILITY_SHADHIN = Compatibility(
         name = "Shadhin",
         packageName = "com.gm.shadhin",
