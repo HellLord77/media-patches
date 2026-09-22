@@ -1,4 +1,4 @@
-package app.morphe.patches.bongobdandroidtv
+package app.morphe.patches.bongobdandroidtv.content
 
 import app.morphe.patcher.Fingerprint
 import com.android.tools.smali.dexlib2.AccessFlags

@@ -7,8 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import reflect.Utils;
 
 public class Request {
-  private static final Method URL =
-      Utils.getMethod(okhttp3.Request.class, "url", HttpUrl.class);
+  private static final Method URL = Utils.getMethod(okhttp3.Request.class, "url", HttpUrl.class);
   private static final Method HEADER =
       Utils.getMethod(okhttp3.Request.class, "header", String.class, String.class);
 

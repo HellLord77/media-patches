@@ -1,19 +1,19 @@
-package app.morphe.patches.bongobd
+package app.morphe.patches.bongobd.content
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.patches.bongobd.misc.extension.sharedExtensionPatch
-import app.morphe.patches.shared.Constants.COMPATIBILITY_BONGO
+import app.morphe.patches.bongobd.extension.sharedExtensionPatch
+import app.morphe.patches.bongobd.shared.Constants.COMPATIBILITY_BONGO
 import app.morphe.patches.shared.getRegisterName
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
 
 @Suppress("unused")
 val freeContentPatch = bytecodePatch(
-    name = "Free paid content",
-    description = "Make paid shows and movies free.",
+    name = "Free content",
+    description = "Use alternative api to get content details.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_BONGO)

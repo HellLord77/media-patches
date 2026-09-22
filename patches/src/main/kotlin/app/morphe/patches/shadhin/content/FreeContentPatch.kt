@@ -1,4 +1,4 @@
-package app.morphe.patches.shadhin
+package app.morphe.patches.shadhin.content
 
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.bytecodePatch

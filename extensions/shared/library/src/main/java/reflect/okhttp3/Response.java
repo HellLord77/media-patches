@@ -6,8 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import reflect.Utils;
 
 public class Response {
-  private static Method REQUEST =
-      Utils.getMethod("okhttp3.Response", "request", Request.class);
+  private static Method REQUEST = Utils.getMethod("okhttp3.Response", "request", Request.class);
 
   @Nullable
   public static Object request(Object self) throws Exception {

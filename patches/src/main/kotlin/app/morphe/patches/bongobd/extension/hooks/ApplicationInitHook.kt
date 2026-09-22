@@ -1,4 +1,4 @@
-package app.morphe.patches.bongobd.misc.extension.hooks
+package app.morphe.patches.bongobd.extension.hooks
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patches.all.misc.extension.ExtensionHook
