@@ -1,3 +1,9 @@
+## [1.2.0-dev.3](https://github.com/HellLord77/media-patches/compare/v1.2.0-dev.2...v1.2.0-dev.3) (2026-09-23)
+
+### ✨ New Features
+
+* Add initial chorki support ([bfbd01f](https://github.com/HellLord77/media-patches/commit/bfbd01f423e977b034bf01faabf9cdb2788ed72b))
+
 ## [1.2.0-dev.2](https://github.com/HellLord77/media-patches/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2026-09-23)
 
 ### ✨ New Features
