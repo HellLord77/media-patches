@@ -1,3 +1,25 @@
+## [1.2.0-dev.3](https://github.com/HellLord77/media-patches/compare/v1.2.0-dev.2...v1.2.0-dev.3) (2026-09-23)
+
+### ✨ New Features
+
+* Add initial chorki support ([bfbd01f](https://github.com/HellLord77/media-patches/commit/bfbd01f423e977b034bf01faabf9cdb2788ed72b))
+
+## [1.2.0-dev.2](https://github.com/HellLord77/media-patches/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2026-09-23)
+
+### ✨ New Features
+
+* Add kabbik temp user patch ([f032804](https://github.com/HellLord77/media-patches/commit/f0328044cdf10bddd044cb9cec79871963f19625))
+
+## [1.2.0-dev.1](https://github.com/HellLord77/media-patches/compare/v1.1.0...v1.2.0-dev.1) (2026-09-21)
+
+### 🐛 Bug Fixes
+
+* push bongoandroidtv request to bg thread ([f970c50](https://github.com/HellLord77/media-patches/commit/f970c50dba633b2faea2bd0027bffa331873baae))
+
+### ✨ New Features
+
+* Initial support for bongoandroidtv ([f2d78d8](https://github.com/HellLord77/media-patches/commit/f2d78d8a829859dc9de7013d3e3f5614c5ad8473))
+
 ## [1.1.0](https://github.com/HellLord77/media-patches/compare/v1.0.0...v1.1.0) (2026-09-20)
 
 ### ✨ New Features

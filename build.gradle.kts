@@ -1,1 +1,3 @@
-// Root build configuration for media-patches
+plugins {
+    alias(libs.plugins.android.library) apply false
+}
