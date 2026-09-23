@@ -1,9 +1,9 @@
-package reflect.retrofit2;
+package app.morphe.extension.shared.reflect.retrofit2;
 
+import app.morphe.extension.shared.reflect.Utils;
 import java.lang.reflect.Method;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import reflect.Utils;
 
 public class Response {
   private static final Method RAW = Utils.getMethod(retrofit2.Response.class, "raw", null);

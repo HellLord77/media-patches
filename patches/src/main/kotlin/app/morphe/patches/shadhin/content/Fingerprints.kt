@@ -1,9 +1,7 @@
 package app.morphe.patches.shadhin.content
 
 import app.morphe.patcher.Fingerprint
-import app.morphe.patcher.fieldAccess
 import com.android.tools.smali.dexlib2.AccessFlags
-import com.android.tools.smali.dexlib2.Opcode
 
 object IsPaidGetterFingerprint : Fingerprint(
     definingClass = "Lcom/gm/shadhin/data/remote/api/model/MainContentModel;",
@@ -11,14 +9,6 @@ object IsPaidGetterFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC),
     returnType = "Z",
     parameters = listOf(),
-    filters = listOf(
-        fieldAccess(
-            opcode = Opcode.IGET_BOOLEAN,
-            definingClass = "this",
-            name = "isPaid",
-            type = "Z",
-        ),
-    ),
 )
 
 object FetchStreamingUrlFingerprint : Fingerprint(

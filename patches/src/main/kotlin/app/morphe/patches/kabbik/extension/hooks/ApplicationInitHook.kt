@@ -17,5 +17,5 @@ internal object KabbikActivityOnCreateFingerprint : Fingerprint(
 internal val kabbikActivityOnCreateHook = ExtensionHook(KabbikActivityOnCreateFingerprint)
 
 internal val kabbikApplicationOnCreateHook = activityOnCreateExtensionHook(
-    activityClassType = "Lcom/pairip/application/Application;"
+    activityClassType = "Lcom/kabbik/app/KabbikApplication;"
 )

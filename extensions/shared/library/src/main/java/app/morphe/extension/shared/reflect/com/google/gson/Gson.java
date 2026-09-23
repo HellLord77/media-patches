@@ -1,9 +1,9 @@
-package reflect.com.google.gson;
+package app.morphe.extension.shared.reflect.com.google.gson;
 
+import app.morphe.extension.shared.reflect.Utils;
 import java.lang.reflect.Method;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import reflect.Utils;
 
 public class Gson {
   private static final Method FROM_JSON =

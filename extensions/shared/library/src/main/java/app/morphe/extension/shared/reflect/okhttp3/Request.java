@@ -1,10 +1,10 @@
-package reflect.okhttp3;
+package app.morphe.extension.shared.reflect.okhttp3;
 
+import app.morphe.extension.shared.reflect.Utils;
 import java.lang.reflect.Method;
 import okhttp3.HttpUrl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import reflect.Utils;
 
 public class Request {
   private static final Method URL = Utils.getMethod(okhttp3.Request.class, "url", HttpUrl.class);

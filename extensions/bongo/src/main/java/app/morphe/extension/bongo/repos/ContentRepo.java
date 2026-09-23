@@ -21,19 +21,20 @@ public class ContentRepo {
       @NotNull String acceptLanguage,
       @NotNull Class<T> classOfT)
       throws Exception {
-    Utils.showToastShort(String.format("getContentDetails: %s", bongoId));
+    Logger.printInfo(() -> String.format("bongoId: %s", bongoId));
     var contentTrailer = getContentTrailer(bongoId, authorization, acceptLanguage);
     Logger.printDebug(() -> String.format("contentTrailer: %s", contentTrailer));
 
     var contentId = contentTrailer.getJSONObject("content").getString("id");
-    Utils.showToastShort(String.format("contentId: %s", contentId));
+    Logger.printInfo(() -> String.format("contentId: %s", contentId));
     var content = getContent(contentId);
     Logger.printDebug(() -> String.format("content: %s", content));
 
     var contentDetails = buildContentDetails(contentTrailer, content, acceptLanguage);
     Logger.printDebug(() -> String.format("contentDetails: %s", contentDetails));
 
-    return reflect.com.google.gson.Gson.fromJson(GSON, contentDetails.toString(), classOfT);
+    return app.morphe.extension.shared.reflect.com.google.gson.Gson.fromJson(
+        GSON, contentDetails.toString(), classOfT);
   }
 
   @NotNull

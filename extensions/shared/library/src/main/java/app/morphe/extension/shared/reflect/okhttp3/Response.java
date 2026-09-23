@@ -1,9 +1,9 @@
-package reflect.okhttp3;
+package app.morphe.extension.shared.reflect.okhttp3;
 
+import app.morphe.extension.shared.reflect.Utils;
 import java.lang.reflect.Method;
 import okhttp3.Request;
 import org.jetbrains.annotations.Nullable;
-import reflect.Utils;
 
 public class Response {
   private static Method REQUEST = Utils.getMethod("okhttp3.Response", "request", Request.class);

@@ -2,6 +2,7 @@ package app.morphe.extension.bongo.patches;
 
 import app.morphe.extension.bongo.repos.ContentRepo;
 import app.morphe.extension.shared.Logger;
+import app.morphe.extension.shared.Utils;
 import com.bongo.bongobd.view.model.ContentDetailsResponse;
 import com.bongo.bongobd.view.network.ApiServiceSaas;
 import com.goebl.david.Webb;
@@ -31,9 +32,9 @@ public class FreeContentPatch {
   @Nullable
   public static Object getContentDetails(
       @NotNull ApiServiceSaas self,
-      @NotNull String bongoId,
+      @Nullable String bongoId,
       @NotNull Continuation<Response<ContentDetailsResponse>> continuation) {
-    Logger.printDebug(() -> String.format("bongoId: %s", bongoId));
+    Utils.showToastShort(String.format("bongoId: %s", bongoId));
 
     return self.getContentDetails(
         bongoId,
@@ -44,7 +45,7 @@ public class FreeContentPatch {
             return continuation.getContext();
           }
 
-          @SuppressWarnings("unchecked")
+          @SuppressWarnings({"unchecked", "DataFlowIssue"})
           @Override
           public void resumeWith(@NotNull Object result) {
             if (!(result instanceof Result.Failure)) {
@@ -62,7 +63,7 @@ public class FreeContentPatch {
   @NotNull
   public static Call<ContentDetails> getVideoDetailsData(
       @NotNull DetailsEndPoint self, @NotNull String id) {
-    Logger.printDebug(() -> String.format("id: %s", id));
+    Utils.showToastShort(String.format("id: %s", id));
     var call = self.getVideoDetailsData(id);
 
     return new Call<>() {
@@ -138,16 +139,23 @@ public class FreeContentPatch {
 
     if (response.code() == 403) {
       try {
-        var raw = reflect.retrofit2.Response.raw((Object) response);
-        var request = (Request) Objects.requireNonNull(reflect.okhttp3.Response.request(raw));
+        var raw = app.morphe.extension.shared.reflect.retrofit2.Response.raw((Object) response);
+        var request =
+            (Request)
+                Objects.requireNonNull(
+                    app.morphe.extension.shared.reflect.okhttp3.Response.request(raw));
         Logger.printDebug(() -> String.format("request: %s", request));
 
         var authorization =
-            Objects.requireNonNull(reflect.okhttp3.Request.header(request, Webb.HDR_AUTHORIZATION));
+            Objects.requireNonNull(
+                app.morphe.extension.shared.reflect.okhttp3.Request.header(
+                    request, Webb.HDR_AUTHORIZATION));
         Logger.printDebug(() -> String.format("authorization: %s", authorization));
 
         var acceptLanguage =
-            Objects.requireNonNull(reflect.okhttp3.Request.header(request, "Accept-Language"));
+            Objects.requireNonNull(
+                app.morphe.extension.shared.reflect.okhttp3.Request.header(
+                    request, "Accept-Language"));
         Logger.printDebug(() -> String.format("acceptLanguage: %s", acceptLanguage));
 
         var contentDetails =

@@ -1,4 +1,4 @@
-package reflect;
+package app.morphe.extension.shared.reflect;
 
 import app.morphe.extension.shared.Logger;
 import java.lang.reflect.Method;

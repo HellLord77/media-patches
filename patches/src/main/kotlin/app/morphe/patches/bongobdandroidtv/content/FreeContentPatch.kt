@@ -1,14 +1,18 @@
 package app.morphe.patches.bongobdandroidtv.content
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.bongobdandroidtv.extension.sharedExtensionPatch
 import app.morphe.patches.bongobdandroidtv.shared.Constants.COMPATIBILITY_BONGOANDROIDTV
 import app.morphe.patches.shared.getRegisterName
+import app.morphe.util.matchAllMethodIndicesForEach
+import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/bongo/patches/FreeContentPatch;"
 
 @Suppress("unused")
 val freeContentPatch = bytecodePatch(
@@ -21,19 +25,17 @@ val freeContentPatch = bytecodePatch(
     dependsOn(sharedExtensionPatch)
 
     execute {
-        GetVideoDetailsDataFingerprint.let { match ->
-            Fingerprint(filters = listOf(methodCall(match.originalMethod))).matchAll()
-                .filterNot { it.originalClassDef.startsWith("Lapp/morphe/extension") }.forEach {
-                    val invokeInterface = it.instructionMatches[0]
-                    val instruction = invokeInterface.getInstruction<FiveRegisterInstruction>()
-                    val registerCName = it.originalMethod.getRegisterName(instruction.registerC)
-                    val registerDName = it.originalMethod.getRegisterName(instruction.registerD)
+        Fingerprint(filters = listOf(methodCall(GetVideoDetailsDataFingerprint.matchSingle().originalMethod))).matchAllMethodIndicesForEach {
+            if (definingClass == EXTENSION_CLASS) return@matchAllMethodIndicesForEach
 
-                    it.method.replaceInstruction(
-                        invokeInterface.index,
-                        "invoke-static {$registerCName, $registerDName}, Lapp/morphe/extension/bongo/patches/FreeContentPatch;->getVideoDetailsData(Lsaas/ott/smarttv/ui/details/data/DetailsEndPoint;Ljava/lang/String;)Lretrofit2/Call;",
-                    )
-                }
+            val instruction = getInstruction<FiveRegisterInstruction>(it)
+            val registerCName = getRegisterName(instruction.registerC)
+            val registerDName = getRegisterName(instruction.registerD)
+
+            replaceInstruction(
+                it,
+                "invoke-static {$registerCName, $registerDName}, $EXTENSION_CLASS->getVideoDetailsData(Lsaas/ott/smarttv/ui/details/data/DetailsEndPoint;Ljava/lang/String;)Lretrofit2/Call;",
+            )
         }
     }
 }

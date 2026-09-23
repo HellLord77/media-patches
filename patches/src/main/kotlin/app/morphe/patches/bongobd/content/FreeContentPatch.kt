@@ -1,14 +1,18 @@
 package app.morphe.patches.bongobd.content
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.bongobd.extension.sharedExtensionPatch
 import app.morphe.patches.bongobd.shared.Constants.COMPATIBILITY_BONGO
 import app.morphe.patches.shared.getRegisterName
+import app.morphe.util.matchAllMethodIndicesForEach
+import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/bongo/patches/FreeContentPatch;"
 
 @Suppress("unused")
 val freeContentPatch = bytecodePatch(
@@ -21,20 +25,18 @@ val freeContentPatch = bytecodePatch(
     dependsOn(sharedExtensionPatch)
 
     execute {
-        GetContentDetailsFingerprint.let { match ->
-            Fingerprint(filters = listOf(methodCall(match.originalMethod))).matchAll()
-                .filterNot { it.originalClassDef.startsWith("Lapp/morphe/extension") }.forEach {
-                    val invokeInterface = it.instructionMatches[0]
-                    val instruction = invokeInterface.getInstruction<FiveRegisterInstruction>()
-                    val registerCName = it.originalMethod.getRegisterName(instruction.registerC)
-                    val registerDName = it.originalMethod.getRegisterName(instruction.registerD)
-                    val registerEName = it.originalMethod.getRegisterName(instruction.registerE)
+        Fingerprint(filters = listOf(methodCall(GetContentDetailsFingerprint.matchSingle().originalMethod))).matchAllMethodIndicesForEach {
+            if (definingClass == EXTENSION_CLASS) return@matchAllMethodIndicesForEach
 
-                    it.method.replaceInstruction(
-                        invokeInterface.index,
-                        "invoke-static {$registerCName, $registerDName, $registerEName}, Lapp/morphe/extension/bongo/patches/FreeContentPatch;->getContentDetails(Lcom/bongo/bongobd/view/network/ApiServiceSaas;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;",
-                    )
-                }
+            val instruction = getInstruction<FiveRegisterInstruction>(it)
+            val registerCName = getRegisterName(instruction.registerC)
+            val registerDName = getRegisterName(instruction.registerD)
+            val registerEName = getRegisterName(instruction.registerE)
+
+            replaceInstruction(
+                it,
+                "invoke-static {$registerCName, $registerDName, $registerEName}, $EXTENSION_CLASS->getContentDetails(Lcom/bongo/bongobd/view/network/ApiServiceSaas;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;",
+            )
         }
     }
 }

@@ -1,9 +1,13 @@
 package app.morphe.patches.kabbik.user
 
+import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.all.misc.fix.changepackageinstaller.changePackageInstallerPatch
 import app.morphe.patches.kabbik.extension.sharedExtensionPatch
 import app.morphe.patches.kabbik.shared.Constants.COMPATIBILITY_KABBIK
+import app.morphe.util.matchSingle
+
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/kabbik/patches/TempUserPatch;"
 
 @Suppress("unused")
 val tempUserPatch = bytecodePatch(
@@ -16,6 +20,9 @@ val tempUserPatch = bytecodePatch(
     dependsOn(sharedExtensionPatch, changePackageInstallerPatch())
 
     execute {
-        // TODO hook onCreate to add temp user data
+        KabbikApplicationOnCreateFingerprint.matchSingle().method.addInstructions(
+            0,
+            "invoke-static {}, $EXTENSION_CLASS->onCreate()V"
+        )
     }
 }
