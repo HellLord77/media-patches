@@ -1,3 +1,9 @@
+## [1.2.0-dev.2](https://github.com/HellLord77/media-patches/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2026-09-23)
+
+### ✨ New Features
+
+* Add kabbik temp user patch ([f032804](https://github.com/HellLord77/media-patches/commit/f0328044cdf10bddd044cb9cec79871963f19625))
+
 ## [1.2.0-dev.1](https://github.com/HellLord77/media-patches/compare/v1.1.0...v1.2.0-dev.1) (2026-09-21)
 
 ### 🐛 Bug Fixes

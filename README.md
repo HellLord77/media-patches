@@ -15,7 +15,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.2.0-dev.1](https://github.com/HellLord77/media-patches/releases/tag/v1.2.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;3 patches total
+> **[v1.2.0-dev.2](https://github.com/HellLord77/media-patches/releases/tag/v1.2.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;5 patches total
 <details open>
 <summary>📦 Bongobd&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -27,7 +27,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Free paid content](#free-paid-content) | Make paid shows and movies free. |  |
+| [Free content](#free-content) | Use alternative api to get content details. |  |
 
 </details>
 
@@ -42,7 +42,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Free paid content](#free-paid-content) | Make paid shows and movies free. |  |
+| [Free content](#free-content) | Use alternative api to get content details. |  |
 
 </details>
 
@@ -57,7 +57,37 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Stream paid content](#stream-paid-content) | Stream podcasts and audiobooks for free. |  |
+| [Stream content](#stream-content) | Stream content as song. |  |
+
+</details>
+
+<details open>
+<summary>📦 Chorki&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 🧪&nbsp;2.4.1 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Stream paid content](#stream-paid-content) | Stream movies and series for free. |  |
+
+</details>
+
+<details open>
+<summary>📦 Kabbik&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 🧪&nbsp;1.7.12 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Temp user](#temp-user) | Log in as subscribed temp user. |  |
 
 </details>
 
