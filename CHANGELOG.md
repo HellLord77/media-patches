@@ -1,3 +1,9 @@
+## [1.3.0-dev.2](https://github.com/HellLord77/media-patches/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2026-09-27)
+
+### 🐛 Bug Fixes
+
+* Added proguard rule to restore bongo ([3fa3db8](https://github.com/HellLord77/media-patches/commit/3fa3db8bde6290b45c65dc48e262066b3adbd421))
+
 ## [1.3.0-dev.1](https://github.com/HellLord77/media-patches/compare/v1.2.0...v1.3.0-dev.1) (2026-09-27)
 
 ### ✨ New Features
