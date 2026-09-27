@@ -1,3 +1,9 @@
+## [1.3.0-dev.1](https://github.com/HellLord77/media-patches/compare/v1.2.0...v1.3.0-dev.1) (2026-09-27)
+
+### ✨ New Features
+
+* Added chorki-tv bypasses ([3ebc602](https://github.com/HellLord77/media-patches/commit/3ebc602bd1a90faa6a051344204016807958a65a))
+
 ## [1.2.0](https://github.com/HellLord77/media-patches/compare/v1.1.0...v1.2.0) (2026-09-23)
 
 ### 🐛 Bug Fixes
