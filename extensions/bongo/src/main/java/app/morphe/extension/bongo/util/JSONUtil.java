@@ -1,4 +1,4 @@
-package app.morphe.extension.bongo.utils;
+package app.morphe.extension.bongo.util;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
