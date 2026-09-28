@@ -29,5 +29,5 @@ fun stripNativeLibrariesPatch(
     }
 }
 
-val stripNonArm64NativeLibraryPatch =
-    stripNativeLibrariesPatch { listOf(CpuArchitecture.ARM64_V8A) }
+val stripNonArmNativeLibraryPatch =
+    stripNativeLibrariesPatch { listOf(CpuArchitecture.ARMEABI_V7A, CpuArchitecture.ARM64_V8A) }
