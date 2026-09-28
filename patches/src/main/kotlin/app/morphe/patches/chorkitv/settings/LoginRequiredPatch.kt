@@ -3,7 +3,7 @@ package app.morphe.patches.chorkitv.settings
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.misc.fix.changepackageinstaller.changePackageInstallerPatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.stripnativelibraries.stripNonArmNativeLibraryPatch
+import app.morphe.patches.all.misc.stripnativelibraries.stripNonArmNativeLibraryPatch
 import app.morphe.patches.chorkitv.shared.Constants.COMPATIBILITY_CHORKITV
 import app.morphe.patches.shared.requireArm
 
@@ -19,19 +19,29 @@ val loginRequiredPatch = rawResourcePatch(
 
     dependsOn(
         stripNonArmNativeLibraryPatch, changePackageInstallerPatch(), hexPatch(true, block = {
-            val lib = "lib/armeabi-v7a/libapp.so"
-
             // package:goplay_tv/data/models/settings_model.json -> SettingsModel.fromJson
             // ADD             R2, R5, #0x8000
             // LDR             R2, [R2,#0xA5B] -> LDR             R2, [R2,#0xA57]
-            "02 29 85 e2 5b 2a 92 e5" asPatternTo "02 29 85 e2 57 2a 92 e5" inFile lib
+            """
+                02 29 85 e2
+                5b 2a 92 e5
+            """ asPatternTo """
+                02 29 85 e2
+                57 2a 92 e5
+            """ inFile "lib/armeabi-v7a/libapp.so"
         }), hexPatch(true, block = {
             val lib = "lib/arm64-v8a/libapp.so"
 
             // package:goplay_tv/data/models/settings_model.json -> SettingsModel.fromJson
             // ADD             X2, X27, #0xF,LSL#12
             // LDR             X2, [X2,#0xFB0]      -> LDR             X2, [X2,#0xFA8]
-            "62 3f 40 91 42 d8 47 f9" asPatternTo "62 3f 40 91 42 d4 47 f9" inFile lib
+            """
+                62 3f 40 91
+                42 d8 47 f9
+            """ asPatternTo """
+                62 3f 40 91
+                42 d4 47 f9
+            """ inFile "lib/armeabi-v7a/libapp.so"
         })
     )
 }

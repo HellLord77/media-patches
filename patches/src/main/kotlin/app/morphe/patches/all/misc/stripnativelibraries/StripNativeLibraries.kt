@@ -1,17 +1,16 @@
-package app.morphe.patches.all.stripnativelibraries
+package app.morphe.patches.all.misc.stripnativelibraries
 
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.resource.CpuArchitecture
+import app.morphe.patches.shared.Constants.NATIVE_LIBRARY_DIRECTORY
 import java.util.logging.Logger
-
-private const val NATIVE_LIBRARY_DIRECTORY = "lib"
 
 fun stripNativeLibrariesPatch(
     keepArchitecturesProvider: () -> List<CpuArchitecture> = { emptyList() },
 ) = rawResourcePatch {
-    execute {
+    finalize {
         val keepArchitectures = keepArchitecturesProvider()
-        if (keepArchitectures.isEmpty()) return@execute
+        if (keepArchitectures.isEmpty()) return@finalize
 
         val logger = Logger.getLogger(this::class.java.name)
         logger.info(
@@ -25,7 +24,7 @@ fun stripNativeLibrariesPatch(
                 dir.deleteRecursively()
             }
         }
-        logger.info("Stripped ${strippedLibraries.size} lib files")
+        logger.info("Stripped ${strippedLibraries.size} lib dirs")
     }
 }
 
