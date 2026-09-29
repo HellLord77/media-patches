@@ -8,6 +8,7 @@ import kotlin.experimental.and
 import kotlin.math.max
 
 private fun String.getPattern() = replace('?', '0')
+
 private fun String.getMaskPattern() = replace(Regex("[0-9a-fA-F]"), "f").getPattern()
 
 fun maskedHexPatch(
