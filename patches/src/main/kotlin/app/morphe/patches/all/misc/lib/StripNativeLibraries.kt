@@ -1,4 +1,4 @@
-package app.morphe.patches.all.misc.stripnativelibraries
+package app.morphe.patches.all.misc.lib
 
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.resource.CpuArchitecture

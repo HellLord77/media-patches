@@ -1,4 +1,4 @@
-package app.morphe.patches.all.misc.disablefluttertlsverification
+package app.morphe.patches.all.misc.flutter
 
 import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.rawResourcePatch

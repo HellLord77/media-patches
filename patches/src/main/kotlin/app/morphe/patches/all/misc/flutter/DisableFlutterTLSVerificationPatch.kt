@@ -1,4 +1,4 @@
-package app.morphe.patches.all.misc.disablefluttertlsverification
+package app.morphe.patches.all.misc.flutter
 
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.rawResourcePatch
@@ -10,11 +10,7 @@ import java.util.logging.Logger
 // https://github.com/NVISOsecurity/disable-flutter-tls-verification
 fun disableFlutterTLSVerificationPatch(
     architecturesProvider: () -> List<CpuArchitecture> = { emptyList() },
-) = rawResourcePatch(
-    name = "Disable Flutter TLS verification",
-    description = "Disables Flutter TLS verification, allowing to inspect traffic via a proxy.",
-    default = false
-) {
+) = rawResourcePatch {
     val architectures = architecturesProvider()
     val logger = Logger.getLogger(this::class.java.name)
 

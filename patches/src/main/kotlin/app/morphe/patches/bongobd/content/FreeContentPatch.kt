@@ -34,12 +34,12 @@ val freeContentPatch = bytecodePatch(
             replaceInstruction(
                 it, BuilderInstruction35c(
                     Opcode.INVOKE_STATIC,
-                    3,
+                    instruction.registerCount,
                     instruction.registerC,
                     instruction.registerD,
                     instruction.registerE,
-                    0,
-                    0,
+                    instruction.registerF,
+                    instruction.registerG,
                     ImmutableMethodReference(
                         EXTENSION_CLASS,
                         reference.name,

@@ -3,7 +3,7 @@ package app.morphe.patches.chorkitv.settings
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.misc.fix.changepackageinstaller.changePackageInstallerPatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.misc.stripnativelibraries.stripNonArmNativeLibraryPatch
+import app.morphe.patches.all.misc.lib.stripNonArmNativeLibraryPatch
 import app.morphe.patches.chorkitv.shared.Constants.COMPATIBILITY_CHORKITV
 import app.morphe.patches.shared.requireArm
 
