@@ -1,4 +1,4 @@
-package app.morphe.extension.shared.reflect.retrofit2;
+package app.morphe.extension.bongo.reflect.retrofit2;
 
 import app.morphe.extension.shared.util.ReflectUtils;
 import java.lang.reflect.Method;
@@ -11,11 +11,5 @@ public class Response {
   @Nullable
   public static Object raw(@NotNull Object self) throws Exception {
     return RAW.invoke(self);
-  }
-
-  @Deprecated
-  @Nullable
-  public static okhttp3.Response raw(@NotNull retrofit2.Response<?> self) throws Exception {
-    return (okhttp3.Response) raw((Object) self);
   }
 }

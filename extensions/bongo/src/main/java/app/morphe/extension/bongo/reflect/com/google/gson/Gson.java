@@ -1,4 +1,4 @@
-package app.morphe.extension.shared.reflect.com.google.gson;
+package app.morphe.extension.bongo.reflect.com.google.gson;
 
 import app.morphe.extension.shared.util.ReflectUtils;
 import java.lang.reflect.Method;

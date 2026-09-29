@@ -1,4 +1,4 @@
-package app.morphe.extension.shared.reflect.okhttp3;
+package app.morphe.extension.bongo.reflect.okhttp3;
 
 import app.morphe.extension.shared.util.ReflectUtils;
 import java.lang.reflect.Method;
@@ -16,10 +16,5 @@ public class Response {
     }
 
     return REQUEST.invoke(self);
-  }
-
-  @Nullable
-  public static Request request(okhttp3.Response self) throws Exception {
-    return (Request) request((Object) self);
   }
 }
