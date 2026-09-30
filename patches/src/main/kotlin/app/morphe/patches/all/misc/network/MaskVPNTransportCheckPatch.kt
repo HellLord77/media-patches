@@ -1,10 +1,8 @@
-package app.morphe.patches.bongobd.content
+package app.morphe.patches.all.misc.network
 
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.patches.bongobd.extension.sharedExtensionPatch
-import app.morphe.patches.bongobd.shared.Constants.COMPATIBILITY_BONGO
 import app.morphe.util.getReference
 import app.morphe.util.matchAllMethodIndicesForEach
 import com.android.tools.smali.dexlib2.Opcode
@@ -13,20 +11,18 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableMethodReference
 
-private const val EXTENSION_CLASS = "Lapp/morphe/extension/bongo/patches/FreeContentPatch;"
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/network/patches/MaskVPNTransportPatch;"
 
 @Suppress("unused")
-val freeContentPatch = bytecodePatch(
-    name = "Free content",
-    description = "Use alternative api to get content details.",
-    default = true,
+val maskVPNTransportPatch = bytecodePatch(
+    name = "Mask VPN transport check",
+    description = "Masks VPN transport check, allowing to inspect traffic via a proxy.",
+    default = false
 ) {
-    compatibleWith(COMPATIBILITY_BONGO)
-
-    dependsOn(sharedExtensionPatch)
+    extendWith("extensions/network.mpe")
 
     execute {
-        GetContentDetailsInvokerFingerprint.matchAllMethodIndicesForEach {
+        HasTransportInvokerFingerprint.matchAllMethodIndicesForEach {
             if (definingClass == EXTENSION_CLASS) return@matchAllMethodIndicesForEach
             val instruction = getInstruction<FiveRegisterInstruction>(it)
             val reference = instruction.getReference<MethodReference>()!!
