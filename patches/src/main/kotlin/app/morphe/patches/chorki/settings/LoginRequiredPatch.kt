@@ -10,7 +10,7 @@ import app.morphe.patches.shared.requireArm
 @Suppress("unused")
 val loginRequiredPatch = rawResourcePatch(
     name = "Login required",
-    description = "Resolve login_required using restrict_vpn.",
+    description = "Resolve login_required to false.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_CHORKI)
@@ -20,6 +20,7 @@ val loginRequiredPatch = rawResourcePatch(
     dependsOn(
         stripNonArmNativeLibraryPatch, changePackageInstallerPatch(), hexPatch(true, block = {
             // package:chorki/data/models/settings_model.json -> SettingsModel.fromJson
+            // login_required -> restrict_vpn
             // ADD             R2, R5, #0xD000
             // LDR             R2, [R2,#0x9D7] -> LDR             R2, [R2,#0x917]
             """
@@ -31,7 +32,8 @@ val loginRequiredPatch = rawResourcePatch(
             """ inFile "lib/armeabi-v7a/libapp.so"
         }), hexPatch(true, block = {
             // package:chorki/data/models/settings_model.json -> SettingsModel.fromJson
-            // ADD             X2, X27, #0x19,LSL#12 -> ADD             X2, X27, #0x19,LSL#12
+            // login_required -> restrict_vpn
+            // ADD             X2, X27, #0x19,LSL#12
             // LDR             X2, [X2,#0xC88]       -> LDR             X2, [X2,#0xB08]
             """
                 62 67 40 91

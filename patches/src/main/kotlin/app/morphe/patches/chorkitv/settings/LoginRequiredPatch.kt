@@ -10,7 +10,7 @@ import app.morphe.patches.shared.requireArm
 @Suppress("unused")
 val loginRequiredPatch = rawResourcePatch(
     name = "Login required",
-    description = "Resolve login_required using restrict_vpn.",
+    description = "Resolve login_required to false.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_CHORKITV)
@@ -20,6 +20,7 @@ val loginRequiredPatch = rawResourcePatch(
     dependsOn(
         stripNonArmNativeLibraryPatch, changePackageInstallerPatch(), hexPatch(true, block = {
             // package:goplay_tv/data/models/settings_model.json -> SettingsModel.fromJson
+            // login_required -> restrict_vpn
             // ADD             R2, R5, #0x8000
             // LDR             R2, [R2,#0xA5B] -> LDR             R2, [R2,#0xA57]
             """
@@ -30,9 +31,8 @@ val loginRequiredPatch = rawResourcePatch(
                 57 2a 92 e5
             """ inFile "lib/armeabi-v7a/libapp.so"
         }), hexPatch(true, block = {
-            val lib = "lib/arm64-v8a/libapp.so"
-
             // package:goplay_tv/data/models/settings_model.json -> SettingsModel.fromJson
+            // login_required -> restrict_vpn
             // ADD             X2, X27, #0xF,LSL#12
             // LDR             X2, [X2,#0xFB0]      -> LDR             X2, [X2,#0xFA8]
             """
@@ -41,7 +41,7 @@ val loginRequiredPatch = rawResourcePatch(
             """ asPatternTo """
                 62 3f 40 91
                 42 d4 47 f9
-            """ inFile "lib/armeabi-v7a/libapp.so"
+            """ inFile "lib/arm64-v8a/libapp.so"
         })
     )
 }
