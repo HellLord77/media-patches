@@ -19,6 +19,30 @@ val contentAccessPatch = rawResourcePatch(
     dependsOn(stripNonArmNativeLibraryPatch, hexPatch(true, block = {
         // package:core_models/src/content_model.dart -> ContentModel.fromJson
         // content_access -> id
+        // ADD             R2, R5, #0xA000 -> ADD             R2, R5, #0x5000
+        // LDR             R2, [R2,#0xF8B] -> LDR             R2, [R2,#0x7DB]
+        """
+            0a 2a 85 e2
+            8b 2f 92 e5
+        """ asPatternTo """
+            05 2a 85 e2
+            db 27 92 e5
+        """ inFile "lib/armeabi-v7a/libapp.so"
+
+        // package:core_models/src/content_model.dart -> ContentModel.fromJson
+        // ContentAccess.unspecified -> ContentAccess.free
+        // ADD             LR, R5, #0xA000 -> ADD             LR, R5, #0x13000
+        // LDR             LR, [LR,#0xF97] -> LDR             LR, [LR,#0x2A3]
+        """
+            0a ea 85 e2
+            97 ef 9e e5
+        """ asPatternTo """
+            13 ea 85 e2
+            a3 e2 9e e5
+        """ inFile "lib/armeabi-v7a/libapp.so"
+    }), hexPatch(true, block = {
+        // package:core_models/src/content_model.dart -> ContentModel.fromJson
+        // content_access -> id
         // ADD             X2, X27, #0x14,LSL#12 -> ADD             X2, X27, #9,LSL#12
         // LDR             X2, [X2,#0x18]        -> LDR             X2, [X2,#0x758]
         """
