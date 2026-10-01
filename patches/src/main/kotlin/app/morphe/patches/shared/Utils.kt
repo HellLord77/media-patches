@@ -17,6 +17,8 @@ fun requireArch(vararg arches: ApkArchitecture) = AvailabilityResolver { _, arch
 
 val requireArm = requireArch(ApkArchitecture.ARM64_V8A, ApkArchitecture.ARMEABI_V7A)
 
+fun Boolean.toInt() = if (this) 1 else 0
+
 fun Method.getRegisterName(register: Int): String {
     val firstParameterRegister = if (implementation != null) p0Register else 0
 
