@@ -7,6 +7,6 @@ internal object GetResultFingerprint : Fingerprint(
     definingClass = "Lcom/angel/klikk/api/response/DeviceCheckResponse;",
     name = "getResult",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-    returnType = "Ljava/lang/Boolean;",
+    returnType = Boolean::class.java.descriptorString(),
     parameters = emptyList(),
 )

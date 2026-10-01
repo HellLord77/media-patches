@@ -7,6 +7,6 @@ internal object GetIdFingerprint : Fingerprint(
     definingClass = "Lcom/angel/klikk/models/UserData;",
     name = "getId",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-    returnType = "Ljava/lang/String;",
+    returnType = String::class.java.descriptorString(),
     parameters = emptyList(),
 )

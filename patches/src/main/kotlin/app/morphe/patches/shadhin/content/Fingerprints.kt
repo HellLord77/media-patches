@@ -13,11 +13,11 @@ object IsPaidGetterFingerprint : Fingerprint(
 
 object FetchStreamingUrlFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.ABSTRACT),
-    returnType = "Ljava/lang/Object;",
+    returnType = Any::class.java.descriptorString(),
     parameters = listOf(
-        "Ljava/lang/String;",
-        "Ljava/lang/String;",
-        "Ljava/lang/String;",
+        String::class.java.descriptorString(),
+        String::class.java.descriptorString(),
+        String::class.java.descriptorString(),
         "L",
     ),
     custom = { method, _ ->

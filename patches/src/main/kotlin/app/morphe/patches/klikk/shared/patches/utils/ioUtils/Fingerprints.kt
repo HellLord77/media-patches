@@ -24,7 +24,7 @@ private object HasValidSubscriptionStringFingerprint : Fingerprint(
     name = "hasValidSubscription",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
     returnType = "Z",
-    parameters = listOf("Ljava/lang/String;"),
+    parameters = listOf(String::class.java.descriptorString()),
 )
 
 internal val HasValidSubscriptionFingerprints =

@@ -7,6 +7,6 @@ object SplashAdVisibilityGetterFingerprint : Fingerprint(
     definingClass = $$"Lcom/api/model/baseConfig/Configuration$SplashAd;",
     name = "getVisibility",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-    returnType = "Ljava/lang/Boolean;",
+    returnType = Boolean::class.java.descriptorString(),
     parameters = emptyList(),
 )

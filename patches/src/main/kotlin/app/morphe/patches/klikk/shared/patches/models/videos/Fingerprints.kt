@@ -7,7 +7,7 @@ internal object IsPaidFingerprint : Fingerprint(
     definingClass = "Lcom/angel/klikk/models/Videos;",
     name = "isPaid",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-    returnType = "Ljava/lang/Boolean;",
+    returnType = Boolean::class.java.descriptorString(),
     parameters = emptyList(),
 )
 
@@ -15,6 +15,6 @@ internal object IsSubscribedFingerprint : Fingerprint(
     definingClass = "Lcom/angel/klikk/models/Videos;",
     name = "isSubscribed",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-    returnType = "Ljava/lang/Boolean;",
+    returnType = Boolean::class.java.descriptorString(),
     parameters = emptyList(),
 )

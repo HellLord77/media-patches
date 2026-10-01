@@ -9,7 +9,7 @@ object GetVideoDetailsDataInvokerFingerprint : Fingerprint(
         methodCall(
             definingClass = "Lsaas/ott/smarttv/ui/details/data/DetailsEndPoint;",
             name = "getVideoDetailsData",
-            parameters = listOf("Ljava/lang/String;"),
+            parameters = listOf(String::class.java.descriptorString()),
             returnType = "Lretrofit2/Call;",
             opcode = Opcode.INVOKE_INTERFACE
         )
