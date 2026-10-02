@@ -15,7 +15,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.1](https://github.com/HellLord77/media-patches/releases/tag/v1.3.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;24 patches total
+> **[v1.3.2-dev.1](https://github.com/HellLord77/media-patches/releases/tag/v1.3.2-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;32 patches total
 <details open>
 <summary>📦 DeeptoPlay&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
@@ -67,7 +67,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 </details>
 
 <details open>
-<summary>📦 Klikk Tv&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<summary>📦 Klikk&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -101,7 +101,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 </details>
 
 <details open>
-<summary>📦 Chorki-TV&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<summary>📦 Chorki TV&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -117,7 +117,42 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 </details>
 
 <details open>
-<summary>📦 Bongobd&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary>📦 IScreen Tv&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 4.4.4 | 4.4.1 | 4.3.8 | 4.2.9 | 4.2.0 | 4.1.32 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable update](#disable-update) | Disables force update |  |
+| [Free TVOD content](#free-tvod-content) | Spoofs TVOD content to be free |  |
+| [Free premium content](#free-premium-content) | Spoofs premium content to be free |  |
+| [Temp user](#temp-user) | Log in as subscribed temp user |  |
+
+</details>
+
+<details open>
+<summary>📦 IScreen&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 2.2.51 | 2.2.41 | 2.2.31 | 2.2.15 | 2.2.7 |
+| :---: | :---: | :---: | :---: | :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Free TVOD content](#free-tvod-content) | Spoofs TVOD content to be free |  |
+| [Free premium content](#free-premium-content) | Spoofs premium content to be free |  |
+| [Temp user](#temp-user) | Log in as subscribed temp user |  |
+
+</details>
+
+<details open>
+<summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -132,7 +167,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 </details>
 
 <details open>
-<summary>📦 Bongobdandroidtv&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -193,11 +228,12 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 </details>
 
 <details open>
-<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Add to Home screen](#add-to-home-screen) | Adds the app to the home screen, allowing to launch main activity. | • Phone<br>• TV |
 | [Disable Flutter TLS verification](#disable-flutter-tls-verification) | Disables Flutter TLS verification, allowing to inspect traffic via a proxy. | • armeabi-v7a<br>• arm64-v8a<br>• x86<br>• x86_64 |
 | [Mask VPN transport check](#mask-vpn-transport-check) | Masks VPN transport check, allowing to inspect traffic via a proxy. |  |
 
