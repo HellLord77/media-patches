@@ -1,8 +1,8 @@
-package app.morphe.patches.toffee.network
+package app.morphe.patches.klikk.network
 
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.all.misc.network.maskVPNTransportPatch
-import app.morphe.patches.toffee.shared.Constants.COMPATIBILITY_TOFFEE
+import app.morphe.patches.klikk.shared.Constants.COMPATIBILITY_KLIKK
 
 @Suppress("unused")
 val vpnActivePatch = bytecodePatch(
@@ -10,7 +10,7 @@ val vpnActivePatch = bytecodePatch(
     description = "Hide VPN state.",
     default = false,
 ) {
-    compatibleWith(COMPATIBILITY_TOFFEE)
+    compatibleWith(COMPATIBILITY_KLIKK)
 
     dependsOn(maskVPNTransportPatch)
 }
