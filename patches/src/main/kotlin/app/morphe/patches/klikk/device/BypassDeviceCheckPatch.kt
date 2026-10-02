@@ -3,7 +3,7 @@ package app.morphe.patches.klikk.device
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.klikk.shared.Constants.COMPATIBILITY_KLIKK
 import app.morphe.patches.klikk.shared.patches.api.response.deviceCheckResponse.getResultPatch
-import app.morphe.patches.klikk.shared.patches.ui.activity.newDetailsAndDownloadActivity.deviceCheckPatch
+import app.morphe.patches.klikk.shared.patches.ui.activity.newDetailsAndDownloadActivity.deviceCheckFieldAccessPatch
 
 @Suppress("unused")
 val bypassDeviceCheckPatch = bytecodePatch(
@@ -13,5 +13,5 @@ val bypassDeviceCheckPatch = bytecodePatch(
 ) {
     compatibleWith(COMPATIBILITY_KLIKK)
 
-    dependsOn(getResultPatch, deviceCheckPatch)
+    dependsOn(getResultPatch, deviceCheckFieldAccessPatch)
 }

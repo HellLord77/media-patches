@@ -5,7 +5,7 @@ import app.morphe.patcher.methodCall
 import app.morphe.patches.shared.Type
 import com.android.tools.smali.dexlib2.Opcode
 
-object GetContentDetailsInvokerFingerprint : Fingerprint(
+object GetContentDetailsMethodCallFingerprint : Fingerprint(
     filters = listOf(
         methodCall(
             definingClass = "Lcom/bongo/bongobd/view/network/ApiServiceSaas;",

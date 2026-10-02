@@ -6,7 +6,7 @@ import app.morphe.patches.shared.Type
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
-internal object DeviceCheckGetterFingerprint : Fingerprint(
+internal object DeviceCheckFieldAccessFingerprint : Fingerprint(
     filters = listOf(
         fieldAccess(
             definingClass = "Lcom/angel/klikk/ui/activity/NewDetailsAndDownloadActivity;",

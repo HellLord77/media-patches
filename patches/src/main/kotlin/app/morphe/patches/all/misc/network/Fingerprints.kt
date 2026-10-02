@@ -5,7 +5,7 @@ import app.morphe.patcher.methodCall
 import app.morphe.patches.shared.Type
 import com.android.tools.smali.dexlib2.Opcode
 
-object HasTransportInvokerFingerprint : Fingerprint(
+object HasTransportMethodCallFingerprint : Fingerprint(
     filters = listOf(
         methodCall(
             definingClass = "Landroid/net/NetworkCapabilities;",

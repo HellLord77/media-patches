@@ -22,7 +22,7 @@ val maskVPNTransportPatch = bytecodePatch(
     extendWith("extensions/network.mpe")
 
     execute {
-        HasTransportInvokerFingerprint.matchAllMethodIndicesForEach {
+        HasTransportMethodCallFingerprint.matchAllMethodIndicesForEach {
             if (definingClass == EXTENSION_CLASS) return@matchAllMethodIndicesForEach
             val instruction = getInstruction<FiveRegisterInstruction>(it)
             val reference = instruction.getReference<MethodReference>()!!
