@@ -27,7 +27,6 @@ val freeContentPatch = bytecodePatch(
 
     execute {
         GetVideoDetailsDataMethodCallFingerprint.matchAllMethodIndicesForEach {
-            if (definingClass == EXTENSION_CLASS) return@matchAllMethodIndicesForEach
             val instruction = getInstruction<FiveRegisterInstruction>(it)
             val reference = instruction.getReference<MethodReference>()!!
 

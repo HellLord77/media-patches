@@ -9,6 +9,7 @@ object Constants {
         name = "Klikk",
         packageName = "com.angel.klikk",
         apkFileType = ApkFileType.XAPK,
+        appIconColor = 0XFD000D,
         signatures = setOf("38a6da45b9097c0286b962a804d3c3d65511685fef6ead76cdcfa1690c3bb592"),
         targets = listOf(
             AppTarget(version = "3.6.3", versionCode = 150, minSdk = 23),

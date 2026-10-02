@@ -3,6 +3,7 @@ package app.morphe.patches.bongobd.content
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.methodCall
 import app.morphe.patches.shared.Type
+import app.morphe.patches.shared.isNotExtension
 import com.android.tools.smali.dexlib2.Opcode
 
 object GetContentDetailsMethodCallFingerprint : Fingerprint(
@@ -14,5 +15,6 @@ object GetContentDetailsMethodCallFingerprint : Fingerprint(
             returnType = Type.OBJECT,
             opcode = Opcode.INVOKE_INTERFACE,
         )
-    )
+    ),
+    custom = ::isNotExtension
 )
