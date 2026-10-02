@@ -6,6 +6,8 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.iscreen.extension.sharedExtensionPatch
 import app.morphe.patches.iscreen.shared.Constants.COMPATIBILITY_ISCREEN
 import app.morphe.patches.iscreen.shared.patches.util.preferenceUtil.isLoginPatch
+import app.morphe.patches.iscreen.shared.patches.util.preferenceUtil.isSubscribedPatch
+import app.morphe.patches.iscreen.shared.patches.util.preferenceUtil.isTVodSubscribedPatch
 import app.morphe.util.getReference
 import app.morphe.util.matchAllMethodIndicesForEach
 import com.android.tools.smali.dexlib2.Opcode
@@ -19,16 +21,15 @@ private const val EXTENSION_CLASS = "Lapp/morphe/extension/iscreen/patches/TempU
 @Suppress("unused")
 val tempUserPatch = bytecodePatch(
     name = "Temp user",
-    description = "Log in as temp user",
+    description = "Log in as subscribed temp user",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_ISCREEN)
 
-    dependsOn(sharedExtensionPatch, isLoginPatch)
+    dependsOn(sharedExtensionPatch, isSubscribedPatch, isTVodSubscribedPatch, isLoginPatch)
 
     execute {
         GetRefreshTokenMethodCallFingerprint.matchAllMethodIndicesForEach {
-            if (definingClass == EXTENSION_CLASS) return@matchAllMethodIndicesForEach
             val instruction = getInstruction<FiveRegisterInstruction>(it)
             val reference = instruction.getReference<MethodReference>()!!
 
