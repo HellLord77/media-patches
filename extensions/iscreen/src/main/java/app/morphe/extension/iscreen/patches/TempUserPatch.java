@@ -1,12 +1,11 @@
 package app.morphe.extension.iscreen.patches;
 
-import static com.rockstreamer.iscreen.extensions.ExtensionsKt.getTempApiCall;
-
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
+import app.morphe.extension.shared.compat.java.util.function.Consumer;
+import app.morphe.extension.shared.compat.java.util.function.Supplier;
 import com.google.gson.Gson;
 import com.playoffstudio.modelmodule.LoginResponse;
-import com.rockstreamer.iscreen.util.PreferenceUtil;
 import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -16,25 +15,40 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
 public class TempUserPatch {
-  public static String getRefreshToken(@NotNull PreferenceUtil self) {
-    var refreshToken = self.getRefreshToken();
+  @NotNull
+  public static String getRefreshToken(@NotNull com.rockstreamer.iscreen.util.PreferenceUtil self) {
+    return getRefreshToken(self::getRefreshToken, self::setRefreshToken);
+  }
 
+  @NotNull
+  public static String getRefreshToken(
+      @NotNull com.rockstreamer.iscreentv.utils.PreferenceUtil self) {
+    return getRefreshToken(self::getRefreshToken, self::setRefreshToken);
+  }
+
+  @NotNull
+  private static String getRefreshToken(
+      @NotNull Supplier<String> getRefreshToken, @NotNull Consumer<String> setRefreshToken) {
+    var refreshToken = getRefreshToken.get();
     if (refreshToken.isEmpty()) {
       try {
         refreshToken = getRefreshToken();
         Utils.showToastShort(String.format("refreshToken: %s", refreshToken));
-        self.setRefreshToken(refreshToken);
+
+        setRefreshToken.accept(refreshToken);
       } catch (IOException e) {
         Logger.printException(() -> "getRefreshToken failure", e);
       }
     }
 
+    String finalRefreshToken = refreshToken;
+    Logger.printInfo(() -> String.format("refreshToken: %s", finalRefreshToken));
     return refreshToken;
   }
 
   @NotNull
   private static String getRefreshToken() throws IOException {
-    var body = RequestBody.create(getTempApiCall().toString(), MediaType.get("application/json"));
+    var body = RequestBody.create("{\"platform\": \"iscreen\"}", MediaType.get("application/json"));
     var request =
         new Request.Builder()
             .url("https://api.rockstreamer.com/auth/token/temp")
