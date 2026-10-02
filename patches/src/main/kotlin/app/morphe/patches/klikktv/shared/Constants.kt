@@ -6,7 +6,7 @@ import app.morphe.patcher.patch.Compatibility
 
 object Constants {
     val COMPATIBILITY_KLIKKTV = Compatibility(
-        name = "Klikk Tv",
+        name = "Klikk",
         packageName = "com.angel.klikk.tv",
         apkFileType = ApkFileType.XAPK,
         appIconColor = 0XFD000D,
