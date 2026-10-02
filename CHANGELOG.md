@@ -1,3 +1,9 @@
+## [1.3.1-dev.1](https://github.com/HellLord77/media-patches/compare/v1.3.0...v1.3.1-dev.1) (2026-10-02)
+
+### 🐛 Bug Fixes
+
+* Wrong boolean type ([23ec417](https://github.com/HellLord77/media-patches/commit/23ec41731dfc420a0a378654b01adfcb0f98649d))
+
 ## [1.3.0](https://github.com/HellLord77/media-patches/compare/v1.2.0...v1.3.0) (2026-09-27)
 
 ### 🐛 Bug Fixes
