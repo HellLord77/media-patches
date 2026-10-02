@@ -1,3 +1,9 @@
+## [1.3.2](https://github.com/HellLord77/media-patches/compare/v1.3.1...v1.3.2) (2026-10-02)
+
+### 🐛 Bug Fixes
+
+* Properly handle extension matches ([5e5f3cc](https://github.com/HellLord77/media-patches/commit/5e5f3cc1724b5624ef8f7f2120daea85f189db8b))
+
 ## [1.3.2-dev.1](https://github.com/HellLord77/media-patches/compare/v1.3.1...v1.3.2-dev.1) (2026-10-02)
 
 ### 🐛 Bug Fixes
