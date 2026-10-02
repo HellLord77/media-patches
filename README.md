@@ -15,7 +15,75 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.0](https://github.com/HellLord77/media-patches/releases/tag/v1.3.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;8 patches total
+> **[v1.3.1-dev.1](https://github.com/HellLord77/media-patches/releases/tag/v1.3.1-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;24 patches total
+<details open>
+<summary>📦 DeeptoPlay&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 2.2.10 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Ad campaign](#ad-campaign) | Resolve ad_campaign to null. |  |
+| [Content access](#content-access) | Resolve content_access to ContentAccess.free. |  |
+
+</details>
+
+<details open>
+<summary>📦 DeeptoTV&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 2.0.4 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Ad campaign](#ad-campaign) | Resolve ad_campaign to null. |  |
+| [Content access](#content-access) | Resolve content_access to ContentAccess.free. |  |
+
+</details>
+
+<details open>
+<summary>📦 Klikk&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 3.6.3 | 3.5.6 | 3.5.4 | 3.5.2 | 3.5.0 | 3.4.7 | 3.3.3 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Anonymous user](#anonymous-user) | Log in as anonymous subscribed user. |  |
+| [Bypass device check](#bypass-device-check) | Force device check to succeed. |  |
+| [Free content](#free-content) | Mark all content as free. |  |
+| [VPN active](#vpn-active) | Hide VPN state. |  |
+
+</details>
+
+<details open>
+<summary>📦 Klikk Tv&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 3.4.9 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Bypass device check](#bypass-device-check) | Force device check to succeed. |  |
+| [Disable update](#disable-update) | Force update to be not available. |  |
+| [Fake user](#fake-user) | Fakes logged in user |  |
+| [Free content](#free-content) | Mark all content as free. |  |
+
+</details>
+
 <details open>
 <summary>📦 Chorki&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
@@ -28,7 +96,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Content access](#content-access) | Resolve content_access to ContentAccess.free. |  |
-| [Login required](#login-required) | Resolve login_required using restrict_vpn. |  |
+| [Login required](#login-required) | Resolve login_required to false. |  |
 
 </details>
 
@@ -44,7 +112,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Content access](#content-access) | Resolve content_access to ContentAccess.free. |  |
-| [Login required](#login-required) | Resolve login_required using restrict_vpn. |  |
+| [Login required](#login-required) | Resolve login_required to false. |  |
 
 </details>
 
@@ -79,6 +147,22 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 </details>
 
 <details open>
+<summary>📦 Toffee&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 🧪&nbsp;9.2.6 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Splash ad](#splash-ad) | Conceal splash ad. |  |
+| [VPN active](#vpn-active) | Hide VPN state. |  |
+
+</details>
+
+<details open>
 <summary>📦 Shadhin&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
@@ -105,6 +189,17 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Temp user](#temp-user) | Log in as subscribed temp user. |  |
+
+</details>
+
+<details open>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable Flutter TLS verification](#disable-flutter-tls-verification) | Disables Flutter TLS verification, allowing to inspect traffic via a proxy. | • armeabi-v7a<br>• arm64-v8a<br>• x86<br>• x86_64 |
+| [Mask VPN transport check](#mask-vpn-transport-check) | Masks VPN transport check, allowing to inspect traffic via a proxy. |  |
 
 </details>
 
