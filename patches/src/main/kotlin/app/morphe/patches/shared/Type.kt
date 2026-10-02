@@ -1,5 +1,7 @@
 package app.morphe.patches.shared
 
+import kotlin.coroutines.Continuation
+
 @Suppress("unused")
 object Type {
     val boolean: String = Boolean::class.javaPrimitiveType!!.descriptorString()
@@ -24,4 +26,8 @@ object Type {
 
     val OBJECT: String = Any::class.java.descriptorString()
     val STRING: String = String::class.java.descriptorString()
+    val CONTINUATION: String = Continuation::class.java.descriptorString()
+
+    const val BUNDLE: String = "Landroid/os/Bundle;"
+    const val CONTEXT: String = "Landroid/content/Context;"
 }

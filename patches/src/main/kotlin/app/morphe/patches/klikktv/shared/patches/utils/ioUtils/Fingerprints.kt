@@ -9,5 +9,5 @@ internal object GetSharedPreferenceStringFingerprint : Fingerprint(
     name = "getSharedPreferenceString",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
     returnType = Type.STRING,
-    parameters = listOf("Landroid/content/Context;", Type.STRING),
+    parameters = listOf(Type.CONTEXT, Type.STRING),
 )

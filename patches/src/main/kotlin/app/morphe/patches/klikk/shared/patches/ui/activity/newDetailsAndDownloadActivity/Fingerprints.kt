@@ -2,6 +2,7 @@ package app.morphe.patches.klikk.shared.patches.ui.activity.newDetailsAndDownloa
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.fieldAccess
+import app.morphe.patches.shared.Type
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
@@ -10,7 +11,7 @@ internal object DeviceCheckGetterFingerprint : Fingerprint(
         fieldAccess(
             definingClass = "Lcom/angel/klikk/ui/activity/NewDetailsAndDownloadActivity;",
             name = "DeviceCheck",
-            type = "Z",
+            type = Type.boolean,
             opcode = Opcode.IGET_BOOLEAN,
         )
     )
@@ -20,6 +21,6 @@ internal object IsDownloadLimitExceededFingerprint : Fingerprint(
     definingClass = "Lcom/angel/klikk/ui/activity/NewDetailsAndDownloadActivity;",
     name = "isDownloadLimitExceeded",
     accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.FINAL),
-    returnType = "Z",
+    returnType = Type.boolean,
     parameters = emptyList(),
 )

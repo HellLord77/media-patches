@@ -2,6 +2,7 @@ package app.morphe.patches.all.misc.network
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.methodCall
+import app.morphe.patches.shared.Type
 import com.android.tools.smali.dexlib2.Opcode
 
 object HasTransportInvokerFingerprint : Fingerprint(
@@ -9,8 +10,8 @@ object HasTransportInvokerFingerprint : Fingerprint(
         methodCall(
             definingClass = "Landroid/net/NetworkCapabilities;",
             name = "hasTransport",
-            parameters = listOf("I"),
-            returnType = "Z",
+            parameters = listOf(Type.int),
+            returnType = Type.boolean,
             opcode = Opcode.INVOKE_VIRTUAL,
         ),
     )
