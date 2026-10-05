@@ -1,7 +1,7 @@
 package app.morphe.patches.klikk.network
 
 import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.patches.all.misc.network.maskVPNTransportPatch
+import app.morphe.patches.all.network.maskVPNTransportPatch
 import app.morphe.patches.klikk.shared.Constants.COMPATIBILITY_KLIKK
 
 @Suppress("unused")

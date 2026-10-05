@@ -1,4 +1,4 @@
-package app.morphe.patches.all.misc.network
+package app.morphe.patches.all.network
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.methodCall

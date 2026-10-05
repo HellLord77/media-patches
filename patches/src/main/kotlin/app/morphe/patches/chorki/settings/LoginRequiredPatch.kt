@@ -1,7 +1,6 @@
 package app.morphe.patches.chorki.settings
 
 import app.morphe.patcher.patch.rawResourcePatch
-import app.morphe.patches.all.misc.fix.changepackageinstaller.changePackageInstallerPatch
 import app.morphe.patches.all.misc.hex.hexPatch
 import app.morphe.patches.all.misc.lib.stripNonArmNativeLibraryPatch
 import app.morphe.patches.chorki.shared.Constants.COMPATIBILITY_CHORKI
@@ -18,7 +17,7 @@ val loginRequiredPatch = rawResourcePatch(
     availability(requireArm)
 
     dependsOn(
-        stripNonArmNativeLibraryPatch, changePackageInstallerPatch(), hexPatch(true, block = {
+        stripNonArmNativeLibraryPatch, hexPatch(true, block = {
             // package:chorki/data/models/settings_model.json -> SettingsModel.fromJson
             // login_required -> restrict_vpn
             // ADD             R2, R5, #0xD000

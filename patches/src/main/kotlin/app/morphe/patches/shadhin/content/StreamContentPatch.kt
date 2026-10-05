@@ -6,6 +6,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shadhin.shared.Constants.COMPATIBILITY_SHADHIN
+import app.morphe.patches.shadhin.shared.data.remote.api.model.mainContentModel.isPaidPatch
 import app.morphe.util.matchAllMethodIndicesForEach
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.Opcode
@@ -16,12 +17,12 @@ import com.android.tools.smali.dexlib2.immutable.reference.ImmutableStringRefere
 @Suppress("unused")
 val streamPatch = bytecodePatch(
     name = "Stream content",
-    description = "Stream content as song.",
+    description = "Stream paid content for free.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_SHADHIN)
 
-    dependsOn(freeContentPatch)
+    dependsOn(isPaidPatch)
 
     execute {
         FetchStreamingUrlFingerprint.matchSingle().originalMethod.run {

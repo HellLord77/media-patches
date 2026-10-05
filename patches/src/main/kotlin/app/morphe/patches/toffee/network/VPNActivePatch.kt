@@ -1,7 +1,7 @@
 package app.morphe.patches.toffee.network
 
 import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.patches.all.misc.network.maskVPNTransportPatch
+import app.morphe.patches.all.network.maskVPNTransportPatch
 import app.morphe.patches.toffee.shared.Constants.COMPATIBILITY_TOFFEE
 
 @Suppress("unused")

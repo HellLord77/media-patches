@@ -1,11 +1,11 @@
-package app.morphe.patches.all.misc.flutter
+package app.morphe.patches.all.flutter.network.tlsverification
 
 import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.resource.CpuArchitecture
 
 @Suppress("unused")
-val disableFlutterTLSVerification = rawResourcePatch(
+val disableTLSVerification = rawResourcePatch(
     name = "Disable Flutter TLS verification",
     description = "Disables Flutter TLS verification, allowing to inspect traffic via a proxy.",
     default = false
@@ -22,7 +22,7 @@ val disableFlutterTLSVerification = rawResourcePatch(
     }
 
     dependsOn(
-        disableFlutterTLSVerificationPatch {
+        disableTLSVerificationPatch {
             architectures.filterIndexed { index, _ -> options[index].value!! }
         })
 }

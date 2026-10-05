@@ -1,4 +1,4 @@
-package app.morphe.patches.all.misc.flutter
+package app.morphe.patches.all.flutter.network.tlsverification
 
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.rawResourcePatch
@@ -8,7 +8,7 @@ import app.morphe.patches.shared.Constants.NATIVE_LIBRARY_DIRECTORY
 import java.util.logging.Logger
 
 // https://github.com/NVISOsecurity/disable-flutter-tls-verification
-fun disableFlutterTLSVerificationPatch(
+fun disableTLSVerificationPatch(
     architecturesProvider: () -> List<CpuArchitecture> = { emptyList() },
 ) = rawResourcePatch {
     val architectures = architecturesProvider()

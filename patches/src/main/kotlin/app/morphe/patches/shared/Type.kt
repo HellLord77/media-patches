@@ -25,7 +25,10 @@ object Type {
     val VOID: String = Void::class.javaObjectType.descriptorString()
 
     val OBJECT: String = Any::class.java.descriptorString()
+
+    val CHAR_SEQUENCE: String = CharSequence::class.java.descriptorString()
     val STRING: String = String::class.java.descriptorString()
+
     val CONTINUATION: String = Continuation::class.java.descriptorString()
 
     const val BUNDLE: String = "Landroid/os/Bundle;"
