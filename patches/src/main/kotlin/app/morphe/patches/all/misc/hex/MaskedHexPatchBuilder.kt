@@ -2,10 +2,9 @@ package app.morphe.patches.all.misc.hex
 
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.rawResourcePatch
+import app.morphe.patches.shared.indexOfPatternIn
 import app.morphe.util.byteArrayOf
 import java.io.RandomAccessFile
-import kotlin.experimental.and
-import kotlin.math.max
 
 private fun String.getPattern() = replace('?', '0')
 
@@ -72,11 +71,10 @@ class MaskedReplacement(
     private val replacementBytes: ByteArray,
     internal val targetFilePath: String,
 ) {
-    val maskBytesPadded = maskBytes + ByteArray(bytes.size - maskBytes.size) { 0xFF.toByte() }
     val replacementBytesPadded = replacementBytes + ByteArray(bytes.size - replacementBytes.size)
 
     fun replacePattern(ignoreMissingReplacements: Boolean = false, targetFile: RandomAccessFile) {
-        val startIndex = indexOfPatternIn(targetFile)
+        val startIndex = bytes.indexOfPatternIn(targetFile, maskBytes)
 
         if (startIndex == -1L) {
             if (ignoreMissingReplacements) return
@@ -89,44 +87,5 @@ class MaskedReplacement(
 
         targetFile.seek(startIndex)
         targetFile.write(replacementBytesPadded)
-    }
-
-    private fun indexOfPatternIn(file: RandomAccessFile): Long {
-        val needle = bytes
-        val right = IntArray(256) { -1 }
-
-        for ((i, element) in needle.withIndex()) right[element.toInt().and(0xFF)] = i
-
-        val bufferSize = 65536
-        val buffer = ByteArray(bufferSize + needle.size)
-
-        var fileOffset = 0L
-        val fileLength = file.length()
-
-        while (fileOffset < fileLength) {
-            file.seek(fileOffset)
-            val bytesRead = file.read(buffer)
-
-            if (bytesRead < needle.size) break
-
-            var skip: Int
-            var i = 0
-            while (i <= bytesRead - needle.size) {
-                skip = 0
-
-                for (j in needle.size - 1 downTo 0) {
-                    if (needle[j].and(maskBytesPadded[j]) != buffer[i + j].and(maskBytesPadded[j])) {
-                        skip = max(1, j - right[buffer[i + j].toInt().and(0xFF)])
-                        break
-                    }
-                }
-
-                if (skip == 0) return fileOffset + i
-                i += skip
-            }
-
-            fileOffset += (bytesRead - needle.size + 1)
-        }
-        return -1L
     }
 }

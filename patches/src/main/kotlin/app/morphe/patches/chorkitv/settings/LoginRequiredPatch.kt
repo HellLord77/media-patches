@@ -2,7 +2,7 @@ package app.morphe.patches.chorkitv.settings
 
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.misc.lib.stripNonArmNativeLibraryPatch
+import app.morphe.patches.all.misc.lib.keepArmNativeLibraryPatch
 import app.morphe.patches.chorkitv.shared.Constants.COMPATIBILITY_CHORKITV
 import app.morphe.patches.shared.requireArm
 
@@ -17,7 +17,7 @@ val loginRequiredPatch = rawResourcePatch(
     availability(requireArm)
 
     dependsOn(
-        stripNonArmNativeLibraryPatch, hexPatch(true, block = {
+        keepArmNativeLibraryPatch, hexPatch(true, block = {
             // package:goplay_tv/data/models/settings_model.json -> SettingsModel.fromJson
             // login_required -> restrict_vpn
             // ADD             R2, R5, #0x8000

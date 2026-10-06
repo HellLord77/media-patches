@@ -2,7 +2,7 @@ package app.morphe.patches.chorkitv.content
 
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.misc.lib.stripNonArmNativeLibraryPatch
+import app.morphe.patches.all.misc.lib.keepArmNativeLibraryPatch
 import app.morphe.patches.chorkitv.shared.Constants.COMPATIBILITY_CHORKITV
 import app.morphe.patches.shared.requireArm
 
@@ -17,7 +17,7 @@ val contentAccessPatch = rawResourcePatch(
     availability(requireArm)
 
     dependsOn(
-        stripNonArmNativeLibraryPatch, hexPatch(true, block = {
+        keepArmNativeLibraryPatch, hexPatch(true, block = {
             // package:goplay_tv/data/models/content_model.dart -> ContentModel.toEntity
             // content_access -> id
             // ADD             R2, R5, #0x5000

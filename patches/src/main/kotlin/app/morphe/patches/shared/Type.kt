@@ -1,5 +1,7 @@
 package app.morphe.patches.shared
 
+import java.lang.reflect.Field
+import java.lang.reflect.Method
 import kotlin.coroutines.Continuation
 
 @Suppress("unused")
@@ -25,9 +27,13 @@ object Type {
     val VOID: String = Void::class.javaObjectType.descriptorString()
 
     val OBJECT: String = Any::class.java.descriptorString()
+    val OBJECT_ARRAY: String = Array<Any>::class.java.descriptorString()
 
     val CHAR_SEQUENCE: String = CharSequence::class.java.descriptorString()
     val STRING: String = String::class.java.descriptorString()
+
+    val FIELD: String = Field::class.java.descriptorString()
+    val METHOD: String = Method::class.java.descriptorString()
 
     val CONTINUATION: String = Continuation::class.java.descriptorString()
 

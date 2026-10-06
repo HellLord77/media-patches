@@ -9,7 +9,7 @@ import java.util.logging.Logger
 
 // https://github.com/NVISOsecurity/disable-flutter-tls-verification
 fun disableTLSVerificationPatch(
-    architecturesProvider: () -> List<CpuArchitecture> = { emptyList() },
+    architecturesProvider: () -> List<CpuArchitecture> = ::emptyList,
 ) = rawResourcePatch {
     val architectures = architecturesProvider()
     val logger = Logger.getLogger(this::class.java.name)

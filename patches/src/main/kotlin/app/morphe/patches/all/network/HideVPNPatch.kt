@@ -11,12 +11,12 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableMethodReference
 
-private const val EXTENSION_CLASS = "Lapp/morphe/extension/network/patches/MaskVPNTransportPatch;"
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/network/patches/NetworkCapabilities;"
 
-val maskVPNTransportPatch = bytecodePatch(
-    name = "Mask VPN transport check",
-    description = "Masks VPN transport check, allowing to inspect traffic via a proxy.",
-    default = false
+val hideVPNPatch = bytecodePatch(
+    name = "Hide VPN",
+    description = "Hides active VPN.",
+    default = false,
 ) {
     extendWith("extensions/network.mpe")
 

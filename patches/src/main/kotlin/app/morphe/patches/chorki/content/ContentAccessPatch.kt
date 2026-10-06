@@ -2,7 +2,7 @@ package app.morphe.patches.chorki.content
 
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.misc.lib.stripNonArmNativeLibraryPatch
+import app.morphe.patches.all.misc.lib.keepArmNativeLibraryPatch
 import app.morphe.patches.chorki.shared.Constants.COMPATIBILITY_CHORKI
 import app.morphe.patches.shared.requireArm
 
@@ -17,7 +17,7 @@ val contentAccessPatch = rawResourcePatch(
     availability(requireArm)
 
     dependsOn(
-        stripNonArmNativeLibraryPatch, hexPatch(true, block = {
+        keepArmNativeLibraryPatch, hexPatch(true, block = {
             // package:chorki/data/models/content_model.dart -> ContentModel.toEntity
             // content_access -> content_access_token
             // ADD             R0, R5, #0xB000

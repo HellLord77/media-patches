@@ -2,7 +2,7 @@ package app.morphe.patches.deeptotv.content
 
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.misc.lib.stripNonArmNativeLibraryPatch
+import app.morphe.patches.all.misc.lib.keepArmNativeLibraryPatch
 import app.morphe.patches.deeptotv.shared.Constants.COMPATIBILITY_DEEPTOTV
 import app.morphe.patches.shared.requireArm
 
@@ -16,7 +16,7 @@ val contentAccessPatch = rawResourcePatch(
 
     availability(requireArm)
 
-    dependsOn(stripNonArmNativeLibraryPatch, hexPatch(true, block = {
+    dependsOn(keepArmNativeLibraryPatch, hexPatch(true, block = {
         // package:core_models/src/content_model.dart -> ContentModel.fromJson
         // content_access -> id
         // ADD             R2, R5, #0x9000 -> ADD             R2, R5, #0x2000
