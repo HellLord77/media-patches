@@ -1,16 +1,16 @@
-package app.morphe.patches.deeptoplay.content
+package app.morphe.patches.deeptoplay.ad
 
 import app.morphe.patcher.patch.rawResourcePatch
+import app.morphe.patches.all.library.keepArmNativeLibraryPatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.misc.lib.keepArmNativeLibraryPatch
 import app.morphe.patches.deeptoplay.shared.Constants.COMPATIBILITY_DEEPTOPLAY
 import app.morphe.patches.shared.requireArm
 
 
 @Suppress("unused")
-val adCampaignPatch = rawResourcePatch(
-    name = "Ad campaign",
-    description = "Resolve ad_campaign to null.",
+val hideAdsPatch = rawResourcePatch(
+    name = "Hide ads",
+    description = "Hides ads from stream.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_DEEPTOPLAY)

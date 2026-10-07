@@ -1,15 +1,15 @@
-package app.morphe.patches.chorkitv.settings
+package app.morphe.patches.chorkitv.user
 
 import app.morphe.patcher.patch.rawResourcePatch
+import app.morphe.patches.all.library.keepArmNativeLibraryPatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.misc.lib.keepArmNativeLibraryPatch
 import app.morphe.patches.chorkitv.shared.Constants.COMPATIBILITY_CHORKITV
 import app.morphe.patches.shared.requireArm
 
 @Suppress("unused")
-val loginRequiredPatch = rawResourcePatch(
-    name = "Login required",
-    description = "Resolve login_required to false.",
+val bypassLoginPatch = rawResourcePatch(
+    name = "Bypass login",
+    description = "Bypasses required login.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_CHORKITV)

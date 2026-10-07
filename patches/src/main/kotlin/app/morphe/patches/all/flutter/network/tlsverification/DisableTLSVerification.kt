@@ -24,5 +24,6 @@ val disableTLSVerification = rawResourcePatch(
     dependsOn(
         disableTLSVerificationPatch {
             architectures.filterIndexed { index, _ -> options[index].value!! }
-        })
+        }
+    )
 }

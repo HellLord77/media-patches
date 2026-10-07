@@ -1,4 +1,4 @@
-package app.morphe.patches.all.misc.lib
+package app.morphe.patches.all.library
 
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.resource.CpuArchitecture

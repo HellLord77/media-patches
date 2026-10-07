@@ -4,9 +4,11 @@ import app.morphe.patcher.patch.rawResourcePatch
 
 @Suppress("unused")
 fun stripPairIP() = rawResourcePatch(
-    name = "Strip PairIP libraries",
-    description = "Strips Play Integrity API (pairip) client-side libraries.",
+    name = "Strip PairIP checks",
+    description = "Strips Play Integrity API (pairip) client-side checks.",
     default = false,
 ) {
-    throw NotImplementedError()
+    execute {
+        throw NotImplementedError()
+    }
 }

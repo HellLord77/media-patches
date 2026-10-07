@@ -1,15 +1,15 @@
 package app.morphe.patches.deeptoplay.content
 
 import app.morphe.patcher.patch.rawResourcePatch
+import app.morphe.patches.all.library.keepArmNativeLibraryPatch
 import app.morphe.patches.all.misc.hex.hexPatch
-import app.morphe.patches.all.misc.lib.keepArmNativeLibraryPatch
 import app.morphe.patches.deeptoplay.shared.Constants.COMPATIBILITY_DEEPTOPLAY
 import app.morphe.patches.shared.requireArm
 
 @Suppress("unused")
-val contentAccessPatch = rawResourcePatch(
-    name = "Content access",
-    description = "Resolve content_access to ContentAccess.free.",
+val accessContentPatch = rawResourcePatch(
+    name = "Access content",
+    description = "Access paid content.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_DEEPTOPLAY)
