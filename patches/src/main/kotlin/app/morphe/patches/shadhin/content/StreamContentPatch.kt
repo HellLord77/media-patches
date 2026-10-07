@@ -25,7 +25,7 @@ val streamPatch = bytecodePatch(
     dependsOn(isPaidPatch)
 
     execute {
-        FetchStreamingUrlFingerprint.matchSingle().originalMethod.run {
+        FetchStreamingUrlFingerprint.matchSingle().originalMethod.apply {
             val parameterIndex = parameters.indexOfFirst { parameter ->
                 parameter.annotations.flatMap { it.elements }
                     .any { it.value.toString() == "\"ContentType\"" }

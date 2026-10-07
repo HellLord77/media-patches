@@ -5,7 +5,7 @@ import app.morphe.util.matchSingle
 
 val attachBaseContextPatch = bytecodePatch {
     execute {
-        AttachBaseContextFingerprint.matchSingle().run {
+        AttachBaseContextFingerprint.matchSingle().apply {
             classDef.methods.remove(originalMethod)
         }
     }
