@@ -15,7 +15,7 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableStringReference
 
 @Suppress("unused")
-val streamPatch = bytecodePatch(
+val streamContentPatch = bytecodePatch(
     name = "Stream content",
     description = "Stream paid content for free.",
     default = true,

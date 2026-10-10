@@ -4,7 +4,7 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.resource.CpuArchitecture
 import app.morphe.patches.shared.Constants.NATIVE_LIBRARY_DIRECTORY
-import app.morphe.patches.shared.hex.maskedHexPatch
+import app.morphe.patches.shared.patches.hex.maskedHexPatch
 import java.util.logging.Logger
 
 // https://github.com/NVISOsecurity/disable-flutter-tls-verification

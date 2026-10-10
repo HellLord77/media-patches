@@ -22,15 +22,17 @@ val tempUserPatch = bytecodePatch(
     dependsOn(sharedExtensionPatch)
 
     execute {
-        KabbikApplicationOnCreateFingerprint.matchSingle().apply {
-            method.addInstruction(
+        KabbikApplicationOnCreateFingerprint.matchSingle().method.apply {
+            addInstruction(
                 0, BuilderInstruction35c(
-                    Opcode.INVOKE_STATIC, 0, 0, 0, 0, 0, 0, ImmutableMethodReference(
-                        EXTENSION_CLASS,
-                        originalMethod.name,
-                        originalMethod.parameters,
-                        originalMethod.returnType
-                    )
+                    Opcode.INVOKE_STATIC,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    ImmutableMethodReference(EXTENSION_CLASS, name, parameters, returnType),
                 )
             )
         }

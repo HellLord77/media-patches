@@ -1,7 +1,6 @@
 package app.morphe.patches.all.manifest.appicon
 
 import app.morphe.patcher.patch.resourcePatch
-import app.morphe.patches.shared.getNode
 import app.morphe.util.adoptChild
 import app.morphe.util.asSequence
 import app.morphe.util.childElementsSequence
@@ -20,8 +19,7 @@ fun showAppIconPatch(
             var changed = false
 
             val manifest = document.getNode("manifest") as Element
-            val application = manifest.getNode("application") as Element
-            val intentFilters = application.getElementsByTagName("intent-filter")
+            val intentFilters = manifest.getElementsByTagName("intent-filter")
             for (node in intentFilters.asSequence().filterIsInstance<Element>()) {
                 var hasMainAction = false
                 var hasLauncher = false

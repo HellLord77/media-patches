@@ -3,6 +3,7 @@ package app.morphe.patches.shared
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import kotlin.coroutines.Continuation
+import kotlin.coroutines.CoroutineContext
 
 @Suppress("unused")
 object Type {
@@ -24,6 +25,8 @@ object Type {
     val FLOAT: String = Float::class.javaObjectType.descriptorString()
     val LONG: String = Long::class.javaObjectType.descriptorString()
     val DOUBLE: String = Double::class.javaObjectType.descriptorString()
+
+    @Deprecated("Use void instead", ReplaceWith("void"))
     val VOID: String = Void::class.javaObjectType.descriptorString()
 
     val OBJECT: String = Any::class.java.descriptorString()
@@ -32,10 +35,13 @@ object Type {
     val CHAR_SEQUENCE: String = CharSequence::class.java.descriptorString()
     val STRING: String = String::class.java.descriptorString()
 
+    val LIST: String = List::class.java.descriptorString()
+
     val FIELD: String = Field::class.java.descriptorString()
     val METHOD: String = Method::class.java.descriptorString()
 
     val CONTINUATION: String = Continuation::class.java.descriptorString()
+    val COROUTINE_CONTEXT: String = CoroutineContext::class.java.descriptorString()
 
     const val BUNDLE: String = "Landroid/os/Bundle;"
     const val CONTEXT: String = "Landroid/content/Context;"

@@ -1,4 +1,4 @@
-package app.morphe.patches.shared.hex
+package app.morphe.patches.shared.patches.hex
 
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.rawResourcePatch
@@ -33,11 +33,8 @@ class MaskedHexPatchBuilder internal constructor(
     private val replacements: MutableSet<MaskedReplacement> = mutableSetOf(),
 ) : Set<MaskedReplacement> by replacements {
     infix fun String.asPatternTo(replacementPattern: String) = Triple(
-        byteArrayOf(getPattern()),
-        byteArrayOf(getMaskPattern()),
-        byteArrayOf(replacementPattern)
+        byteArrayOf(getPattern()), byteArrayOf(getMaskPattern()), byteArrayOf(replacementPattern)
     )
-
 
     infix fun <T> Triple<T, T, T>.inFile(filePath: String) {
         when (first) {
