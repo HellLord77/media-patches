@@ -21,7 +21,7 @@ object Constants {
         apkFileType = ApkFileType.XAPK,
         signatures = setOf("904a1603367960be38acacaa193df810c3a9868a485da82186da02def4763717"),
         targets = listOf(
-            AppTarget(version = "5.19.51", versionCode = 101418, isExperimental = true, minSdk = 24)
+            AppTarget(version = "5.19.51", versionCode = 101418, minSdk = 24),
         )
     )
 }

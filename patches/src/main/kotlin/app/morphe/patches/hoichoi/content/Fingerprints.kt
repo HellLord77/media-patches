@@ -3,6 +3,7 @@ package app.morphe.patches.hoichoi.content
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.fieldAccess
 import app.morphe.patches.shared.Type
+import app.morphe.patches.shared.morphe.kotlin.String
 import app.morphe.patches.shared.morphe.okhttp3.MediaType
 import app.morphe.patches.shared.morphe.okhttp3.ResponseBody
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -36,4 +37,25 @@ object ResponseBodyCompanionFieldAccessFingerprint : Fingerprint(
             opcode = Opcode.SPUT_OBJECT,
         )
     ),
+)
+
+internal object GetMonetizationModelFingerprint : Fingerprint(
+    name = "getMonetizationModel",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = String.toString(),
+    parameters = emptyList(),
+)
+
+internal object IsFreeContentFingerprint : Fingerprint(
+    name = "isFreeContent",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = Type.boolean,
+    parameters = emptyList(),
+)
+
+internal object IsLoginRequiredFingerprint : Fingerprint(
+    name = "isLoginRequired",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = Type.boolean,
+    parameters = emptyList(),
 )

@@ -17,6 +17,7 @@ import app.morphe.patches.shared.morphe.okhttp3.ResponseBody
 import app.morphe.patches.shared.patches.dex.obfuscateExtensionFieldReferenceFingerprintPatch
 import app.morphe.util.matchSingle
 import app.morphe.util.p0Register
+import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21c
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
@@ -44,6 +45,18 @@ val freeContentPatch = bytecodePatch(
     )
 
     execute {
+        GetMonetizationModelFingerprint.matchAll().forEach {
+            it.method.returnEarly("FREE")
+        }
+
+        IsFreeContentFingerprint.matchAll().forEach {
+            it.method.returnEarly(true)
+        }
+
+        IsLoginRequiredFingerprint.matchAll().forEach {
+            it.method.returnEarly(false)
+        }
+
         OkHttpClient.Builder.BuildFingerprint.matchSingle().method.apply {
             addInstructions(
                 0, listOf(
