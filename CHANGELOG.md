@@ -1,3 +1,9 @@
+## [1.3.3-dev.1](https://github.com/HellLord77/media-patches/compare/v1.3.2...v1.3.3-dev.1) (2026-10-11)
+
+### 🐛 Bug Fixes
+
+* Added chorki disable update patch ([#19](https://github.com/HellLord77/media-patches/issues/19)) ([ed6527c](https://github.com/HellLord77/media-patches/commit/ed6527cf50d01c722e0c5717636e3162948af2d1))
+
 ## [1.3.2](https://github.com/HellLord77/media-patches/compare/v1.3.1...v1.3.2) (2026-10-02)
 
 ### 🐛 Bug Fixes
