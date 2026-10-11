@@ -1,6 +1,7 @@
 package app.morphe.extension.hoichoi.repos
 
 import android.net.Uri
+import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -89,7 +90,7 @@ private fun getFreeContentId(chain: Interceptor.Chain): String {
     while (iterator.hasNext()) {
         val element = iterator.next()
         if (index == count++) {
-            Utils.showToastShort("freeContentId: $element")
+            Logger.printInfo { "freeContentId: $element" }
             return element
         }
     }
@@ -153,7 +154,8 @@ internal fun buildEntitlementInfo(
 ): Response {
     entitlementInfo.put("videoDetails", videoDetails)
 
-    val body = entitlementInfo.toString().toResponseBody("application/json".toMediaType())
+    val body =
+        entitlementInfo.toString().toByteArray().toResponseBody("application/json".toMediaType())
     return response.newBuilder().code(200).header("Content-Length", body.contentLength().toString())
         .body(body).build()
 }

@@ -14,7 +14,7 @@ import java.util.function.Supplier
 private val ASSET_FILE_MAGIC = byteArrayOf(0x00, 0x49, 0x41, 0x50)
 private val DEX_FILE_MAGIC = byteArrayOf(0x64, 0x65, 0x78, 0x0a)
 
-internal fun restoreDexPatch(stripAssets: Boolean = true) = bytecodePatch {
+internal val restoreDexPatch = bytecodePatch {
     val vmAssets = mutableListOf<File>()
 
     dependsOn(rawResourcePatch {
@@ -30,10 +30,8 @@ internal fun restoreDexPatch(stripAssets: Boolean = true) = bytecodePatch {
             }
         }
 
-        if (stripAssets) {
-            finalize {
-                vmAssets.forEach(File::delete)
-            }
+        finalize {
+            vmAssets.forEach(File::delete)
         }
     })
 

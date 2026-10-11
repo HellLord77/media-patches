@@ -2,8 +2,14 @@ package app.morphe.patches.hoichoi.content
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patches.all.misc.extension.SHARED_UTILS_EXTENSION_CLASS
+import app.morphe.patches.hoichoi.extension.hooks.hoichoiActivityOnCreateHook
+import app.morphe.patches.hoichoi.extension.hooks.hoichoiApplicationOnCreateHook
+import app.morphe.patches.hoichoi.extension.hooks.hoichoitvActivityOnCreateHook
+import app.morphe.patches.hoichoi.extension.hooks.hoichoitvApplicationOnCreateHook
 import app.morphe.patches.hoichoi.extension.sharedExtensionPatch
 import app.morphe.patches.hoichoi.shared.Constants.COMPATIBILITY_HOICHOI
+import app.morphe.patches.hoichoi.shared.Constants.COMPATIBILITY_HOICHOITV
 import app.morphe.patches.shared.Type
 import app.morphe.patches.shared.morphe.okhttp3.MediaType
 import app.morphe.patches.shared.morphe.okhttp3.OkHttpClient
@@ -26,7 +32,7 @@ val freeContentPatch = bytecodePatch(
     name = "Free content",
     default = true,
 ) {
-    compatibleWith(COMPATIBILITY_HOICHOI)
+    compatibleWith(COMPATIBILITY_HOICHOI, COMPATIBILITY_HOICHOITV)
 
     dependsOn(
         sharedExtensionPatch, obfuscateExtensionFieldReferenceFingerprintPatch(
@@ -73,6 +79,16 @@ val freeContentPatch = bytecodePatch(
                     ),
                 )
             )
+        }
+    }
+
+    finalize {
+        if (COMPATIBILITY_HOICHOI.targets.any { target -> target.version == packageMetadata.versionName }) {
+            hoichoiActivityOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
+            hoichoiApplicationOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
+        } else if (COMPATIBILITY_HOICHOITV.targets.any { target -> target.version == null }) {
+            hoichoitvActivityOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
+            hoichoitvApplicationOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
         }
     }
 }

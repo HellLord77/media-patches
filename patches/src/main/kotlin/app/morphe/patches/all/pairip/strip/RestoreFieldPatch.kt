@@ -29,7 +29,7 @@ private const val EXTENSION_CLASS = "Lapp/morphe/extension/pairip/RestoreMethod;
 
 private data class Translation(val type: String, val fields: Map<String, String>)
 
-internal fun restoreFieldPatch(dictionaryPath: String) = bytecodePatch {
+internal val restoreFieldPatch = bytecodePatch {
     dependsOn(
         attachBaseContextPatch,
         classConstructorPatch, invokePatch,
@@ -38,10 +38,13 @@ internal fun restoreFieldPatch(dictionaryPath: String) = bytecodePatch {
     extendWith("extensions/pairip.mpe")
 
     execute {
-        val restoreInstructions = mutableListOf<ImmutableInstruction>()
+        val dictionaryPath =
+            "/pairip/${packageMetadata.packageName}/${packageMetadata.versionName}/${packageMetadata.versionCode}.json"
         val stream = object {}.javaClass.getResourceAsStream(dictionaryPath)!!.bufferedReader()
         val dictionary: Map<String, Translation> =
             Gson().fromJson(stream, object : TypeToken<Map<String, Translation>>() {}.type)
+
+        val restoreInstructions = mutableListOf<ImmutableInstruction>()
         dictionary.entries.forEach { (name, translation) ->
 
             val restoreField = when (translation.type) {

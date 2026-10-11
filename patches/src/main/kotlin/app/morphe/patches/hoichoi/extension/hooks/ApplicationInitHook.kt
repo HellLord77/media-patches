@@ -12,3 +12,10 @@ internal val hoichoiApplicationOnCreateHook = activityOnCreateExtensionHook(
     activityClassType = "Lcom/viewlift/hoichoi/HoichoiApplication;",
     targetBundleMethod = false,
 )
+
+internal val hoichoitvActivityOnCreateHook = activityOnCreateExtensionHook()
+
+internal val hoichoitvApplicationOnCreateHook = activityOnCreateExtensionHook(
+    activityClassType = "Lcom/viewlift/hoichoi/App;",
+    targetBundleMethod = false,
+)

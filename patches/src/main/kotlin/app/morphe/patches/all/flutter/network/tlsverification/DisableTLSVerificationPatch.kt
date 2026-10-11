@@ -20,9 +20,7 @@ fun disableTLSVerificationPatch(
         val lib = "$NATIVE_LIBRARY_DIRECTORY/${arch.arch}/libflutter.so"
 
         dependsOn(
-            maskedHexPatch(
-                true, ignoreMissingReplacements = true
-            ) {
+            maskedHexPatch(ignoreMissingTargetFiles = true, ignoreMissingReplacements = true) {
                 when (arch) {
                     CpuArchitecture.ARMEABI_V7A -> {
                         // mov r0, #0

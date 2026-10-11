@@ -13,7 +13,7 @@ private fun String.getMaskPattern() = replace(Regex("[0-9a-fA-F]"), "f").getPatt
 fun maskedHexPatch(
     ignoreMissingTargetFiles: Boolean = false,
     ignoreMissingReplacements: Boolean = false,
-    block: MaskedHexPatchBuilder.() -> Unit
+    block: MaskedHexPatchBuilder.() -> Unit,
 ) = rawResourcePatch {
     execute {
         MaskedHexPatchBuilder().apply(block).groupBy { it.targetFilePath }
