@@ -5,7 +5,6 @@ import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.library.keepArmNativeLibraryPatch
 import app.morphe.patches.all.misc.hex.hexPatch
 import app.morphe.patches.chorki.shared.Constants.COMPATIBILITY_CHORKI
-import app.morphe.patches.shared.requireArm
 
 @Suppress("unused")
 val disableUpdatePatch = rawResourcePatch(
@@ -14,8 +13,6 @@ val disableUpdatePatch = rawResourcePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_CHORKI)
-
-    availability(requireArm)
 
     dependsOn(
         keepArmNativeLibraryPatch,

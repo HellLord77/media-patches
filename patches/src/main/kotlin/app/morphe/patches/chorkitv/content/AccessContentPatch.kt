@@ -1,10 +1,14 @@
 package app.morphe.patches.chorkitv.content
 
+import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.rawResourcePatch
+import app.morphe.patcher.resource.CpuArchitecture
 import app.morphe.patches.all.library.keepArmNativeLibraryPatch
 import app.morphe.patches.all.misc.hex.hexPatch
 import app.morphe.patches.chorkitv.shared.Constants.COMPATIBILITY_CHORKITV
-import app.morphe.patches.shared.requireArm
+import app.morphe.patches.shared.patches.cpuArchitectures
+import app.morphe.patches.shared.patches.extractMetadataPatch
+import app.morphe.patches.shared.patches.packageMetadata
 
 @Suppress("unused")
 val accessContentPatch = rawResourcePatch(
@@ -14,33 +18,73 @@ val accessContentPatch = rawResourcePatch(
 ) {
     compatibleWith(COMPATIBILITY_CHORKITV)
 
-    availability(requireArm)
-
     dependsOn(
-        keepArmNativeLibraryPatch, hexPatch(true, block = {
+        keepArmNativeLibraryPatch, extractMetadataPatch, hexPatch(block = {
             // package:goplay_tv/data/models/content_model.dart -> ContentModel.toEntity
             // content_access -> id
-            // ADD             R2, R5, #0x5000
-            // LDR             R2, [R2,#0x1E3]  -> LDR             R2, [R2,#0x1AF]
-            """
-                05 2a 85 e2
-                e3 21 92 e5
-            """ asPatternTo """
-                05 2a 85 e2
-                af 21 92 e5
-            """ inFile "lib/armeabi-v7a/libapp.so"
-        }), hexPatch(true, block = {
-            // package:goplay_tv/data/models/content_model.dart -> ContentModel.toEntity
-            // content_access -> id
-            // ADD             X0, X27, #8,LSL#12
-            // LDR             X0, [X0,#0xF00]    -> LDR             X0, [X0,#0xE98]
-            """
-                62 23 40 91
-                42 80 47 f9
-            """ asPatternTo """
-                62 23 40 91
-                42 4c 47 f9
-            """ inFile "lib/arm64-v8a/libapp.so"
+            if (CpuArchitecture.ARMEABI_V7A in cpuArchitectures) {
+                val lib = "lib/armeabi-v7a/libapp.so"
+
+                when (packageMetadata.versionCode.toInt()) {
+                    290 -> {
+                        // ADD             R2, R5, #0x6000
+                        // LDR             R2, [R2,#0x93F]  -> LDR             R2, [R2,#0x90B]
+                        """
+                            06 2a 85 e2
+                            3f 29 92 e5
+                        """ asPatternTo """
+                            06 2a 85 e2
+                            0b 29 92 e5
+                        """ inFile lib
+                    }
+
+                    288 -> {
+                        // ADD             R2, R5, #0x5000
+                        // LDR             R2, [R2,#0x1E3]  -> LDR             R2, [R2,#0x1AF]
+                        """
+                            05 2a 85 e2
+                            e3 21 92 e5
+                        """ asPatternTo """
+                            05 2a 85 e2
+                            af 21 92 e5
+                        """ inFile lib
+                    }
+
+                    else -> throw PatchException("Unsupported version: ${packageMetadata.versionName}")
+                }
+            }
+
+            if (CpuArchitecture.ARM64_V8A in cpuArchitectures) {
+                val lib = "lib/arm64-v8a/libapp.so"
+
+                when (packageMetadata.versionCode.toInt()) {
+                    290 -> {
+                        // ADD             X2, X27, #0xB,LSL#12
+                        // LDR             X2, [X2,#0xDB0]      -> LDR             X2, [X2,#0xD48]
+                        """
+                            62 2f 40 91
+                            42 d8 46 f9
+                        """ asPatternTo """
+                            62 2f 40 91
+                            42 a4 46 f9
+                        """ inFile lib
+                    }
+
+                    288 -> {
+                        // ADD             X0, X27, #8,LSL#12
+                        // LDR             X0, [X0,#0xF00]    -> LDR             X0, [X0,#0xE98]
+                        """
+                            62 23 40 91
+                            42 80 47 f9
+                        """ asPatternTo """
+                            62 23 40 91
+                            42 4c 47 f9
+                        """ inFile lib
+                    }
+
+                    else -> throw PatchException("Unsupported version: ${packageMetadata.versionName}")
+                }
+            }
         })
     )
 }
