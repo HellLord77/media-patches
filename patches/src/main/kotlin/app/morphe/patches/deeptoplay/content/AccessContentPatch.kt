@@ -4,7 +4,6 @@ import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.library.keepArmNativeLibraryPatch
 import app.morphe.patches.all.misc.hex.hexPatch
 import app.morphe.patches.deeptoplay.shared.Constants.COMPATIBILITY_DEEPTOPLAY
-import app.morphe.patches.shared.requireArm
 
 @Suppress("unused")
 val accessContentPatch = rawResourcePatch(
@@ -13,8 +12,6 @@ val accessContentPatch = rawResourcePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_DEEPTOPLAY)
-
-    availability(requireArm)
 
     dependsOn(keepArmNativeLibraryPatch, hexPatch(true, block = {
         // package:core_models/src/content_model.dart -> ContentModel.fromJson

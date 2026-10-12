@@ -4,7 +4,6 @@ import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patches.all.library.keepArmNativeLibraryPatch
 import app.morphe.patches.all.misc.hex.hexPatch
 import app.morphe.patches.deeptotv.shared.Constants.COMPATIBILITY_DEEPTOTV
-import app.morphe.patches.shared.requireArm
 
 
 @Suppress("unused")
@@ -14,8 +13,6 @@ val hideAdsPatch = rawResourcePatch(
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_DEEPTOTV)
-
-    availability(requireArm)
 
     dependsOn(keepArmNativeLibraryPatch, hexPatch(true, block = {
         // package:core_models/src/content_model.dart -> ContentModel.fromJson
