@@ -5,15 +5,19 @@ import app.morphe.patches.iscreentv.shared.Constants.COMPATIBILITY_ISCREENTV
 import app.morphe.util.returnEarly
 
 @Suppress("unused")
-val premiumContentPatch = bytecodePatch(
-    name = "Free premium content",
-    description = "Spoofs premium content to be free.",
+val freeContentPatch = bytecodePatch(
+    name = "Free content",
+    description = "Marks all content as free.",
     default = false,
 ) {
     compatibleWith(COMPATIBILITY_ISCREENTV)
 
     execute {
         GetPremiumFingerprint.matchAll().forEach {
+            it.method.returnEarly(false)
+        }
+
+        GetTvodFingerprint.matchAll().forEach {
             it.method.returnEarly(false)
         }
     }

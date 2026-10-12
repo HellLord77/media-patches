@@ -5,9 +5,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.iscreen.extension.sharedExtensionPatch
 import app.morphe.patches.iscreen.shared.Constants.COMPATIBILITY_ISCREEN
-import app.morphe.patches.iscreen.shared.patches.util.preferenceUtil.isLoginPatch
-import app.morphe.patches.iscreen.shared.patches.util.preferenceUtil.isSubscribedPatch
-import app.morphe.patches.iscreen.shared.patches.util.preferenceUtil.isTVodSubscribedPatch
+import app.morphe.patches.iscreen.shared.morphe.com.rockstreamer.iscreen.util.PreferenceUtil
 import app.morphe.util.getReference
 import app.morphe.util.matchAllMethodIndicesForEach
 import com.android.tools.smali.dexlib2.Opcode
@@ -26,7 +24,12 @@ val tempUserPatch = bytecodePatch(
 ) {
     compatibleWith(COMPATIBILITY_ISCREEN)
 
-    dependsOn(sharedExtensionPatch, isSubscribedPatch, isTVodSubscribedPatch, isLoginPatch)
+    dependsOn(
+        sharedExtensionPatch,
+        PreferenceUtil.isSubscribedPatch,
+        PreferenceUtil.isTVodSubscribedPatch,
+        PreferenceUtil.isLoginPatch,
+    )
 
     execute {
         GetRefreshTokenMethodCallFingerprint.matchAllMethodIndicesForEach {

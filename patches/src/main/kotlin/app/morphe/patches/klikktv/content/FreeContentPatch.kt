@@ -8,7 +8,7 @@ import app.morphe.patches.klikktv.shared.patches.model.videos.isSubscribedPatch
 @Suppress("unused")
 val freeContentPatch = bytecodePatch(
     name = "Free content",
-    description = "Mark all content as free.",
+    description = "Marks all content as free.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_KLIKKTV)

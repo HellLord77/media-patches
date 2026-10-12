@@ -2,8 +2,7 @@ package app.morphe.patches.iscreentv.update
 
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.iscreentv.shared.Constants.COMPATIBILITY_ISCREENTV
-import app.morphe.util.matchSingle
-import app.morphe.util.returnBoxedBooleanEarly
+import app.morphe.patches.iscreentv.shared.morphe.com.rockstreamer.iscreentv.pojo.ForceUpdate
 
 @Suppress("unused")
 val disableUpdatePatch = bytecodePatch(
@@ -13,7 +12,5 @@ val disableUpdatePatch = bytecodePatch(
 ) {
     compatibleWith(COMPATIBILITY_ISCREENTV)
 
-    execute {
-        GetTvForceUpdateFingerprint.matchSingle().method.returnBoxedBooleanEarly(false)
-    }
+    dependsOn(ForceUpdate.getTVForceUpdatePatch)
 }
