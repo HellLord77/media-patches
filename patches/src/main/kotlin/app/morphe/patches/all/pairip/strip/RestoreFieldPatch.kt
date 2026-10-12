@@ -39,7 +39,7 @@ internal val restoreFieldPatch = bytecodePatch {
 
     execute {
         val dictionaryPath =
-            "/pairip/${packageMetadata.packageName}/${packageMetadata.versionName}/${packageMetadata.versionCode}.json"
+            "/pairip/${packageMetadata.packageName}/${packageMetadata.versionCode}.json"
         val stream = object {}.javaClass.getResourceAsStream(dictionaryPath)!!.bufferedReader()
         val dictionary: Map<String, Translation> =
             Gson().fromJson(stream, object : TypeToken<Map<String, Translation>>() {}.type)
