@@ -4,6 +4,8 @@ import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.rawResourcePatch
 import app.morphe.patcher.resource.CpuArchitecture
 import app.morphe.patches.shared.Constants.NATIVE_LIBRARY_DIRECTORY
+import app.morphe.patches.shared.patches.cpuArchitectures
+import app.morphe.patches.shared.patches.extractMetadataPatch
 import app.morphe.patches.shared.patches.hex.maskedHexPatch
 import java.util.logging.Logger
 
@@ -16,11 +18,14 @@ fun disableTLSVerificationPatch(
 
     logger.info("[+] Pattern version: Jun 17 2026")
     logger.info("[+] Platform: android")
-    architectures.forEach { arch ->
-        val lib = "$NATIVE_LIBRARY_DIRECTORY/${arch.arch}/libflutter.so"
 
-        dependsOn(
-            maskedHexPatch(ignoreMissingTargetFiles = true, ignoreMissingReplacements = true) {
+    dependsOn(
+        extractMetadataPatch,
+        maskedHexPatch(ignoreMissingReplacements = true) {
+            @Suppress("ConvertArgumentToSet")
+            (cpuArchitectures intersect architectures).forEach { arch ->
+                val lib = "$NATIVE_LIBRARY_DIRECTORY/${arch.arch}/libflutter.so"
+
                 when (arch) {
                     CpuArchitecture.ARMEABI_V7A -> {
                         // mov r0, #0
@@ -83,7 +88,7 @@ fun disableTLSVerificationPatch(
 
                     else -> throw PatchException("Unsupported architecture: ${arch.arch}")
                 }
-            })
-    }
+            }
+        })
 }
 
