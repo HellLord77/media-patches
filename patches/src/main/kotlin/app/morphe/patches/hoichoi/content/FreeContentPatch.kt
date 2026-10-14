@@ -6,24 +6,25 @@ import app.morphe.patches.hoichoi.shared.Constants.COMPATIBILITY_HOICHOITV
 import app.morphe.util.returnEarly
 
 @Suppress("unused")
-val freeContentPatch = bytecodePatch(
-    name = "Free content",
-    description = "Marks content as free.",
-    default = true,
-) {
-    compatibleWith(COMPATIBILITY_HOICHOI, COMPATIBILITY_HOICHOITV)
+val freeContentPatch =
+    bytecodePatch(
+        name = "Free content",
+        description = "Marks content as free.",
+        default = true,
+    ) {
+        compatibleWith(COMPATIBILITY_HOICHOI, COMPATIBILITY_HOICHOITV)
 
-    execute {
-        GetMonetizationModelFingerprint.matchAll().forEach {
-            it.method.returnEarly("FREE")
-        }
+        execute {
+            GetMonetizationModelFingerprint.matchAll().forEach {
+                it.method.returnEarly("FREE")
+            }
 
-        IsFreeContentFingerprint.matchAll().forEach {
-            it.method.returnEarly(true)
-        }
+            IsFreeContentFingerprint.matchAll().forEach {
+                it.method.returnEarly(true)
+            }
 
-        IsLoginRequiredFingerprint.matchAll().forEach {
-            it.method.returnEarly(false)
+            IsLoginRequiredFingerprint.matchAll().forEach {
+                it.method.returnEarly(false)
+            }
         }
     }
-}
