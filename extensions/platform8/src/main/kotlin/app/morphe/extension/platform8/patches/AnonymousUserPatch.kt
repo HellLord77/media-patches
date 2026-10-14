@@ -11,13 +11,13 @@ private const val SESSION_ID = "60194480f127015d9011475a"
 fun onCreate() {
     val context = Utils.getContext() ?: return
     val preferences =
-        context.getSharedPreferences("com.digivive.platform8_preferences", Context.MODE_PRIVATE)
+        context.getSharedPreferences("${context.packageName}_preferences", Context.MODE_PRIVATE)
 
     if ("profile_info" !in preferences)
         preferences
             .edit()
             .apply {
-                putString("profile_info", " ")
+                putString("profile_info", "{}")
                 putString("session_id", SESSION_ID)
                 Utils.showToastShort("session_id: $SESSION_ID")
             }
