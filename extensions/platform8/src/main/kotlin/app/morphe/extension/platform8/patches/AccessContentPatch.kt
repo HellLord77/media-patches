@@ -40,8 +40,9 @@ fun performRequest(self: Network, request: Request<*>): NetworkResponse {
 
     try {
         ContentRepo(self, chargeCode, catalogue, authorization).also {
-            Logger.printDebug { "assetData: ${it.assetData}" }
-            Logger.printDebug { "cloudFront: ${it.cloudFront}" }
+            Logger.printInfo { "assetData: ${it.assetData}" }
+            Logger.printInfo { "cloudFront: ${it.cloudFront}" }
+            Logger.printInfo { "seasonData: ${it.seasonData}" }
             return it.response
         }
     } catch (e: Exception) {

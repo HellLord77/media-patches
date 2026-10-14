@@ -5,8 +5,8 @@ import app.morphe.util.adoptChild
 import app.morphe.util.asSequence
 import app.morphe.util.childElementsSequence
 import app.morphe.util.getNode
-import java.util.logging.Logger
 import org.w3c.dom.Element
+import java.util.logging.Logger
 
 fun showAppIconPatch(
     launcher: Boolean = false,

@@ -4,10 +4,10 @@ import android.net.Uri
 import app.morphe.extension.hoichoi.repos.ContentRepo
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
-import java.io.IOException
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.internal.closeQuietly
+import java.io.IOException
 
 @Suppress("unused")
 class EntitlementInterceptor : Interceptor {
@@ -43,9 +43,9 @@ class EntitlementInterceptor : Interceptor {
 
         try {
             ContentRepo(chain, contentId, action, language, anonymousToken).also {
-                Logger.printDebug { "videoDetails: ${it.videoDetails}" }
-                Logger.printDebug { "freeEntitlementInfo: ${it.freeEntitlementInfo}" }
-                return it.getEntitlementInfo(response)
+                Logger.printInfo { "videoDetails: ${it.videoDetails}" }
+                Logger.printInfo { "freeEntitlementInfo: ${it.freeEntitlementInfo}" }
+                return it.getResponse(response)
             }
         } catch (e: Exception) {
             Logger.printException({ "contentRepo failure" }, e)

@@ -4,6 +4,7 @@ import android.net.Uri
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
 import app.morphe.extension.shared.extension.org.json.objects
+import java.util.Random
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Request
@@ -12,7 +13,6 @@ import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.Random
 
 internal class ContentRepo(
     private val chain: Interceptor.Chain,
@@ -100,7 +100,7 @@ internal class ContentRepo(
         }
     }
 
-    internal fun getEntitlementInfo(response: Response): Response {
+    internal fun getResponse(response: Response): Response {
         freeEntitlementInfo.put("videoDetails", videoDetails)
 
         val body =
