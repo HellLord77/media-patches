@@ -17,42 +17,44 @@ import com.android.tools.smali.dexlib2.immutable.reference.ImmutableMethodRefere
 private const val EXTENSION_CLASS = "Lapp/morphe/extension/iscreen/patches/TempUserPatch;"
 
 @Suppress("unused")
-val tempUserPatch = bytecodePatch(
-    name = "Temp user",
-    description = "Log in as subscribed temp user.",
-    default = true,
-) {
-    compatibleWith(COMPATIBILITY_ISCREENTV)
+val tempUserPatch =
+    bytecodePatch(
+        name = "Temp user",
+        description = "Log in as subscribed temp user.",
+        default = true,
+    ) {
+        compatibleWith(COMPATIBILITY_ISCREENTV)
 
-    dependsOn(
-        sharedExtensionPatch,
-        PreferenceUtil.isTVodSubscribedPatch,
-        PreferenceUtil.isSubscribedPatch,
-        PreferenceUtil.isLoginPatch,
-    )
+        dependsOn(
+            sharedExtensionPatch,
+            PreferenceUtil.isTVodSubscribedPatch,
+            PreferenceUtil.isSubscribedPatch,
+            PreferenceUtil.isLoginPatch,
+        )
 
-    execute {
-        GetRefreshTokenMethodCallFingerprint.matchAllMethodIndicesForEach {
-            val instruction = getInstruction<FiveRegisterInstruction>(it)
-            val reference = instruction.getReference<MethodReference>()!!
+        execute {
+            GetRefreshTokenMethodCallFingerprint.matchAllMethodIndicesForEach {
+                val instruction = getInstruction<FiveRegisterInstruction>(it)
+                val reference = instruction.getReference<MethodReference>()!!
 
-            replaceInstruction(
-                it, BuilderInstruction35c(
-                    Opcode.INVOKE_STATIC,
-                    instruction.registerCount,
-                    instruction.registerC,
-                    instruction.registerD,
-                    instruction.registerE,
-                    instruction.registerF,
-                    instruction.registerG,
-                    ImmutableMethodReference(
-                        EXTENSION_CLASS,
-                        reference.name,
-                        listOf(reference.definingClass) + reference.parameterTypes,
-                        reference.returnType
-                    )
+                replaceInstruction(
+                    it,
+                    BuilderInstruction35c(
+                        Opcode.INVOKE_STATIC,
+                        instruction.registerCount,
+                        instruction.registerC,
+                        instruction.registerD,
+                        instruction.registerE,
+                        instruction.registerF,
+                        instruction.registerG,
+                        ImmutableMethodReference(
+                            EXTENSION_CLASS,
+                            reference.name,
+                            listOf(reference.definingClass) + reference.parameterTypes,
+                            reference.returnType,
+                        ),
+                    ),
                 )
-            )
+            }
         }
     }
-}

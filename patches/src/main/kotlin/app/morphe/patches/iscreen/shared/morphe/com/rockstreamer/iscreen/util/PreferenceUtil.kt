@@ -7,17 +7,17 @@ import app.morphe.util.matchSingle
 import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.AccessFlags
 
-
 object PreferenceUtil {
     override fun toString() = "Lcom/rockstreamer/iscreen/util/PreferenceUtil;"
 
-    object IsVastShowFingerprint : Fingerprint(
-        definingClass = PreferenceUtil.toString(),
-        name = "isVastShow",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = Type.boolean,
-        parameters = emptyList(),
-    )
+    object IsVastShowFingerprint :
+        Fingerprint(
+            definingClass = PreferenceUtil.toString(),
+            name = "isVastShow",
+            accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+            returnType = Type.boolean,
+            parameters = emptyList(),
+        )
 
     val isVastShowPatch = bytecodePatch {
         execute {
@@ -25,13 +25,14 @@ object PreferenceUtil {
         }
     }
 
-    object IsBannerAdsShowFingerprint : Fingerprint(
-        definingClass = PreferenceUtil.toString(),
-        name = "isBannerAdsShow",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = Type.boolean,
-        parameters = emptyList(),
-    )
+    object IsBannerAdsShowFingerprint :
+        Fingerprint(
+            definingClass = PreferenceUtil.toString(),
+            name = "isBannerAdsShow",
+            accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+            returnType = Type.boolean,
+            parameters = emptyList(),
+        )
 
     val isBannerAdsShowPatch = bytecodePatch {
         execute {
@@ -39,13 +40,14 @@ object PreferenceUtil {
         }
     }
 
-    object IsSubscribedFingerprint : Fingerprint(
-        definingClass = PreferenceUtil.toString(),
-        name = "isSubscribed",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = Type.boolean,
-        parameters = emptyList(),
-    )
+    object IsSubscribedFingerprint :
+        Fingerprint(
+            definingClass = PreferenceUtil.toString(),
+            name = "isSubscribed",
+            accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+            returnType = Type.boolean,
+            parameters = emptyList(),
+        )
 
     val isSubscribedPatch = bytecodePatch {
         execute {
@@ -53,13 +55,14 @@ object PreferenceUtil {
         }
     }
 
-    object IsTVodSubscribedFingerprint : Fingerprint(
-        definingClass = PreferenceUtil.toString(),
-        name = "isTVodSubscribed",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = Type.boolean,
-        parameters = emptyList(),
-    )
+    object IsTVodSubscribedFingerprint :
+        Fingerprint(
+            definingClass = PreferenceUtil.toString(),
+            name = "isTVodSubscribed",
+            accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+            returnType = Type.boolean,
+            parameters = emptyList(),
+        )
 
     val isTVodSubscribedPatch = bytecodePatch {
         execute {
@@ -67,13 +70,14 @@ object PreferenceUtil {
         }
     }
 
-    object IsLoginFingerprint : Fingerprint(
-        definingClass = PreferenceUtil.toString(),
-        name = "isLogin",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = Type.boolean,
-        parameters = emptyList(),
-    )
+    object IsLoginFingerprint :
+        Fingerprint(
+            definingClass = PreferenceUtil.toString(),
+            name = "isLogin",
+            accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+            returnType = Type.boolean,
+            parameters = emptyList(),
+        )
 
     val isLoginPatch = bytecodePatch {
         execute {

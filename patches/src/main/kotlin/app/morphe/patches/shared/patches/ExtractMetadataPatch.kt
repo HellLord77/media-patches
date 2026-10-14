@@ -34,13 +34,14 @@ val extractMetadataPatch = rawResourcePatch {
             execute {
                 app.morphe.patches.shared.patches.packageMetadata = packageMetadata
             }
-        })
+        }
+    )
 
     execute {
-        cpuArchitectures = get(NATIVE_LIBRARY_DIRECTORY, copy = false)
-            .listFiles()
-            ?.filter { it.isDirectory }
-            ?.mapNotNull { CpuArchitecture.valueOfOrNull(it.name) }
-            ?: emptyList()
+        cpuArchitectures =
+            get(NATIVE_LIBRARY_DIRECTORY, copy = false)
+                .listFiles()
+                ?.filter { it.isDirectory }
+                ?.mapNotNull { CpuArchitecture.valueOfOrNull(it.name) } ?: emptyList()
     }
 }

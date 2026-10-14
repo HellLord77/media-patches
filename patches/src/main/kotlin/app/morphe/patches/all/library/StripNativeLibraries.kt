@@ -8,7 +8,7 @@ import app.morphe.patches.shared.patches.extractMetadataPatch
 import java.util.logging.Logger
 
 fun stripNativeLibrariesPatch(
-    keepArchitecturesProvider: () -> List<CpuArchitecture> = ::emptyList,
+    keepArchitecturesProvider: () -> List<CpuArchitecture> = ::emptyList
 ) = rawResourcePatch {
     dependsOn(extractMetadataPatch)
 
@@ -31,5 +31,6 @@ fun stripNativeLibrariesPatch(
     }
 }
 
-val keepArmNativeLibraryPatch =
-    stripNativeLibrariesPatch { listOf(CpuArchitecture.ARMEABI_V7A, CpuArchitecture.ARM64_V8A) }
+val keepArmNativeLibraryPatch = stripNativeLibrariesPatch {
+    listOf(CpuArchitecture.ARMEABI_V7A, CpuArchitecture.ARM64_V8A)
+}

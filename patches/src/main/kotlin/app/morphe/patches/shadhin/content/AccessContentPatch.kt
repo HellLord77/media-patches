@@ -14,34 +14,39 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableStringReference
 
 @Suppress("unused")
-val accessContentPatch = bytecodePatch(
-    name = "Access content",
-    description = "Enables access to content.",
-    default = true,
-) {
-    compatibleWith(COMPATIBILITY_SHADHIN)
+val accessContentPatch =
+    bytecodePatch(
+        name = "Access content",
+        description = "Enables access to content.",
+        default = true,
+    ) {
+        compatibleWith(COMPATIBILITY_SHADHIN)
 
-    execute {
-        FetchStreamingUrlFingerprint.matchSingle().originalMethod.apply {
-            val parameterIndex = parameters.indexOfFirst { parameter ->
-                parameter.annotations.flatMap { it.elements }
-                    .any { it.value.toString() == "\"ContentType\"" }
-            }
-
-            Fingerprint(filters = listOf(methodCall(this))).matchAllMethodIndicesForEach {
-                val register = getInstruction<FiveRegisterInstruction>(it).run {
-                    listOf(registerD, registerE, registerF)[parameterIndex]
+        execute {
+            FetchStreamingUrlFingerprint.matchSingle().originalMethod.apply {
+                val parameterIndex = parameters.indexOfFirst { parameter ->
+                    parameter.annotations
+                        .flatMap { it.elements }
+                        .any { it.value.toString() == "\"ContentType\"" }
                 }
 
-                addInstruction(
-                    it,
-                    BuilderInstruction21c(
-                        Opcode.CONST_STRING,
-                        register,
-                        ImmutableStringReference("S"),
-                    ),
-                )
+                Fingerprint(filters = listOf(methodCall(this))).matchAllMethodIndicesForEach {
+                    val instruction = getInstruction<FiveRegisterInstruction>(it)
+
+                    addInstruction(
+                        it,
+                        BuilderInstruction21c(
+                            Opcode.CONST_STRING,
+                            when (parameterIndex) {
+                                0 -> instruction.registerD
+                                1 -> instruction.registerE
+                                2 -> instruction.registerF
+                                else -> throw IllegalStateException()
+                            },
+                            ImmutableStringReference("S"),
+                        ),
+                    )
+                }
             }
         }
     }
-}

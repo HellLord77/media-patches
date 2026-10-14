@@ -40,9 +40,14 @@ fun performRequest(self: Network, request: Request<*>): NetworkResponse {
     val authorization = request.headers["authorization"]
     Logger.printDebug { "authorization: $authorization" }
 
-    ContentRepo(self, chargeCode, catalogue, authorization).also { repo ->
-        Logger.printDebug { "assetData: ${repo.assetData}" }
-        Logger.printDebug { "cloudFront: ${repo.cloudFront}" }
-        return repo.response
+    try {
+        ContentRepo(self, chargeCode, catalogue, authorization).also {
+            Logger.printDebug { "assetData: ${it.assetData}" }
+            Logger.printDebug { "cloudFront: ${it.cloudFront}" }
+            return it.response
+        }
+    } catch (e: Exception) {
+        Logger.printException({ "contentRepo failure" }, e)
+        return response
     }
 }

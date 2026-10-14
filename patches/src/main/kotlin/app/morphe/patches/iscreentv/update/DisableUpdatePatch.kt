@@ -5,12 +5,13 @@ import app.morphe.patches.iscreentv.shared.Constants.COMPATIBILITY_ISCREENTV
 import app.morphe.patches.iscreentv.shared.morphe.com.rockstreamer.iscreentv.pojo.ForceUpdate
 
 @Suppress("unused")
-val disableUpdatePatch = bytecodePatch(
-    name = "Disable update",
-    description = "Disables forced update.",
-    default = true,
-) {
-    compatibleWith(COMPATIBILITY_ISCREENTV)
+val disableUpdatePatch =
+    bytecodePatch(
+        name = "Disable update",
+        description = "Disables forced update.",
+        default = true,
+    ) {
+        compatibleWith(COMPATIBILITY_ISCREENTV)
 
-    dependsOn(ForceUpdate.getTVForceUpdatePatch)
-}
+        dependsOn(ForceUpdate.getTVForceUpdatePatch)
+    }
