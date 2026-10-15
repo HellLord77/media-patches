@@ -4,10 +4,10 @@ import android.net.Uri
 import app.morphe.extension.hoichoi.repos.ContentRepo
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
+import java.io.IOException
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.internal.closeQuietly
-import java.io.IOException
 
 @Suppress("unused")
 class EntitlementInterceptor : Interceptor {
