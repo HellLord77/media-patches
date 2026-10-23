@@ -14,20 +14,26 @@ import org.json.JSONObject
 
 @Suppress("unused")
 @Throws(VolleyError::class)
-fun performRequest(self: Network, request: Request<*>): NetworkResponse {
+fun performRequest(
+    self: Network,
+    request: Request<*>,
+): NetworkResponse {
     Logger.printDebug { "request: $request" }
     val response = self.performRequest(request)
     Logger.printDebug { "response: $response" }
 
     val uri = Uri.parse(request.url)
     if (
-        !(request.method == Request.Method.GET &&
-            uri.host == "apps.digivive.com" &&
-            uri.pathSegments == listOf("platform8_dynamic", "geturlv4") &&
-            response.statusCode == 200 &&
-            (JSONObject(response.data.decodeToString())["error_code"] as String).toInt() != 200)
-    )
+        !(
+            request.method == Request.Method.GET &&
+                uri.host == "apps.digivive.com" &&
+                uri.pathSegments == listOf("platform8_dynamic", "geturlv4") &&
+                response.statusCode == 200 &&
+                (JSONObject(response.data.decodeToString())["error_code"] as String).toInt() != 200
+        )
+    ) {
         return response
+    }
 
     val chargeCode = uri.getQueryParameter("charge_code")!!
     Utils.showToastShort("chargeCode: $chargeCode")

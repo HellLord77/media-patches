@@ -36,8 +36,7 @@ internal class ContentRepo(
                     (recentlyWatched["no"] as String).toInt() + 1,
                 )
             seasonsOrder[0] as JSONObject
-        }
-            .getOrNull()
+        }.getOrNull()
     }
 
     internal val response: NetworkResponse by lazy {
@@ -51,7 +50,7 @@ internal class ContentRepo(
                 .put("cloud_front", cloudFront)
                 .put("next_episode", nextEpisode)
                 .toString()
-                .toByteArray()
+                .toByteArray(),
         )
     }
 
@@ -62,8 +61,7 @@ internal class ContentRepo(
                 .put("episode_title", recentlyWatched["name"])
                 .put("season_number", seasonData?.get("season_number"))
                 .put("episode_number", recentlyWatched["no"])
-        }
-            .getOrNull()
+        }.getOrNull()
     }
 
     private val nextEpisode: JSONObject? by lazy {
@@ -72,19 +70,19 @@ internal class ContentRepo(
                 runCatching {
                     (getJSONArray("assets")[0] as JSONObject)
                 }
-            }
-            ?.getOrNull()
+            }?.getOrNull()
     }
 
     private fun getVod(code: String): JSONObject {
         val request =
             ContentRequest(
-                Uri.parse("https://apps.digivive.com/platform8_dynamic/assetdetail")
+                Uri
+                    .parse("https://apps.digivive.com/platform8_dynamic/assetdetail")
                     .buildUpon()
                     .appendQueryParameter("code", code)
                     .appendQueryParameter("catlogue", catalogue ?: CATALOGUE)
                     .appendQueryParameter("type", "vod")
-                    .build()
+                    .build(),
             )
 
         val response = network.performRequest(request).apply { require(statusCode == 200) }
@@ -94,17 +92,21 @@ internal class ContentRepo(
         }
     }
 
-    private fun getSeasonsOrder(seasonId: String, page: Int? = null): JSONArray {
+    private fun getSeasonsOrder(
+        seasonId: String,
+        page: Int? = null,
+    ): JSONArray {
         val request =
             ContentRequest(
-                Uri.parse("https://apps.digivive.com/platform8_dynamic/assetdetail")
+                Uri
+                    .parse("https://apps.digivive.com/platform8_dynamic/assetdetail")
                     .buildUpon()
                     .appendQueryParameter("season_id", seasonId)
                     .appendQueryParameter("catlogue", catalogue ?: CATALOGUE)
                     .appendQueryParameter("type", "seasons_order")
                     .appendQueryParameter("page", page?.toString())
                     .appendQueryParameter("limit", "1")
-                    .build()
+                    .build(),
             )
 
         val response = network.performRequest(request).apply { require(statusCode == 200) }
@@ -114,9 +116,10 @@ internal class ContentRepo(
         }
     }
 
-    private inner class ContentRequest(uri: Uri) : StringRequest(uri.toString(), null, null) {
-        override fun getHeaders(): Map<String, String> =
-            mapOf("Authorization" to (authorization ?: AUTHORIZATION))
+    private inner class ContentRequest(
+        uri: Uri,
+    ) : StringRequest(uri.toString(), null, null) {
+        override fun getHeaders(): Map<String, String> = mapOf("Authorization" to (authorization ?: AUTHORIZATION))
     }
 
     private companion object {
