@@ -16,7 +16,7 @@ object GetVideoDetailsDataMethodCallFingerprint :
                     parameters = listOf(Type.STRING),
                     returnType = "Lretrofit2/Call;",
                     opcode = Opcode.INVOKE_INTERFACE,
-                )
+                ),
             ),
         custom = ::isNotExtension,
     )

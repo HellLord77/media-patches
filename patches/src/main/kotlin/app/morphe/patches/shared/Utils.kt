@@ -16,23 +16,32 @@ import java.io.RandomAccessFile
 import kotlin.experimental.and
 import kotlin.math.max
 
-fun requireArch(vararg arches: ApkArchitecture) = AvailabilityResolver { _, arch ->
-    if (arch in arches) PatchAvailability.REQUIRED else PatchAvailability.UNAVAILABLE
-}
+fun requireArch(vararg arches: ApkArchitecture) =
+    AvailabilityResolver { _, arch ->
+        if (arch in arches) PatchAvailability.REQUIRED else PatchAvailability.UNAVAILABLE
+    }
 
 val requireArm = requireArch(ApkArchitecture.ARM64_V8A, ApkArchitecture.ARMEABI_V7A)
 
-fun isNotExtension(@Suppress("UNUSED_PARAMETER") method: Method, classDef: ClassDef) =
-    classDef.isNotExtension()
+fun isNotExtension(
+    @Suppress("UNUSED_PARAMETER") method: Method,
+    classDef: ClassDef,
+) = classDef.isNotExtension()
 
 fun Method.getRegisterName(register: Int): String {
     val firstParameterRegister = if (implementation != null) p0Register else 0
 
-    return if (register >= firstParameterRegister) "p${register - firstParameterRegister}"
-    else "v$register"
+    return if (register >= firstParameterRegister) {
+        "p${register - firstParameterRegister}"
+    } else {
+        "v$register"
+    }
 }
 
-fun ByteArray.indexOfPatternIn(file: RandomAccessFile, mask: ByteArray = ByteArray(0)): Long {
+fun ByteArray.indexOfPatternIn(
+    file: RandomAccessFile,
+    mask: ByteArray = ByteArray(0),
+): Long {
     val right = IntArray(256) { -1 }
     for ((i, element) in withIndex()) right[element.toInt().and(0xFF)] = i
 
@@ -70,32 +79,38 @@ fun ByteArray.indexOfPatternIn(file: RandomAccessFile, mask: ByteArray = ByteArr
     return -1L
 }
 
-fun RandomAccessFile.read(len: Int, off: Long = 0L): ByteArray {
+fun RandomAccessFile.read(
+    len: Int,
+    off: Long = 0L,
+): ByteArray {
     seek(off)
     val b = ByteArray(len)
     read(b)
     return b
 }
 
-fun InputStream.limitNBytes(n: Int): InputStream {
-    return object : FilterInputStream(this) {
+fun InputStream.limitNBytes(n: Int): InputStream =
+    object : FilterInputStream(this) {
         private var left = n
 
-        override fun read(): Int =
-            if (left <= 0) -1 else super.read().also { if (it >= 0) left -= it }
+        override fun read(): Int = if (left <= 0) -1 else super.read().also { if (it >= 0) left -= it }
 
-        override fun read(b: ByteArray, off: Int, len: Int): Int {
-            return if (left <= 0) -1
-            else
-                super.read(
+        override fun read(
+            b: ByteArray,
+            off: Int,
+            len: Int,
+        ): Int =
+            if (left <= 0) {
+                -1
+            } else {
+                super
+                    .read(
                         b,
                         off,
                         minOf(len, left),
-                    )
-                    .also { if (it >= 0) left -= it }
-        }
+                    ).also { if (it >= 0) left -= it }
+            }
     }
-}
 
 fun ResourcePatchContext.writeResources(
     vararg streams: InputStream,

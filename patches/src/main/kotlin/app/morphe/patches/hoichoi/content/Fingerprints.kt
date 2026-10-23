@@ -49,7 +49,7 @@ object MediaTypeCompanionFieldAccessFingerprint :
                     definingClass = MediaType.toString(),
                     type = MediaType.Companion.toString(),
                     opcode = Opcode.SPUT_OBJECT,
-                )
+                ),
             ),
     )
 
@@ -66,7 +66,7 @@ object ResponseBodyCompanionFieldAccessFingerprint :
                     definingClass = ResponseBody.toString(),
                     type = ResponseBody.Companion.toString(),
                     opcode = Opcode.SPUT_OBJECT,
-                )
+                ),
             ),
     )
 

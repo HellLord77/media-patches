@@ -19,8 +19,8 @@ object ContentAvailabilityFieldAccessFingerprint :
                     name = "content_availability",
                     type = String.toString(),
                     opcode = Opcode.IGET_OBJECT,
-                )
-            )
+                ),
+            ),
     )
 
 object PerformRequestMethodCallFingerprint :
@@ -33,7 +33,7 @@ object PerformRequestMethodCallFingerprint :
                     parameters = listOf(Request.toString()),
                     returnType = NetworkResponse.toString(),
                     opcode = Opcode.INVOKE_INTERFACE,
-                )
+                ),
             ),
         custom = ::isNotExtension,
     )

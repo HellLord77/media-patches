@@ -23,7 +23,8 @@ internal class ContentRepo(
 ) {
     private val anonymousToken: String by lazy {
         val request =
-            Request.Builder()
+            Request
+                .Builder()
                 .url("https://prod-api.hoichoi.dev/core/api/v1/users/anonymous-token")
                 .build()
 
@@ -40,7 +41,8 @@ internal class ContentRepo(
 
     internal val videoDetails: JSONObject by lazy {
         val uri =
-            Uri.parse("https://prod-contents-api.hoichoi.dev/contents/api/v1/contents")
+            Uri
+                .parse("https://prod-contents-api.hoichoi.dev/contents/api/v1/contents")
                 .buildUpon()
                 .appendQueryParameter("contentId", contentId)
                 .appendQueryParameter("language", language)
@@ -55,14 +57,16 @@ internal class ContentRepo(
 
     internal val freeEntitlementInfo: JSONObject by lazy {
         val uri =
-            Uri.parse("https://prod-api.hoichoi.dev/contents/api/v1/entitlement")
+            Uri
+                .parse("https://prod-api.hoichoi.dev/contents/api/v1/entitlement")
                 .buildUpon()
                 .appendQueryParameter("contentId", freeContentId)
                 .appendQueryParameter("action", action)
                 .appendQueryParameter("language", language)
                 .build()
         val request =
-            Request.Builder()
+            Request
+                .Builder()
                 .url(uri.toString())
                 .header("Anonymous-Token", token ?: anonymousToken)
                 .post(RequestBody.EMPTY)
@@ -83,12 +87,15 @@ internal class ContentRepo(
                     return freeContentId
                 }
             }
-            throw IllegalStateException()
+            throw NotImplementedError()
         }
 
-    private fun getPageData(@Suppress("SameParameterValue") pageId: String): JSONObject {
+    private fun getPageData(
+        @Suppress("SameParameterValue") pageId: String,
+    ): JSONObject {
         val uri =
-            Uri.parse("https://prod-contents-api.hoichoi.dev/contents/api/v1/pages")
+            Uri
+                .parse("https://prod-contents-api.hoichoi.dev/contents/api/v1/pages")
                 .buildUpon()
                 .appendPath(pageId)
                 .build()
@@ -127,9 +134,10 @@ internal class ContentRepo(
         private fun isFreeContent(content: JSONObject) =
             try {
                 content["monetizationModel"] == "FREE" &&
-                    ((content["monetizationPlan"] as JSONObject)["includedMonetizationPlans"]
-                            as JSONArray)
-                        .objects()
+                    (
+                        (content["monetizationPlan"] as JSONObject)["includedMonetizationPlans"]
+                            as JSONArray
+                    ).objects()
                         .any { !(it["loginRequired"] as Boolean) }
             } catch (_: Throwable) {
                 false
@@ -142,10 +150,11 @@ internal class ContentRepo(
                     .flatMap { (it["contents"] as JSONArray).objects() }
                     .forEach { content ->
                         when (content["contentType"]) {
-                            "movie" ->
+                            "movie" -> {
                                 if (isFreeContent(content)) {
                                     add(content["contentId"] as String)
                                 }
+                            }
 
                             "series" -> {
                                 addAll(
@@ -153,9 +162,8 @@ internal class ContentRepo(
                                         .objects()
                                         .flatMap {
                                             (it["episodes"] as JSONArray).objects()
-                                        }
-                                        .filter(::isFreeContent)
-                                        .map { it["contentId"] as String }
+                                        }.filter(::isFreeContent)
+                                        .map { it["contentId"] as String },
                                 )
                             }
                         }

@@ -16,7 +16,7 @@ object GetContentDetailsMethodCallFingerprint :
                     parameters = listOf(Type.STRING, Type.CONTINUATION),
                     returnType = Type.OBJECT,
                     opcode = Opcode.INVOKE_INTERFACE,
-                )
+                ),
             ),
         custom = ::isNotExtension,
     )

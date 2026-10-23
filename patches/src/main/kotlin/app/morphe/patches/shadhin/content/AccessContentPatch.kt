@@ -24,11 +24,12 @@ val accessContentPatch =
 
         execute {
             FetchStreamingUrlFingerprint.matchSingle().originalMethod.apply {
-                val parameterIndex = parameters.indexOfFirst { parameter ->
-                    parameter.annotations
-                        .flatMap { it.elements }
-                        .any { it.value.toString() == "\"ContentType\"" }
-                }
+                val parameterIndex =
+                    parameters.indexOfFirst { parameter ->
+                        parameter.annotations
+                            .flatMap { it.elements }
+                            .any { it.value.toString() == "\"ContentType\"" }
+                    }
 
                 Fingerprint(filters = listOf(methodCall(this))).matchAllMethodIndicesForEach {
                     val instruction = getInstruction<FiveRegisterInstruction>(it)

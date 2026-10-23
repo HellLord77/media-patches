@@ -4,10 +4,10 @@ import android.net.Uri
 import app.morphe.extension.hoichoi.repos.ContentRepo
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
-import java.io.IOException
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.internal.closeQuietly
+import java.io.IOException
 
 @Suppress("unused")
 class EntitlementInterceptor : Interceptor {
@@ -21,12 +21,15 @@ class EntitlementInterceptor : Interceptor {
 
         val uri = Uri.parse(request.url.toString())
         if (
-            !(request.method == "POST" &&
-                uri.host == "prod-api.hoichoi.dev" &&
-                uri.pathSegments == listOf("contents", "api", "v1", "entitlement") &&
-                response.code == 401)
-        )
+            !(
+                request.method == "POST" &&
+                    uri.host == "prod-api.hoichoi.dev" &&
+                    uri.pathSegments == listOf("contents", "api", "v1", "entitlement") &&
+                    response.code == 401
+            )
+        ) {
             return response
+        }
 
         response.closeQuietly()
         val contentId = uri.getQueryParameter("contentId")!!

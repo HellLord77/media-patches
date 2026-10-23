@@ -11,17 +11,18 @@ import app.morphe.patches.hoichoi.shared.Constants.COMPATIBILITY_HOICHOI
 import app.morphe.patches.hoichoi.shared.Constants.COMPATIBILITY_HOICHOITV
 import app.morphe.patches.shared.extension.app.morphe.patcher.patch.compatibleWith
 
-val sharedExtensionPatch = bytecodePatch {
-    dependsOn(sharedExtensionPatch(listOf("hoichoi")))
+val sharedExtensionPatch =
+    bytecodePatch {
+        dependsOn(sharedExtensionPatch(listOf("hoichoi")))
 
-    finalize {
-        var versionCode = packageMetadata.versionCode.toInt()
-        if (COMPATIBILITY_HOICHOI.compatibleWith(versionCode)) {
-            hoichoiActivityOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
-            hoichoiApplicationOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
-        } else if (COMPATIBILITY_HOICHOITV.compatibleWith(versionCode)) {
-            hoichoitvActivityOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
-            hoichoitvApplicationOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
+        finalize {
+            var versionCode = packageMetadata.versionCode.toInt()
+            if (COMPATIBILITY_HOICHOI.compatibleWith(versionCode)) {
+                hoichoiActivityOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
+                hoichoiApplicationOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
+            } else if (COMPATIBILITY_HOICHOITV.compatibleWith(versionCode)) {
+                hoichoitvActivityOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
+                hoichoitvApplicationOnCreateHook(SHARED_UTILS_EXTENSION_CLASS)
+            }
         }
     }
-}

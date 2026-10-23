@@ -29,7 +29,7 @@ object PerformRequestMethodCallFingerprint :
                     parameters = listOf(Request.toString()),
                     returnType = NetworkResponse.toString(),
                     opcode = Opcode.INVOKE_INTERFACE,
-                )
+                ),
             ),
         custom = ::isNotExtension,
     )

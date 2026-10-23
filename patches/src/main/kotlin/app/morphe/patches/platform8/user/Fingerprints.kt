@@ -18,8 +18,8 @@ object IsProfileCompleteFieldAccessFingerprint :
                     name = "isProfileComplete",
                     type = String.toString(),
                     opcode = Opcode.IGET_OBJECT,
-                )
-            )
+                ),
+            ),
     )
 
 object IsAdditionalProfileFieldSkippedFieldAccessFingerprint :
@@ -31,8 +31,8 @@ object IsAdditionalProfileFieldSkippedFieldAccessFingerprint :
                     name = "isAdditionalProfileFieldSkipped",
                     type = String.toString(),
                     opcode = Opcode.IGET_OBJECT,
-                )
-            )
+                ),
+            ),
     )
 
 object CallNextActivityMethodCallFingerprint :
@@ -50,6 +50,6 @@ object CallNextActivityMethodCallFingerprint :
                     parameters = listOf(Type.int),
                     returnType = Type.void,
                     opcode = Opcode.INVOKE_DIRECT,
-                )
+                ),
             ),
     )
