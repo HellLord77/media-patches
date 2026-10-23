@@ -8,4 +8,4 @@ import android.net.NetworkCapabilities
 fun hasTransport(
     self: NetworkCapabilities,
     transportType: Int,
-): Boolean = transportType != NetworkCapabilities.TRANSPORT_VPN && self.hasTransport(transportType)
+) = transportType != NetworkCapabilities.TRANSPORT_VPN && self.hasTransport(transportType)

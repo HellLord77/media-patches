@@ -39,21 +39,6 @@ internal class ContentRepo(
         }.getOrNull()
     }
 
-    internal val response: NetworkResponse by lazy {
-        cloudFront.put("cloud_url", (assetData["watchable_content"] as JSONArray)[0])
-        showDetails?.also { assetData.put("show_details", it) }
-
-        NetworkResponse(
-            JSONObject()
-                .put("error_code", 200)
-                .put("assetData", assetData)
-                .put("cloud_front", cloudFront)
-                .put("next_episode", nextEpisode)
-                .toString()
-                .toByteArray(),
-        )
-    }
-
     private val showDetails: JSONObject? by lazy {
         runCatching {
             val recentlyWatched = assetData["recently_watched"] as JSONObject
@@ -85,10 +70,12 @@ internal class ContentRepo(
                     .build(),
             )
 
-        val response = network.performRequest(request).apply { require(statusCode == 200) }
-        JSONObject(response.data.decodeToString()).apply {
-            require(getString("error_code").toInt() == 200)
-            return getJSONObject("result")
+        network.performRequest(request).run {
+            require(statusCode == 200)
+            JSONObject(data.decodeToString()).apply {
+                require(getString("error_code").toInt() == 200)
+                return getJSONObject("result")
+            }
         }
     }
 
@@ -109,11 +96,28 @@ internal class ContentRepo(
                     .build(),
             )
 
-        val response = network.performRequest(request).apply { require(statusCode == 200) }
-        JSONObject(response.data.decodeToString()).apply {
-            require(getString("error_code").toInt() == 200)
-            return getJSONArray("result")
+        network.performRequest(request).run {
+            require(statusCode == 200)
+            JSONObject(data.decodeToString()).apply {
+                require(getString("error_code").toInt() == 200)
+                return getJSONArray("result")
+            }
         }
+    }
+
+    internal fun getResponse(): NetworkResponse {
+        cloudFront.put("cloud_url", (assetData["watchable_content"] as JSONArray)[0])
+        showDetails?.also { assetData.put("show_details", it) }
+
+        return NetworkResponse(
+            JSONObject()
+                .put("error_code", 200)
+                .put("assetData", assetData)
+                .put("cloud_front", cloudFront)
+                .put("next_episode", nextEpisode)
+                .toString()
+                .toByteArray(),
+        )
     }
 
     private inner class ContentRequest(

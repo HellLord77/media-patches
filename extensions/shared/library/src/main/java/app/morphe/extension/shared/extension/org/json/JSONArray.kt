@@ -7,7 +7,10 @@ inline operator fun <reified T> JSONArray.iterator(): Iterator<T> =
     object : Iterator<T> {
         private var index = 0
 
-        override fun next() = get(index++) as T
+        override fun next(): T {
+            if (!hasNext()) throw NoSuchElementException()
+            return get(index++) as T
+        }
 
         override fun hasNext() = index < length()
     }

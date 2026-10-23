@@ -1,27 +1,16 @@
 package app.morphe.patches.shared
 
-import app.morphe.patcher.patch.ApkArchitecture
-import app.morphe.patcher.patch.AvailabilityResolver
-import app.morphe.patcher.patch.PatchAvailability
 import app.morphe.patcher.patch.ResourcePatchContext
 import app.morphe.patches.shared.extension.com.android.tools.smali.dexlib2.iface.isNotExtension
 import app.morphe.util.ResourceGroup
 import app.morphe.util.p0Register
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
-import java.io.ByteArrayInputStream
 import java.io.FilterInputStream
 import java.io.InputStream
 import java.io.RandomAccessFile
 import kotlin.experimental.and
 import kotlin.math.max
-
-fun requireArch(vararg arches: ApkArchitecture) =
-    AvailabilityResolver { _, arch ->
-        if (arch in arches) PatchAvailability.REQUIRED else PatchAvailability.UNAVAILABLE
-    }
-
-val requireArm = requireArch(ApkArchitecture.ARM64_V8A, ApkArchitecture.ARMEABI_V7A)
 
 fun isNotExtension(
     @Suppress("UNUSED_PARAMETER") method: Method,
@@ -126,14 +115,4 @@ fun ResourcePatchContext.writeResources(
 
         resourceGroupDirectory.resolve(resource).outputStream().use(stream::copyTo)
     }
-}
-
-fun ResourcePatchContext.writeResources(
-    vararg streams: ByteArray,
-    resourceGroup: ResourceGroup,
-) {
-    writeResources(
-        *streams.map(::ByteArrayInputStream).toTypedArray(),
-        resourceGroup = resourceGroup,
-    )
 }

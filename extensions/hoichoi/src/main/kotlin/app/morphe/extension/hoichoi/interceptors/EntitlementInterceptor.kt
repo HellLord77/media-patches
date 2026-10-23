@@ -44,11 +44,12 @@ class EntitlementInterceptor : Interceptor {
         val anonymousToken = request.header("Anonymous-Token")
         Logger.printDebug { "anonymousToken: $anonymousToken" }
 
+        @Suppress("TooGenericExceptionCaught")
         try {
-            ContentRepo(chain, contentId, action, language, anonymousToken).also {
-                Logger.printInfo { "videoDetails: ${it.videoDetails}" }
-                Logger.printInfo { "freeEntitlementInfo: ${it.freeEntitlementInfo}" }
-                return it.getResponse(response)
+            ContentRepo(chain, contentId, action, language, anonymousToken).apply {
+                Logger.printInfo { "videoDetails: $videoDetails" }
+                Logger.printInfo { "freeEntitlementInfo: $freeEntitlementInfo" }
+                return getResponse(response)
             }
         } catch (e: Exception) {
             Logger.printException({ "contentRepo failure" }, e)

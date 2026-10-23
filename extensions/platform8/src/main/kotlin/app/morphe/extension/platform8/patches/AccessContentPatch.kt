@@ -44,12 +44,13 @@ fun performRequest(
     val authorization = request.headers["authorization"]
     Logger.printDebug { "authorization: $authorization" }
 
+    @Suppress("TooGenericExceptionCaught")
     try {
-        ContentRepo(self, chargeCode, catalogue, authorization).also {
-            Logger.printInfo { "assetData: ${it.assetData}" }
-            Logger.printInfo { "cloudFront: ${it.cloudFront}" }
-            Logger.printInfo { "seasonData: ${it.seasonData}" }
-            return it.response
+        ContentRepo(self, chargeCode, catalogue, authorization).apply {
+            Logger.printInfo { "assetData: $assetData" }
+            Logger.printInfo { "cloudFront: $cloudFront" }
+            Logger.printInfo { "seasonData: $seasonData" }
+            return getResponse()
         }
     } catch (e: Exception) {
         Logger.printException({ "contentRepo failure" }, e)

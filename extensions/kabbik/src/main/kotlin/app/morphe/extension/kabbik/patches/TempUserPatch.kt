@@ -31,4 +31,4 @@ fun onCreate() {
 private fun getLoginUser(
     token: String,
     userId: Int,
-): String = JSONObject().put("token", token).put("user", JSONObject().put("id", userId)).toString()
+) = JSONObject().put("token", token).put("user", JSONObject().put("id", userId)).toString()

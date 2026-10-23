@@ -42,7 +42,7 @@ val accessContentPatch =
                                 0 -> instruction.registerD
                                 1 -> instruction.registerE
                                 2 -> instruction.registerF
-                                else -> throw IllegalStateException()
+                                else -> throw NotImplementedError()
                             },
                             ImmutableStringReference("S"),
                         ),

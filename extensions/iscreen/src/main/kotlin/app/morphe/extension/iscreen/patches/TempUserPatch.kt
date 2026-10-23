@@ -30,22 +30,15 @@ private val authToken by lazy {
     }
 }
 
-@Suppress("unused")
-fun getRefreshToken(self: com.rockstreamer.iscreen.util.PreferenceUtil): String =
-    getRefreshToken(self::getRefreshToken, self::setRefreshToken)
-
-@Suppress("unused")
-fun getRefreshToken(self: com.rockstreamer.iscreentv.utils.PreferenceUtil): String =
-    getRefreshToken(self::getRefreshToken, self::setRefreshToken)
-
 private fun getRefreshToken(
     getRefreshToken: () -> String,
     setRefreshToken: (String) -> Unit,
 ): String {
     var refreshToken = getRefreshToken()
     if (refreshToken.isEmpty()) {
+        @Suppress("TooGenericExceptionCaught")
         try {
-            refreshToken = authToken.get("refreshToken") as String
+            refreshToken = authToken["refreshToken"] as String
             Utils.showToastShort("refreshToken: $refreshToken")
 
             setRefreshToken(refreshToken)
@@ -55,3 +48,11 @@ private fun getRefreshToken(
     }
     return refreshToken
 }
+
+@Suppress("unused")
+fun getRefreshToken(self: com.rockstreamer.iscreen.util.PreferenceUtil): String =
+    getRefreshToken(self::getRefreshToken, self::setRefreshToken)
+
+@Suppress("unused")
+fun getRefreshToken(self: com.rockstreamer.iscreentv.utils.PreferenceUtil): String =
+    getRefreshToken(self::getRefreshToken, self::setRefreshToken)
