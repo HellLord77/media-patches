@@ -15,7 +15,7 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.4](https://github.com/HellLord77/media-patches/releases/tag/v1.3.4)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;50 patches total
+> **[v1.3.5-dev.1](https://github.com/HellLord77/media-patches/releases/tag/v1.3.5-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;51 patches total
 <details open>
 <summary>📦 Hoichoi&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
@@ -74,8 +74,8 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 
 **🎯 Supported versions:**
 
-| 4.4.4 | 4.4.2 | 4.4.1 | 4.3.9 | 4.3.7 | 4.3.5 | 4.3.4 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 4.4.5 | 4.4.4 | 4.4.2 | 4.4.1 | 4.3.9 | 4.3.7 | 4.3.5 | 4.3.4 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
@@ -177,6 +177,22 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 
 **🎯 Supported versions:**
 
+| 6.11.1 | 6.10.3 | 6.10.2 | 6.10.0 | 6.9.2 | 6.9.1 | 6.9.0 | 6.8.9 | 6.8.8 | 6.8.6 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Disable update](#disable-update) | Disables forced update. |  |
+| [Free content](#free-content) |  |  |
+
+</details>
+
+<details open>
+<summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
 | 1.17.1 | 1.16.9 | 1.16.7 | 1.16.5 |
 | :---: | :---: | :---: | :---: |
 
@@ -202,21 +218,6 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 | [Free content](#free-content) | Marks content as free. |  |
 | [Hide ads](#hide-ads) | Hides all ads from app. |  |
 | [Temp user](#temp-user) | Log in as subscribed temp user. |  |
-
-</details>
-
-<details open>
-<summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
-<br>
-
-**🎯 Supported versions:**
-
-| 6.10.3 | 6.10.2 | 6.10.0 | 6.9.2 | 6.9.1 | 6.9.0 | 6.8.9 | 6.8.8 | 6.8.6 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-
-| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
-|----------|----------------|-----------|
-| [Free content](#free-content) |  |  |
 
 </details>
 
