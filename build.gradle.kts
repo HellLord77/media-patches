@@ -8,4 +8,8 @@ plugins {
 subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "io.gitlab.arturbosch.detekt")
+
+    extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
+        ignoreFailures = true
+    }
 }

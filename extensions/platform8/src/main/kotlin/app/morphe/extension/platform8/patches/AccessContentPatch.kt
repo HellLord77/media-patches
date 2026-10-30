@@ -11,6 +11,24 @@ import com.android.volley.NetworkResponse
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import org.json.JSONObject
+import java.net.HttpURLConnection
+
+private fun performRequest(
+    request: Request<*>,
+    response: NetworkResponse,
+): Boolean {
+    val uri = Uri.parse(request.url)
+    return request.method == Request.Method.GET &&
+        uri.host == "apps.digivive.com" &&
+        uri.pathSegments == listOf("platform8_dynamic", "geturlv4") &&
+        (
+            response.statusCode != HttpURLConnection.HTTP_OK ||
+                runCatching {
+                    (JSONObject(response.data.decodeToString())["error_code"] as String).toInt() !=
+                        HttpURLConnection.HTTP_OK
+                }.getOrDefault(false)
+        )
+}
 
 @Suppress("unused")
 @Throws(VolleyError::class)
@@ -19,21 +37,11 @@ fun performRequest(
     request: Request<*>,
 ): NetworkResponse {
     Logger.printDebug { "request: $request" }
-    val response = self.performRequest(request)
+    var response = self.performRequest(request)
     Logger.printDebug { "response: $response" }
 
+    if (!performRequest(request, response)) return response
     val uri = Uri.parse(request.url)
-    if (
-        !(
-            request.method == Request.Method.GET &&
-                uri.host == "apps.digivive.com" &&
-                uri.pathSegments == listOf("platform8_dynamic", "geturlv4") &&
-                response.statusCode == 200 &&
-                (JSONObject(response.data.decodeToString())["error_code"] as String).toInt() != 200
-        )
-    ) {
-        return response
-    }
 
     val chargeCode = uri.getQueryParameter("charge_code")!!
     Utils.showToastShort("chargeCode: $chargeCode")
@@ -50,10 +58,10 @@ fun performRequest(
             Logger.printInfo { "assetData: $assetData" }
             Logger.printInfo { "cloudFront: $cloudFront" }
             Logger.printInfo { "seasonData: $seasonData" }
-            return getResponse()
+            response = getResponse()
         }
     } catch (e: Exception) {
         Logger.printException({ "contentRepo failure" }, e)
-        return response
     }
+    return response
 }

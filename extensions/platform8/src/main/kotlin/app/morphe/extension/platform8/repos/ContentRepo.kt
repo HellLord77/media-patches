@@ -6,6 +6,7 @@ import com.android.volley.NetworkResponse
 import com.android.volley.toolbox.StringRequest
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.HttpURLConnection
 
 internal class ContentRepo(
     private val network: Network,
@@ -71,9 +72,9 @@ internal class ContentRepo(
             )
 
         network.performRequest(request).run {
-            require(statusCode == 200)
+            require(statusCode == HttpURLConnection.HTTP_OK)
             JSONObject(data.decodeToString()).apply {
-                require(getString("error_code").toInt() == 200)
+                require(getString("error_code").toInt() == HttpURLConnection.HTTP_OK)
                 return getJSONObject("result")
             }
         }
@@ -97,9 +98,9 @@ internal class ContentRepo(
             )
 
         network.performRequest(request).run {
-            require(statusCode == 200)
+            require(statusCode == HttpURLConnection.HTTP_OK)
             JSONObject(data.decodeToString()).apply {
-                require(getString("error_code").toInt() == 200)
+                require(getString("error_code").toInt() == HttpURLConnection.HTTP_OK)
                 return getJSONArray("result")
             }
         }
@@ -111,7 +112,7 @@ internal class ContentRepo(
 
         return NetworkResponse(
             JSONObject()
-                .put("error_code", 200)
+                .put("error_code", HttpURLConnection.HTTP_OK)
                 .put("assetData", assetData)
                 .put("cloud_front", cloudFront)
                 .put("next_episode", nextEpisode)

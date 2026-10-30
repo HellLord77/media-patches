@@ -12,6 +12,7 @@ import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.HttpURLConnection
 import java.util.Random
 
 internal class ContentRepo(
@@ -117,8 +118,7 @@ internal class ContentRepo(
                 .toResponseBody("application/json".toMediaType())
         return response
             .newBuilder()
-            .code(200)
-            .message("OK")
+            .code(HttpURLConnection.HTTP_OK)
             .header("Content-Length", body.contentLength().toString())
             .body(body)
             .build()
@@ -143,6 +143,7 @@ internal class ContentRepo(
                 false
             }
 
+        @Suppress("NestedBlockDepth")
         private fun filterFreeContentIds(pageData: JSONObject) =
             mutableSetOf<String>().apply {
                 (pageData["modules"] as JSONArray)
