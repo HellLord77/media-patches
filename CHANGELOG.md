@@ -1,3 +1,9 @@
+## [1.3.5-dev.1](https://github.com/HellLord77/media-patches/compare/v1.3.4...v1.3.5-dev.1) (2026-10-30)
+
+### 🚀 Updated App Support
+
+* Bump Shadin to 4.4.5 ([83c730a](https://github.com/HellLord77/media-patches/commit/83c730ac89a743e527320dedc639807c858cc714))
+
 ## [1.3.4](https://github.com/HellLord77/media-patches/compare/v1.3.3...v1.3.4) (2026-10-14)
 
 ### 🐛 Bug Fixes

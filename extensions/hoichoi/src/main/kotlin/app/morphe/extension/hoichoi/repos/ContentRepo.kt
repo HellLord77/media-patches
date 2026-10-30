@@ -4,7 +4,6 @@ import android.net.Uri
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
 import app.morphe.extension.shared.extension.org.json.objects
-import java.util.Random
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Request
@@ -13,6 +12,8 @@ import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.util.Random
 
 internal class ContentRepo(
     private val chain: Interceptor.Chain,
@@ -23,7 +24,8 @@ internal class ContentRepo(
 ) {
     private val anonymousToken: String by lazy {
         val request =
-            Request.Builder()
+            Request
+                .Builder()
                 .url("https://prod-api.hoichoi.dev/core/api/v1/users/anonymous-token")
                 .build()
 
@@ -40,7 +42,8 @@ internal class ContentRepo(
 
     internal val videoDetails: JSONObject by lazy {
         val uri =
-            Uri.parse("https://prod-contents-api.hoichoi.dev/contents/api/v1/contents")
+            Uri
+                .parse("https://prod-contents-api.hoichoi.dev/contents/api/v1/contents")
                 .buildUpon()
                 .appendQueryParameter("contentId", contentId)
                 .appendQueryParameter("language", language)
@@ -55,14 +58,16 @@ internal class ContentRepo(
 
     internal val freeEntitlementInfo: JSONObject by lazy {
         val uri =
-            Uri.parse("https://prod-api.hoichoi.dev/contents/api/v1/entitlement")
+            Uri
+                .parse("https://prod-api.hoichoi.dev/contents/api/v1/entitlement")
                 .buildUpon()
                 .appendQueryParameter("contentId", freeContentId)
                 .appendQueryParameter("action", action)
                 .appendQueryParameter("language", language)
                 .build()
         val request =
-            Request.Builder()
+            Request
+                .Builder()
                 .url(uri.toString())
                 .header("Anonymous-Token", token ?: anonymousToken)
                 .post(RequestBody.EMPTY)
@@ -83,12 +88,15 @@ internal class ContentRepo(
                     return freeContentId
                 }
             }
-            throw IllegalStateException()
+            throw NotImplementedError()
         }
 
-    private fun getPageData(@Suppress("SameParameterValue") pageId: String): JSONObject {
+    private fun getPageData(
+        @Suppress("SameParameterValue") pageId: String,
+    ): JSONObject {
         val uri =
-            Uri.parse("https://prod-contents-api.hoichoi.dev/contents/api/v1/pages")
+            Uri
+                .parse("https://prod-contents-api.hoichoi.dev/contents/api/v1/pages")
                 .buildUpon()
                 .appendPath(pageId)
                 .build()
@@ -110,8 +118,7 @@ internal class ContentRepo(
                 .toResponseBody("application/json".toMediaType())
         return response
             .newBuilder()
-            .code(200)
-            .message("OK")
+            .code(HttpURLConnection.HTTP_OK)
             .header("Content-Length", body.contentLength().toString())
             .body(body)
             .build()
@@ -127,14 +134,16 @@ internal class ContentRepo(
         private fun isFreeContent(content: JSONObject) =
             try {
                 content["monetizationModel"] == "FREE" &&
-                    ((content["monetizationPlan"] as JSONObject)["includedMonetizationPlans"]
-                            as JSONArray)
-                        .objects()
+                    (
+                        (content["monetizationPlan"] as JSONObject)["includedMonetizationPlans"]
+                            as JSONArray
+                    ).objects()
                         .any { !(it["loginRequired"] as Boolean) }
             } catch (_: Throwable) {
                 false
             }
 
+        @Suppress("NestedBlockDepth")
         private fun filterFreeContentIds(pageData: JSONObject) =
             mutableSetOf<String>().apply {
                 (pageData["modules"] as JSONArray)
@@ -142,10 +151,11 @@ internal class ContentRepo(
                     .flatMap { (it["contents"] as JSONArray).objects() }
                     .forEach { content ->
                         when (content["contentType"]) {
-                            "movie" ->
+                            "movie" -> {
                                 if (isFreeContent(content)) {
                                     add(content["contentId"] as String)
                                 }
+                            }
 
                             "series" -> {
                                 addAll(
@@ -153,9 +163,8 @@ internal class ContentRepo(
                                         .objects()
                                         .flatMap {
                                             (it["episodes"] as JSONArray).objects()
-                                        }
-                                        .filter(::isFreeContent)
-                                        .map { it["contentId"] as String }
+                                        }.filter(::isFreeContent)
+                                        .map { it["contentId"] as String },
                                 )
                             }
                         }

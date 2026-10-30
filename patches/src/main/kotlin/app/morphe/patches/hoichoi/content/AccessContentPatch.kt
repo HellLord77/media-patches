@@ -81,7 +81,8 @@ val accessContentPatch =
                             0,
                             0,
                             0,
-                            OkHttpClient.Builder.AddInterceptorFingerprint.matchSingle()
+                            OkHttpClient.Builder.AddInterceptorFingerprint
+                                .matchSingle()
                                 .originalMethod,
                         ),
                     ),

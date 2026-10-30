@@ -1,7 +1,5 @@
 package app.morphe.extension.bongo.repos;
 
-import static app.morphe.extension.bongo.reflect.com.google.gson.Gson.fromJson;
-
 import com.goebl.david.Webb;
 import com.google.gson.Gson;
 
@@ -39,7 +37,7 @@ public class ContentRepo {
         var contentDetails = buildContentDetails(contentTrailer, content, acceptLanguage);
         Logger.printDebug(() -> String.format("contentDetails: %s", contentDetails));
 
-        return fromJson(GSON, contentDetails.toString(), classOfT);
+        return GSON.fromJson(contentDetails.toString(), classOfT);
     }
 
     @NotNull

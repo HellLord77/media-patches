@@ -1,13 +1,12 @@
 package app.morphe.extension.platform8.repos
 
 import android.net.Uri
-import app.morphe.extension.shared.extension.org.json.objects
-import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Network
 import com.android.volley.NetworkResponse
 import com.android.volley.toolbox.StringRequest
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.HttpURLConnection
 
 internal class ContentRepo(
     private val network: Network,
@@ -16,7 +15,7 @@ internal class ContentRepo(
     private val authorization: String?,
 ) {
     internal val assetData: JSONObject by lazy {
-        getAssetData(code)
+        getVod(code)
     }
 
     internal val cloudFront: JSONObject by lazy {
@@ -26,30 +25,19 @@ internal class ContentRepo(
                 if (it.length() != 0) return@lazy it
             }
 
-        getAssetData(CODE)["cloud_front"] as JSONObject
+        getVod(CODE)["cloud_front"] as JSONObject
     }
 
     internal val seasonData: JSONObject? by lazy {
         runCatching {
-            val seasonId = (assetData["recently_watched"] as JSONObject)["season_id"] as String
-            getSeasonData(seasonId)
-        }
-            .getOrNull()
-    }
-
-    internal val response: NetworkResponse by lazy {
-        cloudFront.put("cloud_url", (assetData["watchable_content"] as JSONArray)[0])
-        showDetails?.also { assetData.put("show_details", it) }
-
-        NetworkResponse(
-            JSONObject()
-                .put("error_code", 200)
-                .put("assetData", assetData)
-                .put("cloud_front", cloudFront)
-                .put("next_episode", nextEpisode)
-                .toString()
-                .toByteArray()
-        )
+            val recentlyWatched = assetData["recently_watched"] as JSONObject
+            val seasonsOrder =
+                getSeasonsOrder(
+                    recentlyWatched["season_id"] as String,
+                    (recentlyWatched["no"] as String).toInt() + 1,
+                )
+            seasonsOrder[0] as JSONObject
+        }.getOrNull()
     }
 
     private val showDetails: JSONObject? by lazy {
@@ -59,72 +47,84 @@ internal class ContentRepo(
                 .put("episode_title", recentlyWatched["name"])
                 .put("season_number", seasonData?.get("season_number"))
                 .put("episode_number", recentlyWatched["no"])
-        }
-            .getOrNull()
+        }.getOrNull()
     }
 
-    private val nextEpisode: JSONObject by lazy {
+    private val nextEpisode: JSONObject? by lazy {
         seasonData
-            ?.let {
+            ?.run {
                 runCatching {
-                    (it.getJSONArray("assets"))
-                        .objects()
-                        .zipWithNext()
-                        .firstOrNull { (asset, nextAsset) ->
-                            asset["code"] as String == code
-                        }
-                        ?.second
+                    (getJSONArray("assets")[0] as JSONObject)
                 }
-            }
-            ?.getOrNull() ?: JSONObject()
+            }?.getOrNull()
     }
 
-    private fun getAssetData(code: String): JSONObject {
+    private fun getVod(code: String): JSONObject {
         val request =
             ContentRequest(
-                Uri.parse("https://apps.digivive.com/platform8_dynamic/assetdetail")
+                Uri
+                    .parse("https://apps.digivive.com/platform8_dynamic/assetdetail")
                     .buildUpon()
                     .appendQueryParameter("code", code)
                     .appendQueryParameter("catlogue", catalogue ?: CATALOGUE)
                     .appendQueryParameter("type", "vod")
-                    .build()
+                    .build(),
             )
 
-        val response = network.performRequest(request).apply { require(statusCode == 200) }
-        JSONObject(response.data.decodeToString()).apply {
-            require(getString("error_code").toInt() == 200)
-            return getJSONObject("result")
+        network.performRequest(request).run {
+            require(statusCode == HttpURLConnection.HTTP_OK)
+            JSONObject(data.decodeToString()).apply {
+                require(getString("error_code").toInt() == HttpURLConnection.HTTP_OK)
+                return getJSONObject("result")
+            }
         }
     }
 
-    private fun getSeasonData(seasonId: String): JSONObject {
+    private fun getSeasonsOrder(
+        seasonId: String,
+        page: Int? = null,
+    ): JSONArray {
         val request =
             ContentRequest(
-                Uri.parse("https://apps.digivive.com/platform8_dynamic/assetdetail")
+                Uri
+                    .parse("https://apps.digivive.com/platform8_dynamic/assetdetail")
                     .buildUpon()
                     .appendQueryParameter("season_id", seasonId)
                     .appendQueryParameter("catlogue", catalogue ?: CATALOGUE)
                     .appendQueryParameter("type", "seasons_order")
-                    .appendQueryParameter("limit", Int.MAX_VALUE.toString())
-                    .build()
-            )
-        request.retryPolicy =
-            DefaultRetryPolicy(
-                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 10,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT,
+                    .appendQueryParameter("page", page?.toString())
+                    .appendQueryParameter("limit", "1")
+                    .build(),
             )
 
-        val response = network.performRequest(request).apply { require(statusCode == 200) }
-        JSONObject(response.data.decodeToString()).apply {
-            require(getString("error_code").toInt() == 200)
-            return getJSONArray("result")[0] as JSONObject
+        network.performRequest(request).run {
+            require(statusCode == HttpURLConnection.HTTP_OK)
+            JSONObject(data.decodeToString()).apply {
+                require(getString("error_code").toInt() == HttpURLConnection.HTTP_OK)
+                return getJSONArray("result")
+            }
         }
     }
 
-    private inner class ContentRequest(uri: Uri) : StringRequest(uri.toString(), null, null) {
-        override fun getHeaders(): Map<String, String> =
-            mapOf("Authorization" to (authorization ?: AUTHORIZATION))
+    internal fun getResponse(): NetworkResponse {
+        cloudFront.put("cloud_url", (assetData["watchable_content"] as JSONArray)[0])
+        showDetails?.also { assetData.put("show_details", it) }
+
+        return NetworkResponse(
+            JSONObject()
+                .put("error_code", HttpURLConnection.HTTP_OK)
+                .put("assetData", assetData)
+                .put("cloud_front", cloudFront)
+                .put("next_episode", nextEpisode)
+                .toString()
+                .toByteArray(),
+        )
+    }
+
+    private inner class ContentRequest(
+        uri: Uri,
+    ) : StringRequest(uri.toString(), null, null) {
+        override fun getHeaders(): Map<String, String> = mapOf("Authorization" to (authorization ?: AUTHORIZATION))
     }
 
     private companion object {

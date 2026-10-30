@@ -18,7 +18,7 @@ object Constants {
                         versionCode = 235,
                         isExperimental = true,
                         minSdk = 25,
-                    )
+                    ),
                 ),
         )
 }

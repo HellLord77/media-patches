@@ -5,6 +5,10 @@ import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.bongobdandroidtv.extension.sharedExtensionPatch
 import app.morphe.patches.bongobdandroidtv.shared.Constants.COMPATIBILITY_BONGOANDROIDTV
+import app.morphe.patches.shared.morphe.okhttp3.Request
+import app.morphe.patches.shared.morphe.okhttp3.Response
+import app.morphe.patches.shared.patches.dex.obfuscateExtensionClassPatch
+import app.morphe.patches.shared.patches.dex.obfuscateExtensionMethodReferencePatch
 import app.morphe.util.getReference
 import app.morphe.util.matchAllMethodIndicesForEach
 import com.android.tools.smali.dexlib2.Opcode
@@ -23,7 +27,14 @@ val freeContentPatch =
     ) {
         compatibleWith(COMPATIBILITY_BONGOANDROIDTV)
 
-        dependsOn(sharedExtensionPatch)
+        dependsOn(
+            sharedExtensionPatch,
+            obfuscateExtensionClassPatch(Response.toString() to RequestFingerprint),
+            obfuscateExtensionMethodReferencePatch(
+                Request.toString() to ("header" to HeaderFingerprint),
+                Response.toString() to ("request" to RequestFingerprint),
+            ),
+        )
 
         execute {
             GetVideoDetailsDataMethodCallFingerprint.matchAllMethodIndicesForEach {

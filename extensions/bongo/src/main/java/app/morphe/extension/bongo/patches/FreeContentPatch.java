@@ -1,9 +1,5 @@
 package app.morphe.extension.bongo.patches;
 
-import static app.morphe.extension.bongo.reflect.okhttp3.Request.header;
-import static app.morphe.extension.bongo.reflect.okhttp3.Response.request;
-import static app.morphe.extension.bongo.reflect.retrofit2.Response.raw;
-
 import com.bongo.bongobd.view.model.ContentDetailsResponse;
 import com.bongo.bongobd.view.network.ApiServiceSaas;
 import com.goebl.david.Webb;
@@ -12,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -37,39 +34,29 @@ public class FreeContentPatch {
     private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
 
     @Nullable
-    public static Object getContentDetails(
-            @NotNull ApiServiceSaas self,
-            @Nullable String bongoId,
-            @NotNull Continuation<Response<ContentDetailsResponse>> continuation) {
+    public static Object getContentDetails(@NotNull ApiServiceSaas self, @Nullable String bongoId, @NotNull Continuation<Response<ContentDetailsResponse>> continuation) {
         Utils.showToastShort(String.format("bongoId: %s", bongoId));
 
-        return self.getContentDetails(
-                bongoId,
-                new Continuation<>() {
-                    @NotNull
-                    @Override
-                    public CoroutineContext getContext() {
-                        return continuation.getContext();
-                    }
+        return self.getContentDetails(bongoId, new Continuation<>() {
+            @NotNull
+            @Override
+            public CoroutineContext getContext() {
+                return continuation.getContext();
+            }
 
-                    @SuppressWarnings({"unchecked", "DataFlowIssue", "KotlinInternalInJava"})
-                    @Override
-                    public void resumeWith(@NotNull Object result) {
-                        if (!(result instanceof Result.Failure)) {
-                            result =
-                                    getResponse(
-                                            bongoId,
-                                            (Response<ContentDetailsResponse>) result,
-                                            ContentDetailsResponse.class);
-                        }
-                        continuation.resumeWith(result);
-                    }
-                });
+            @SuppressWarnings({"unchecked", "DataFlowIssue", "KotlinInternalInJava"})
+            @Override
+            public void resumeWith(@NotNull Object result) {
+                if (!(result instanceof Result.Failure)) {
+                    result = getResponse(bongoId, (Response<ContentDetailsResponse>) result, ContentDetailsResponse.class);
+                }
+                continuation.resumeWith(result);
+            }
+        });
     }
 
     @NotNull
-    public static Call<ContentDetails> getVideoDetailsData(
-            @NotNull DetailsEndPoint self, @NotNull String id) {
+    public static Call<ContentDetails> getVideoDetailsData(@NotNull DetailsEndPoint self, @NotNull String id) {
         Utils.showToastShort(String.format("id: %s", id));
         var call = self.getVideoDetailsData(id);
 
@@ -82,25 +69,21 @@ public class FreeContentPatch {
 
             @Override
             public void enqueue(@NotNull Callback<ContentDetails> callback) {
-                call.enqueue(
-                        new Callback<>() {
-                            @Override
-                            public void onResponse(
-                                    @NotNull Call<ContentDetails> call, @NotNull Response<ContentDetails> response) {
-                                try {
-                                    callback.onResponse(
-                                            call,
-                                            EXECUTOR.submit(() -> getResponse(id, response, ContentDetails.class)).get());
-                                } catch (ExecutionException | InterruptedException t) {
-                                    callback.onFailure(call, t);
-                                }
-                            }
+                call.enqueue(new Callback<>() {
+                    @Override
+                    public void onResponse(@NotNull Call<ContentDetails> call, @NotNull Response<ContentDetails> response) {
+                        try {
+                            callback.onResponse(call, EXECUTOR.submit(() -> getResponse(id, response, ContentDetails.class)).get());
+                        } catch (ExecutionException | InterruptedException t) {
+                            callback.onFailure(call, t);
+                        }
+                    }
 
-                            @Override
-                            public void onFailure(@NotNull Call<ContentDetails> call, @NotNull Throwable t) {
-                                callback.onFailure(call, t);
-                            }
-                        });
+                    @Override
+                    public void onFailure(@NotNull Call<ContentDetails> call, @NotNull Throwable t) {
+                        callback.onFailure(call, t);
+                    }
+                });
             }
 
             @Override
@@ -139,25 +122,22 @@ public class FreeContentPatch {
     }
 
     @NotNull
-    private static <T> Response<T> getResponse(
-            @NotNull String systemId, @NotNull Response<T> response, @NotNull Class<T> classOfT) {
+    private static <T> Response<T> getResponse(@NotNull String systemId, @NotNull Response<T> response, @NotNull Class<T> classOfT) {
         var finalResponse = response;
         Logger.printDebug(() -> String.format("response: %s", finalResponse));
 
-        if (response.code() == 403) {
+        if (response.code() != HttpURLConnection.HTTP_OK) {
             try {
-                var raw = raw((Object) response);
-                var request = (Request) Objects.requireNonNull(request(raw));
+                @SuppressWarnings("resource") var request = response.raw().request();
                 Logger.printDebug(() -> String.format("request: %s", request));
 
-                var authorization = Objects.requireNonNull(header(request, Webb.HDR_AUTHORIZATION));
+                var authorization = Objects.requireNonNull(request.header(Webb.HDR_AUTHORIZATION));
                 Logger.printDebug(() -> String.format("authorization: %s", authorization));
 
-                var acceptLanguage = Objects.requireNonNull(header(request, "Accept-Language"));
+                var acceptLanguage = Objects.requireNonNull(request.header("Accept-Language"));
                 Logger.printDebug(() -> String.format("acceptLanguage: %s", acceptLanguage));
 
-                var contentDetails =
-                        ContentRepo.getContentDetails(systemId, authorization, acceptLanguage, classOfT);
+                var contentDetails = ContentRepo.getContentDetails(systemId, authorization, acceptLanguage, classOfT);
                 if (contentDetails != null) {
                     response = Response.success(contentDetails);
                 }
