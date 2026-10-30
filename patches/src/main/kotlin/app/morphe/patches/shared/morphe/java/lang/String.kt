@@ -1,4 +1,4 @@
-package app.morphe.patches.shared.morphe.kotlin
+package app.morphe.patches.shared.morphe.java.lang
 
 import kotlin.String
 

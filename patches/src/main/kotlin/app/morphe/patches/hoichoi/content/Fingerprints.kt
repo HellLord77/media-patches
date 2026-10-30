@@ -4,9 +4,9 @@ import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.fieldAccess
 import app.morphe.patches.shared.Type
 import app.morphe.patches.shared.morphe.java.lang.Iterable
+import app.morphe.patches.shared.morphe.java.lang.String
 import app.morphe.patches.shared.morphe.java.util.Collection
 import app.morphe.patches.shared.morphe.java.util.List
-import app.morphe.patches.shared.morphe.kotlin.String
 import app.morphe.patches.shared.morphe.okhttp3.MediaType
 import app.morphe.patches.shared.morphe.okhttp3.ResponseBody
 import com.android.tools.smali.dexlib2.AccessFlags
