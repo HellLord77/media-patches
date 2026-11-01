@@ -9,7 +9,6 @@ import app.morphe.patches.shared.morphe.com.google.gson.Gson
 import app.morphe.patches.shared.morphe.kotlin.LazyKt
 import app.morphe.patches.shared.morphe.kotlin.collections.CollectionsKt
 import app.morphe.patches.shared.morphe.kotlin.collections.SetsKt
-import app.morphe.patches.shared.morphe.kotlin.sequences.SequencesKt
 import app.morphe.patches.shared.morphe.kotlin.text.StringsKt
 import app.morphe.patches.shared.morphe.okhttp3.Request
 import app.morphe.patches.shared.morphe.okhttp3.Response
@@ -28,7 +27,7 @@ private const val EXTENSION_CLASS = "Lapp/morphe/extension/bongo/patches/AccessC
 val accessContentPatch =
     bytecodePatch(
         name = "Access content",
-        description = "Access content",
+        description = "Enables access to content.",
         default = true,
     ) {
         compatibleWith(COMPATIBILITY_BONGO)

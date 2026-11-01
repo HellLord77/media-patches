@@ -2,7 +2,6 @@ package app.morphe.patches.shared.morphe.kotlin.sequences
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patches.shared.morphe.java.util.Iterator
-import app.morphe.patches.shared.morphe.java.util.List
 import com.android.tools.smali.dexlib2.AccessFlags
 import kotlin.sequences.Sequence
 

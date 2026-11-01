@@ -3,6 +3,7 @@ package app.morphe.patches.chorkitv.shared
 import app.morphe.patcher.patch.ApkFileType
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
+import app.morphe.patcher.patch.FormFactor
 
 object Constants {
     val COMPATIBILITY_CHORKITV =
@@ -17,5 +18,6 @@ object Constants {
                     AppTarget(version = "2.0.90", versionCode = 290, minSdk = 24),
                     AppTarget(version = "2.0.88", versionCode = 288, minSdk = 24),
                 ),
+            formFactor = FormFactor.TV,
         )
 }

@@ -16,7 +16,13 @@ private fun intercept(
     response: Response,
 ) = request.method == "POST" &&
     request.url.host == "prod-api.hoichoi.dev" &&
-    Uri.parse(request.url.toString()).pathSegments == listOf("contents", "api", "v1", "entitlement") &&
+    Uri.parse(request.url.toString()).pathSegments ==
+    listOf(
+        "contents",
+        "api",
+        "v1",
+        "entitlement",
+    ) &&
     response.code != HttpURLConnection.HTTP_OK
 
 @Suppress("unused")

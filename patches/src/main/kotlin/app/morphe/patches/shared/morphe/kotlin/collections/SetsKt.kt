@@ -2,7 +2,6 @@ package app.morphe.patches.shared.morphe.kotlin.collections
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patches.shared.morphe.java.lang.Object
-import app.morphe.patches.shared.morphe.java.util.List
 import app.morphe.patches.shared.morphe.java.util.Set
 import com.android.tools.smali.dexlib2.AccessFlags
 

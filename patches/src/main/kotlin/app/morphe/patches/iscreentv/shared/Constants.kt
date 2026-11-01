@@ -3,6 +3,7 @@ package app.morphe.patches.iscreentv.shared
 import app.morphe.patcher.patch.ApkFileType
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
+import app.morphe.patcher.patch.FormFactor
 
 object Constants {
     val COMPATIBILITY_ISCREENTV =
@@ -21,5 +22,6 @@ object Constants {
                     AppTarget(version = "4.2.0", versionCode = 446, minSdk = 23),
                     AppTarget(version = "4.1.32", versionCode = 445, minSdk = 23),
                 ),
+            formFactor = FormFactor.TV,
         )
 }

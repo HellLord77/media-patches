@@ -23,7 +23,7 @@ private const val EXTENSION_CLASS = "Lapp/morphe/extension/bongo/patches/AccessC
 val accessContentPatch =
     bytecodePatch(
         name = "Access content",
-        description = "Access content",
+        description = "Enables access to content.",
         default = true,
     ) {
         compatibleWith(COMPATIBILITY_BONGOANDROIDTV)

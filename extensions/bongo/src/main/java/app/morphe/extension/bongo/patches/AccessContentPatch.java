@@ -1,7 +1,5 @@
 package app.morphe.extension.bongo.patches;
 
-import android.util.Log;
-
 import com.bongo.bongobd.view.model.ContentDetailsResponse;
 import com.bongo.bongobd.view.network.ApiServiceSaas;
 import com.goebl.david.Webb;

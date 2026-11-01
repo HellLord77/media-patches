@@ -27,7 +27,7 @@ val extractMetadataPatch =
         availability { installer, arch ->
             installerType = installer
             apkArchitecture = arch
-            PatchAvailability.ENABLED
+            PatchAvailability.REQUIRED
         }
 
         dependsOn(

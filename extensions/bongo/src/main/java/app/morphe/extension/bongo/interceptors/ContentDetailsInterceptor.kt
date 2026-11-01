@@ -13,7 +13,14 @@ private fun intercept(
     response: Response,
 ) = request.method == "GET" &&
     request.url.host == "api.bongo-solutions.com" &&
-    request.url.pathSegments.dropLast(1) == listOf("ironman", "api", "v1", "content", "detail") &&
+    request.url.pathSegments.dropLast(1) ==
+    listOf(
+        "ironman",
+        "api",
+        "v1",
+        "content",
+        "detail",
+    ) &&
     response.code != HttpURLConnection.HTTP_OK
 
 @Deprecated("")
