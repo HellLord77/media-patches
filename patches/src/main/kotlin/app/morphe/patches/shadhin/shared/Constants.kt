@@ -10,7 +10,7 @@ object Constants {
             name = "Shadhin",
             packageName = "com.gm.shadhin",
             apkFileType = ApkFileType.XAPK,
-            appIconColor = 0x00B0FF,
+            appIconColor = 0x0597F2,
             signatures = setOf("ad22e167e88efc585f295a1f604d5c85fceb26bc501b1edb693bfe95b206eaf0"),
             targets =
                 listOf(
