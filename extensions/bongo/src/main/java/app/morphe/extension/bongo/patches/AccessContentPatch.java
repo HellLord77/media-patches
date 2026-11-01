@@ -1,5 +1,7 @@
 package app.morphe.extension.bongo.patches;
 
+import android.util.Log;
+
 import com.bongo.bongobd.view.model.ContentDetailsResponse;
 import com.bongo.bongobd.view.network.ApiServiceSaas;
 import com.goebl.david.Webb;
@@ -14,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import app.morphe.extension.bongo.repos.ContentRepo;
+import app.morphe.extension.bongo.repositories.ContentRepository;
 import app.morphe.extension.shared.Logger;
 import app.morphe.extension.shared.Utils;
 import kotlin.NotImplementedError;
@@ -30,7 +32,7 @@ import saas.ott.smarttv.ui.details.data.DetailsEndPoint;
 import saas.ott.smarttv.ui.details.model.ContentDetails;
 
 @SuppressWarnings("unused")
-public class FreeContentPatch {
+public class AccessContentPatch {
     private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
 
     @Nullable
@@ -131,19 +133,18 @@ public class FreeContentPatch {
                 @SuppressWarnings("resource") var request = response.raw().request();
                 Logger.printDebug(() -> String.format("request: %s", request));
 
-                var authorization = Objects.requireNonNull(request.header(Webb.HDR_AUTHORIZATION));
+                var authorization = request.header(Webb.HDR_AUTHORIZATION);
                 Logger.printDebug(() -> String.format("authorization: %s", authorization));
 
                 var acceptLanguage = Objects.requireNonNull(request.header("Accept-Language"));
                 Logger.printDebug(() -> String.format("acceptLanguage: %s", acceptLanguage));
 
-                var contentDetails = ContentRepo.getContentDetails(systemId, authorization, acceptLanguage, classOfT);
-                if (contentDetails != null) {
-                    response = Response.success(contentDetails);
-                }
-
-            } catch (Exception e) {
-                Logger.printException(() -> "getResponse failure", e);
+                var it = new ContentRepository(systemId, authorization, acceptLanguage);
+                Logger.printInfo(() -> String.format("contentTrailer: %s", it.getContentTrailer$bongo()));
+                Logger.printInfo(() -> String.format("content: %s", it.getContent$bongo()));
+                response = it.getResponse$bongo(classOfT);
+            } catch (Throwable e) {
+                Logger.printException(() -> "contentRepository failure", e);
             }
         }
         return response;

@@ -1,7 +1,7 @@
 package app.morphe.extension.hoichoi.interceptors
 
 import android.net.Uri
-import app.morphe.extension.hoichoi.repos.ContentRepo
+import app.morphe.extension.hoichoi.repositories.ContentRepository
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
 import okhttp3.Interceptor
@@ -16,7 +16,7 @@ private fun intercept(
     response: Response,
 ) = request.method == "POST" &&
     request.url.host == "prod-api.hoichoi.dev" &&
-    request.url.pathSegments == listOf("contents", "api", "v1", "entitlement") &&
+    Uri.parse(request.url.toString()).pathSegments == listOf("contents", "api", "v1", "entitlement") &&
     response.code != HttpURLConnection.HTTP_OK
 
 @Suppress("unused")
@@ -47,13 +47,13 @@ class EntitlementInterceptor : Interceptor {
 
         @Suppress("TooGenericExceptionCaught")
         try {
-            ContentRepo(chain, contentId, action, language, anonymousToken).apply {
+            ContentRepository(chain, contentId, action, language, anonymousToken).apply {
                 Logger.printInfo { "videoDetails: $videoDetails" }
                 Logger.printInfo { "freeEntitlementInfo: $freeEntitlementInfo" }
                 response = getResponse(response)
             }
-        } catch (e: Exception) {
-            Logger.printException({ "contentRepo failure" }, e)
+        } catch (e: Throwable) {
+            Logger.printException({ "contentRepository failure" }, e)
         }
         return response
     }

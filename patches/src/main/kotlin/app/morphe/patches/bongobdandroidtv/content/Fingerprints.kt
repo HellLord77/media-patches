@@ -3,10 +3,13 @@ package app.morphe.patches.bongobdandroidtv.content
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.StringComparisonType
 import app.morphe.patcher.methodCall
+import app.morphe.patcher.opcode
 import app.morphe.patcher.string
 import app.morphe.patches.shared.Type
 import app.morphe.patches.shared.isNotExtension
+import app.morphe.patches.shared.morphe.java.lang.Object
 import app.morphe.patches.shared.morphe.java.lang.String
+import app.morphe.patches.shared.morphe.java.util.List
 import app.morphe.patches.shared.morphe.okhttp3.Request
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode

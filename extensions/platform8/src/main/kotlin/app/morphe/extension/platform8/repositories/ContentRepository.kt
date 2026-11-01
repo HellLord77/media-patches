@@ -1,4 +1,4 @@
-package app.morphe.extension.platform8.repos
+package app.morphe.extension.platform8.repositories
 
 import android.net.Uri
 import com.android.volley.Network
@@ -8,7 +8,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
 
-internal class ContentRepo(
+internal class ContentRepository(
     private val network: Network,
     private val code: String,
     private val catalogue: String?,

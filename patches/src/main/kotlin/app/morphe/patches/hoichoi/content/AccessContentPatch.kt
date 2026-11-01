@@ -29,22 +29,16 @@ private const val EXTENSION_CLASS =
 val accessContentPatch =
     bytecodePatch(
         name = "Access content",
-        description = "Enables access to content.",
+        description = "Access content",
         default = true,
     ) {
         compatibleWith(COMPATIBILITY_HOICHOI, COMPATIBILITY_HOICHOITV)
 
         dependsOn(
             sharedExtensionPatch,
-            obfuscateExtensionClassPatch(
-                Collections.toString() to EmptyListFingerprint,
-                Iterables.toString() to CollectionSizeOrDefaultFingerprint,
-                MutableCollections.toString() to ConvertToListIfNotCollectionFingerprint,
-            ),
             obfuscateExtensionFieldReferencePatch(
-                MediaType.toString() to ("Companion" to MediaTypeCompanionFieldAccessFingerprint),
-                ResponseBody.toString() to
-                    ("Companion" to ResponseBodyCompanionFieldAccessFingerprint),
+                MediaType.toString() to "Companion" to MediaTypeCompanionFieldAccessFingerprint,
+                ResponseBody.toString() to "Companion" to ResponseBodyCompanionFieldAccessFingerprint,
             ),
         )
 

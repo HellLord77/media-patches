@@ -42,7 +42,7 @@ private fun getRefreshToken(
             Utils.showToastShort("refreshToken: $refreshToken")
 
             setRefreshToken(refreshToken)
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             Logger.printException({ "authToken failure" }, e)
         }
     }

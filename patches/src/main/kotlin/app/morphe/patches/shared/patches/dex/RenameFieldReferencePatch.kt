@@ -66,23 +66,23 @@ fun obfuscateExtensionFieldReferencePatch(fieldReferenceMap: Map<String, Map<Str
         }
     }
 
-fun obfuscateExtensionFieldReferencePatch(vararg fieldReferences: Pair<String, Pair<String, Fingerprint>>) =
+fun obfuscateExtensionFieldReferencePatch(vararg fieldReferences: Pair<Pair<String, String>, Fingerprint>) =
     obfuscateExtensionFieldReferencePatch(
-        fieldReferences.associate { (classDescriptor, fieldReference) ->
-            (
-                classDescriptor to
-                    mapOf(
-                        fieldReference.first to
-                            {
-                                fieldReference.second
-                                    .matchSingle()
-                                    .instructionMatches
-                                    .first()
-                                    .instruction
-                                    .getReference<FieldReference>()!!
-                                    .name
-                            },
-                    )
-            )
-        },
+        fieldReferences
+            .groupBy({ it.first.first }, {
+                it.first.second to it.second
+            })
+            .mapValues { (_, pairs) ->
+                pairs.associate { (inner, fingerprint) ->
+                    inner to {
+                        fingerprint
+                            .matchSingle()
+                            .instructionMatches
+                            .first()
+                            .instruction
+                            .getReference<FieldReference>()!!
+                            .name
+                    }
+                }
+            },
     )

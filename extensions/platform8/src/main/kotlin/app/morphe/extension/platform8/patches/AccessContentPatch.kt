@@ -3,7 +3,7 @@
 package app.morphe.extension.platform8.patches
 
 import android.net.Uri
-import app.morphe.extension.platform8.repos.ContentRepo
+import app.morphe.extension.platform8.repositories.ContentRepository
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
 import com.android.volley.Network
@@ -54,14 +54,14 @@ fun performRequest(
 
     @Suppress("TooGenericExceptionCaught")
     try {
-        ContentRepo(self, chargeCode, catalogue, authorization).apply {
+        ContentRepository(self, chargeCode, catalogue, authorization).apply {
             Logger.printInfo { "assetData: $assetData" }
             Logger.printInfo { "cloudFront: $cloudFront" }
             Logger.printInfo { "seasonData: $seasonData" }
             response = getResponse()
         }
-    } catch (e: Exception) {
-        Logger.printException({ "contentRepo failure" }, e)
+    } catch (e: Throwable) {
+        Logger.printException({ "contentRepository failure" }, e)
     }
     return response
 }

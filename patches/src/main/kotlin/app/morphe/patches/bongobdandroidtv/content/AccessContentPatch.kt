@@ -17,22 +17,25 @@ import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableMethodReference
 
-private const val EXTENSION_CLASS = "Lapp/morphe/extension/bongo/patches/FreeContentPatch;"
+private const val EXTENSION_CLASS = "Lapp/morphe/extension/bongo/patches/AccessContentPatch;"
 
 @Suppress("unused")
-val freeContentPatch =
+val accessContentPatch =
     bytecodePatch(
-        name = "Free content",
+        name = "Access content",
+        description = "Access content",
         default = true,
     ) {
         compatibleWith(COMPATIBILITY_BONGOANDROIDTV)
 
         dependsOn(
             sharedExtensionPatch,
-            obfuscateExtensionClassPatch(Response.toString() to RequestFingerprint),
+            obfuscateExtensionClassPatch(
+                Response.toString() to RequestFingerprint,
+            ),
             obfuscateExtensionMethodReferencePatch(
-                Request.toString() to ("header" to HeaderFingerprint),
-                Response.toString() to ("request" to RequestFingerprint),
+                Request.toString() to "header" to HeaderFingerprint,
+                Response.toString() to "request" to RequestFingerprint,
             ),
         )
 

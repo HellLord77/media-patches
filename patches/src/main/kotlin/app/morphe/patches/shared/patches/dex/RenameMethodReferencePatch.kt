@@ -66,19 +66,15 @@ fun obfuscateExtensionMethodReferencePatch(methodReferenceMap: Map<String, Map<S
         }
     }
 
-fun obfuscateExtensionMethodReferencePatch(vararg methodReferences: Pair<String, Pair<String, Fingerprint>>) =
+fun obfuscateExtensionMethodReferencePatch(vararg methodReferences: Pair<Pair<String, String>, Fingerprint>) =
     obfuscateExtensionMethodReferencePatch(
-        methodReferences.associate { (classDescriptor, methodReference) ->
-            (
-                classDescriptor to
-                    mapOf(
-                        methodReference.first to
-                            {
-                                methodReference.second
-                                    .matchSingle()
-                                    .originalMethod.name
-                            },
-                    )
-            )
-        },
+        methodReferences
+            .groupBy({ it.first.first }, {
+                it.first.second to it.second
+            })
+            .mapValues { (_, pairs) ->
+                pairs.associate { (inner, fingerprint) ->
+                    inner to { fingerprint.matchSingle().originalMethod.name }
+                }
+            },
     )

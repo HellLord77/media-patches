@@ -1,4 +1,4 @@
-package app.morphe.extension.hoichoi.repos
+package app.morphe.extension.hoichoi.repositories
 
 import android.net.Uri
 import app.morphe.extension.shared.Logger
@@ -15,7 +15,7 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.util.Random
 
-internal class ContentRepo(
+internal class ContentRepository(
     private val chain: Interceptor.Chain,
     private val contentId: String,
     private val action: String?,
