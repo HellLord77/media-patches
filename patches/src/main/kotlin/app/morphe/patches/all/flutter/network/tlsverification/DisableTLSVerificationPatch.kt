@@ -39,7 +39,7 @@ fun disableTLSVerificationPatch(architecturesProvider: () -> List<CpuArchitectur
                         CpuArchitecture.ARM64_V8A -> {
                             // mov w0, #0
                             // ret
-                            "F? 0F 1C F8 F? 5? 01 A9 F? 5? 02 A9 F? ?? 03 A9 ?? ?? ?? ?? 68 1A 40 F9" asPatternTo """
+"F? 0F 1C F8 F? 5? 01 A9 F? 5? 02 A9 F? ?? 03 A9 ?? ?? ?? ?? 68 1A 40 F9" asPatternTo """
                                 00 00 80 52
                                 C0 03 5F D6
                             """ inFile lib
@@ -54,7 +54,7 @@ fun disableTLSVerificationPatch(architecturesProvider: () -> List<CpuArchitectur
 
                             // mov w0, #1
                             // ret
-                            "FF ?3 01 D1 F? ?? 01 A9 ?? ?? ?? 94 ?? ?? ?? 52 48 00 00 39 1A 50 40 F9 DA 02 00 B4 48 03 40 F9" asPatternTo """
+"FF ?3 01 D1 F? ?? 01 A9 ?? ?? ?? 94 ?? ?? ?? 52 48 00 00 39 1A 50 40 F9 DA 02 00 B4 48 03 40 F9" asPatternTo """
                                 20 00 80 52
                                 C0 03 5F D6
                             """ inFile lib
@@ -63,7 +63,7 @@ fun disableTLSVerificationPatch(architecturesProvider: () -> List<CpuArchitectur
                         CpuArchitecture.X86 -> {
                             // xor eax, eax
                             // ret
-                            "55 89 E5 53 57 56 83 E4 F0 83 EC 20 E8 00 00 00 00 5B 81 C3 2B 79 66 00 8B 7D 08 8B 17 8B 42 18 8B 80 88 01" asPatternTo """
+"55 89 E5 53 57 56 83 E4 F0 83 EC 20 E8 00 00 00 00 5B 81 C3 2B 79 66 00 8B 7D 08 8B 17 8B 42 18 8B 80 88 01" asPatternTo """
                                 31 C0
                                 C3
                             """ inFile lib
@@ -72,7 +72,7 @@ fun disableTLSVerificationPatch(architecturesProvider: () -> List<CpuArchitectur
                         CpuArchitecture.X86_64 -> {
                             // xor eax, eax
                             // ret
-                            "55 41 57 41 56 41 55 41 54 53 50 49 89 F? 4? 8B ?? 4? 8B 4? 30 4C 8B ?? ?? 0? 00 00 4D 85 ?? 74 1? 4D 8B" asPatternTo """
+"55 41 57 41 56 41 55 41 54 53 50 49 89 F? 4? 8B ?? 4? 8B 4? 30 4C 8B ?? ?? 0? 00 00 4D 85 ?? 74 1? 4D 8B" asPatternTo """
                                 31 C0
                                 C3
                             """ inFile lib
