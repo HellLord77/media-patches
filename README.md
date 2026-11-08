@@ -15,15 +15,33 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.5](https://github.com/HellLord77/media-patches/releases/tag/v1.3.5)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;52 patches total
+> **[v1.3.6-dev.1](https://github.com/HellLord77/media-patches/releases/tag/v1.3.6-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;56 patches total
+<details open>
+<summary>📦 Addatimes&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 5849 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Access content](#access-content) | Enables access to content. |  |
+| [Anonymous user](#anonymous-user) | Log in as anonymous user. |  |
+| [Default source](#default-source) | Use default media source for player. |  |
+| [Play button](#play-button) | Change the play button label. |  |
+
+</details>
+
 <details open>
 <summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 6.11.2 | 6.11.1 | 6.10.3 | 6.10.2 | 6.10.0 | 6.9.2 | 6.9.1 | 6.9.0 | 6.8.9 | 6.8.8 | 6.8.6 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 6.11.3 | 6.11.2 | 6.11.1 | 6.10.3 | 6.10.2 | 6.10.0 | 6.9.2 | 6.9.1 | 6.9.0 | 6.8.9 | 6.8.8 | 6.8.6 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|

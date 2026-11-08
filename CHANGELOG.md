@@ -1,3 +1,9 @@
+## [1.3.6-dev.1](https://github.com/HellLord77/media-patches/compare/v1.3.5...v1.3.6-dev.1) (2026-11-08)
+
+### 🚀 Updated App Support
+
+* Added newer bongo version ([853f780](https://github.com/HellLord77/media-patches/commit/853f7803c403a14d8d5ceaf503e2aac0938f81ab))
+
 ## [1.3.5](https://github.com/HellLord77/media-patches/compare/v1.3.4...v1.3.5) (2026-11-01)
 
 ### 🚀 Updated App Support
