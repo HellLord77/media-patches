@@ -3,6 +3,7 @@ package app.morphe.patches.addatimes.video
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.addatimes.shared.Constants.COMPATIBILITY_ADDATIMES
+import app.morphe.patches.addatimes.shared.Constants.COMPATIBILITY_ADDATIMESTV
 import app.morphe.patches.shared.morphe.androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import app.morphe.util.matchSingle
 import com.android.tools.smali.dexlib2.Opcode
@@ -16,16 +17,16 @@ import com.android.tools.smali.dexlib2.immutable.reference.ImmutableTypeReferenc
 val defaultSourcePatch =
     bytecodePatch(
         name = "Default source",
-        description = "Use default media source for player.",
+        description = "Use default media source for video player.",
         default = true,
     ) {
-        compatibleWith(COMPATIBILITY_ADDATIMES)
+        compatibleWith(COMPATIBILITY_ADDATIMES, COMPATIBILITY_ADDATIMESTV)
 
         execute {
-            InvokeFingerprint.matchSingle().apply {
-                print("instructions: $instructionMatches")
+            SetDataToPlayerFingerprint.matchSingle().apply {
                 val newInstanceMatch = instructionMatches[0]
-                val newInstanceInstruction = newInstanceMatch.getInstruction<OneRegisterInstruction>()
+                val newInstanceInstruction =
+                    newInstanceMatch.getInstruction<OneRegisterInstruction>()
 
                 method.replaceInstruction(
                     newInstanceMatch.index,

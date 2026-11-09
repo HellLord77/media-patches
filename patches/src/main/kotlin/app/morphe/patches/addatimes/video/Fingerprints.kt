@@ -3,23 +3,16 @@ package app.morphe.patches.addatimes.video
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.newInstance
-import app.morphe.patcher.opcode
 import app.morphe.patches.shared.Type
 import app.morphe.patches.shared.morphe.androidx.media3.common.MediaItem
 import app.morphe.patches.shared.morphe.androidx.media3.datasource.DataSource
 import app.morphe.patches.shared.morphe.androidx.media3.exoplayer.dash.DashMediaSource
 import app.morphe.patches.shared.morphe.androidx.media3.exoplayer.drm.DrmSessionManagerProvider
-import app.morphe.patches.shared.morphe.java.lang.Object
-import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
-object InvokeFingerprint :
+object SetDataToPlayerFingerprint :
     Fingerprint(
-        definingClass = "Lcom/addatimes/addatimes/ui/activity/",
-        name = "invoke",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = Object.toString(),
-        parameters = listOf(Object.toString()),
+        definingClass = "Lcom/addatimes/addatimes/ui/",
         filters =
             listOf(
                 newInstance(DashMediaSource.Factory.toString()),
