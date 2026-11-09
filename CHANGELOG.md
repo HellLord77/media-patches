@@ -1,3 +1,9 @@
+## [1.3.6-dev.2](https://github.com/HellLord77/media-patches/compare/v1.3.6-dev.1...v1.3.6-dev.2) (2026-11-09)
+
+### 🐛 Bug Fixes
+
+* **Bongo:** Bypass content access check in ui ([702846f](https://github.com/HellLord77/media-patches/commit/702846f64f7d1c2d8b272b09bddb54c7e9a86fa7))
+
 ## [1.3.6-dev.1](https://github.com/HellLord77/media-patches/compare/v1.3.5...v1.3.6-dev.1) (2026-11-08)
 
 ### 🚀 Updated App Support
