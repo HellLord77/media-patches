@@ -19,10 +19,12 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.3.6-dev.2](https://github.com/HellLord77/media-patches/releases/tag/v1.3.6-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;56 patches total
+> **[v1.4.0](https://github.com/HellLord77/media-patches/releases/tag/v1.4.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;58 patches total
 <details open>
-<summary>📦 Addatimes&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<summary>📦 Addatimes&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
 <br>
+
+**Package name:** `com.addatimes.Addatimes`
 
 **🎯 Supported versions:**
 
@@ -32,8 +34,10 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Access content](#access-content) | Enables access to content. |  |
+| [Access content (TV)](#access-content-tv) | Enables access to content. |  |
 | [Anonymous user](#anonymous-user) | Log in as anonymous user. |  |
-| [Default source](#default-source) | Use default media source for player. |  |
+| [Anonymous user (TV)](#anonymous-user-tv) | Log in as anonymous user. |  |
+| [Default source](#default-source) | Use default media source for video player. |  |
 | [Play button](#play-button) | Change the play button label. |  |
 
 </details>
@@ -41,6 +45,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <details open>
 <summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
+
+**Package name:** `com.bongo.bongobd`
 
 **🎯 Supported versions:**
 
@@ -58,6 +64,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
+**Package name:** `com.bongo.bongobdandroidtv`
+
 **🎯 Supported versions:**
 
 | 1.17.2 | 1.17.1 | 1.16.9 | 1.16.7 | 1.16.5 |
@@ -73,6 +81,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <details open>
 <summary>📦 Hoichoi&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
 <br>
+
+**Package name:** `com.viewlift.hoichoi`
 
 **🎯 Supported versions:**
 
@@ -93,6 +103,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 Platform8&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
+**Package name:** `com.digivive.platform8`
+
 **🎯 Supported versions:**
 
 | 9.66.23 |
@@ -109,6 +121,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <details open>
 <summary>📦 Platform8&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
+
+**Package name:** `digivive.platform8.androidtv`
 
 **🎯 Supported versions:**
 
@@ -127,6 +141,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 Shadhin&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
+**Package name:** `com.gm.shadhin`
+
 **🎯 Supported versions:**
 
 | 4.4.5 | 4.4.4 | 4.4.2 | 4.4.1 | 4.3.9 | 4.3.7 | 4.3.5 | 4.3.4 |
@@ -142,6 +158,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <details open>
 <summary>📦 Klikk&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
+
+**Package name:** `com.angel.klikk`
 
 **🎯 Supported versions:**
 
@@ -161,6 +179,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 Chorki&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
 
+**Package name:** `com.prothomalo`
+
 **🎯 Supported versions:**
 
 | 2.4.3 |
@@ -179,6 +199,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 Chorki TV&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
+**Package name:** `com.prothomalo.chorki`
+
 **🎯 Supported versions:**
 
 | 2.0.90 | 2.0.88 |
@@ -196,6 +218,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 Kabbik&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
+**Package name:** `com.kabbik.app`
+
 **🎯 Supported versions:**
 
 | 🧪&nbsp;1.8.2 | 🧪&nbsp;1.7.12 |
@@ -211,6 +235,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <details open>
 <summary>📦 Klikk&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
+
+**Package name:** `com.angel.klikk.tv`
 
 **🎯 Supported versions:**
 
@@ -230,6 +256,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 IScreen Tv&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
 <br>
 
+**Package name:** `com.rockstreamer.iscreentv`
+
 **🎯 Supported versions:**
 
 | 4.4.4 | 4.4.1 | 4.3.8 | 4.2.9 | 4.2.0 | 4.1.32 |
@@ -248,6 +276,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 DeeptoPlay&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
+**Package name:** `com.gotipath.deeptotv`
+
 **🎯 Supported versions:**
 
 | 2.2.10 |
@@ -263,6 +293,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <details open>
 <summary>📦 DeeptoTV&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
+
+**Package name:** `com.gotipath.deeptotvapp`
 
 **🎯 Supported versions:**
 
@@ -280,6 +312,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <summary>📦 IScreen&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
+**Package name:** `com.rockstreamer.iscreen`
+
 **🎯 Supported versions:**
 
 | 2.2.51 | 2.2.50 | 2.2.41 | 2.2.31 | 2.2.15 | 2.2.7 |
@@ -296,6 +330,8 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 <details open>
 <summary>📦 Toffee&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
+
+**Package name:** `com.banglalink.toffee`
 
 **🎯 Supported versions:**
 
