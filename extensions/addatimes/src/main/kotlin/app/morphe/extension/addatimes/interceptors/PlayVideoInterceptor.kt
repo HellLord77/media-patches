@@ -44,7 +44,7 @@ class PlayVideoInterceptor : Interceptor {
         try {
             ContentRepository(chain, id, playVideo).apply {
                 Logger.printInfo { "movieDetails: $movieDetails" }
-                Logger.printInfo { "relatedMovieDetails: $relatedMovieDetails" }
+                Logger.printInfo { "downloadVideoFile: $downloadVideoFile" }
                 response = getResponse(response)
             }
         } catch (e: Throwable) {
