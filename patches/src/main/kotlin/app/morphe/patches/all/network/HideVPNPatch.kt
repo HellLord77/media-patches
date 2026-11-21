@@ -16,7 +16,7 @@ private const val EXTENSION_CLASS = "Lapp/morphe/extension/network/patches/HideV
 val hideVPNPatch =
     bytecodePatch(
         name = "Hide VPN",
-        description = "Hides active VPN.",
+        description = "Hides device VPN status.",
         default = false,
     ) {
         extendWith("extensions/network.mpe")

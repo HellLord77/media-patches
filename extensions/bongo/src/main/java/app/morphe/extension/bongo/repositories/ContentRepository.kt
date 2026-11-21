@@ -116,7 +116,7 @@ internal class ContentRepository(
             }
 
         @Throws(JSONException::class)
-        fun inflectJSON(node: Any): Any =
+        private fun inflectJSON(node: Any): Any =
             when (node) {
                 is JSONObject -> {
                     JSONObject().apply {

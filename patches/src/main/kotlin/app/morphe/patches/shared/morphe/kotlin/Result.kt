@@ -8,4 +8,8 @@ object Result {
     object Companion {
         override fun toString(): String = Result.Companion::class.java.descriptorString()
     }
+
+    object Failure {
+        override fun toString(): String = $$"Lkotlin/Result$Failure;"
+    }
 }

@@ -31,11 +31,11 @@ val accessContentPatch =
         dependsOn(
             sharedExtensionPatch,
             obfuscateExtensionClassPatch(
-                Response.toString() to RequestFingerprint,
+                Response.toString() to ResponseRequestFingerprint,
             ),
             obfuscateExtensionMethodReferencePatch(
-                Request.toString() to "header" to HeaderFingerprint,
-                Response.toString() to "request" to RequestFingerprint,
+                Request.toString() to "header" to RequestHeaderFingerprint,
+                Response.toString() to "request" to ResponseRequestFingerprint,
             ),
         )
 

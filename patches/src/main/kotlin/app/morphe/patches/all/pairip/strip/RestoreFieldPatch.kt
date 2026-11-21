@@ -4,11 +4,14 @@ import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.Companion.toMutable
-import app.morphe.patches.all.pairip.shared.patches.application.application.attachBaseContextPatch
-import app.morphe.patches.all.pairip.shared.patches.vmRunner.classConstructorPatch
-import app.morphe.patches.all.pairip.shared.patches.vmRunner.invokePatch
 import app.morphe.patches.shared.Type
+import app.morphe.patches.shared.morphe.com.pairip.StartupLauncher
+import app.morphe.patches.shared.morphe.com.pairip.VMRunner
+import app.morphe.patches.shared.morphe.com.pairip.application.Application
+import app.morphe.patches.shared.morphe.java.lang.reflect.Method
 import app.morphe.util.matchAllMethodIndicesForEach
+import app.morphe.util.matchSingle
+import app.morphe.util.returnEarly
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction35c
@@ -34,15 +37,23 @@ private data class Translation(
 
 internal val restoreFieldPatch =
     bytecodePatch {
-        dependsOn(
-            attachBaseContextPatch,
-            classConstructorPatch,
-            invokePatch,
-        )
-
         extendWith("extensions/pairip.mpe")
 
         execute {
+            Application.AttachBaseContextFingerprint.matchSingle().apply {
+                classDef.methods.remove(originalMethod)
+            }
+
+            VMRunner.ClassConstructorFingerprint
+                .matchSingle()
+                .method
+                .returnEarly()
+
+            VMRunner.InvokeFingerprint
+                .matchSingle()
+                .method
+                .returnEarly(null)
+
             val dictionaryPath =
                 "/pairip/${packageMetadata.packageName}/${packageMetadata.versionCode}.json"
             val stream = object {}.javaClass.getResourceAsStream(dictionaryPath)!!.bufferedReader()
@@ -65,7 +76,7 @@ internal val restoreFieldPatch =
             }
             restoreInstructions.add(ImmutableInstruction10x(Opcode.RETURN_VOID))
 
-            val startupLauncher = mutableClassDefBy("Lcom/pairip/StartupLauncher;")
+            val startupLauncher = mutableClassDefBy(StartupLauncher.toString())
             val restoreFields =
                 ImmutableMethod(
                     startupLauncher.toString(),
@@ -84,7 +95,7 @@ internal val restoreFieldPatch =
                 )
             startupLauncher.methods.add(restoreFields.toMutable())
 
-            val application = mutableClassDefBy("Lcom/pairip/application/Application;")
+            val application = mutableClassDefBy(Application.toString())
             InvokeMethodCallFingerprint.matchAllMethodIndicesForEach {
                 val constructor =
                     ImmutableMethod(
@@ -155,7 +166,7 @@ private fun restoreMethod(
             EXTENSION_CLASS,
             "get",
             listOf(Type.STRING),
-            Type.METHOD,
+            Method.toString(),
         ),
     ),
     ImmutableInstruction11x(
@@ -168,7 +179,7 @@ private fun restoreMethod(
         ImmutableFieldReference(
             definingClass,
             fieldName,
-            Type.METHOD,
+            Method.toString(),
         ),
     ),
 )

@@ -47,7 +47,7 @@ fun renameClassPatch(
     }
 }
 
-fun obfuscateExtensionClassBlockPatch(classMap: Map<String, BytecodePatchContext.() -> String>) =
+fun obfuscateExtensionClassPatch(classMap: Map<String, BytecodePatchContext.() -> String>) =
     bytecodePatch {
         val lazyClassMap = mutableMapOf<String, String>()
 
@@ -61,7 +61,7 @@ fun obfuscateExtensionClassBlockPatch(classMap: Map<String, BytecodePatchContext
     }
 
 fun obfuscateExtensionClassPatch(vararg classes: Pair<String, Fingerprint>) =
-    obfuscateExtensionClassBlockPatch(
+    obfuscateExtensionClassPatch(
         classes.associate { (classDescriptor, fingerprint) ->
             classDescriptor to { fingerprint.matchSingle().originalClassDef.type }
         },

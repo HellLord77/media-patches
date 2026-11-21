@@ -1,14 +1,11 @@
 package app.morphe.patches.platform8.extension.hooks
 
 import app.morphe.patches.all.misc.extension.activityOnCreateExtensionHook
+import app.morphe.patches.platform8.shared.morphe.com.digivive.nexgtv.activities.SplashActivity
+import app.morphe.patches.platform8.shared.morphe.com.digivive.nexgtv.application.NexgTvApplication
 
 internal val platform8ActivityOnCreateHook =
-    activityOnCreateExtensionHook(
-        activityClassType = "Lcom/digivive/nexgtv/activities/SplashActivity;",
-        targetBundleMethod = true,
-    )
+    activityOnCreateExtensionHook(SplashActivity.toString(), true)
 
 internal val platform8ApplicationOnCreateHook =
-    activityOnCreateExtensionHook(
-        activityClassType = "Lcom/digivive/nexgtv/application/NexgTvApplication;",
-    )
+    activityOnCreateExtensionHook(NexgTvApplication.toString(), false)
