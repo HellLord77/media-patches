@@ -19,7 +19,7 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.5.1-dev.1](https://github.com/HellLord77/media-patches/releases/tag/v1.5.1-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;59 patches total
+> **[v1.6.0-dev.1](https://github.com/HellLord77/media-patches/releases/tag/v1.6.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;64 patches total
 <details open>
 <summary>📦 Addatimes&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
 <br>
@@ -43,7 +43,7 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 </details>
 
 <details open>
-<summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<summary>📦 Bongo&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
 **Package name:** `com.bongo.bongobd`
@@ -57,6 +57,7 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 |----------|----------------|-----------|
 | [Access content](#access-content) | Enables access to content. |  |
 | [Disable update](#disable-update) | Disables forced update. |  |
+| [Free content](#free-content) | Marks content as free. |  |
 
 </details>
 
@@ -75,6 +76,26 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 |----------|----------------|-----------|
 | [Access content](#access-content) | Enables access to content. |  |
 | [Disable update](#disable-update) | Disables forced update. |  |
+
+</details>
+
+<details open>
+<summary>📦 EPIC ON&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<br>
+
+**Package name:** `com.epicchannel.epicon`
+
+**🎯 Supported versions:**
+
+| 4.0.24 | 4.0.22 |
+| :---: | :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Access content](#access-content) | Enables access to content. |  |
+| [Bypass PairIP](#bypass-pairip) | Bypasses PairIP checks. |  |
+| [Free content](#free-content) | Marks content as free. |  |
+| [Hide root](#hide-root) | Hides device root status. |  |
 
 </details>
 
@@ -188,7 +209,7 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 | [Anonymous user](#anonymous-user) | Log in as subscribed anonymous user. |  |
 | [Bypass device check](#bypass-device-check) | Force device check to succeed. |  |
 | [Free content](#free-content) | Marks content as free. |  |
-| [Hide VPN](#hide-vpn) | Hides active VPN. |  |
+| [Hide VPN](#hide-vpn) | Hides device VPN status. |  |
 
 </details>
 
@@ -357,7 +378,7 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Hide VPN](#hide-vpn) | Hides active VPN. |  |
+| [Hide VPN](#hide-vpn) | Hides device VPN status. |  |
 | [Splash ad](#splash-ad) | Conceal splash ad. |  |
 
 </details>
@@ -370,7 +391,7 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 |----------|----------------|-----------|
 | [Bypass PairIP license check](#bypass-pairip-license-check) | Bypasses Play Integrity API (pairip) client-side license check. |  |
 | [Disable Flutter TLS verification](#disable-flutter-tls-verification) | Disables Flutter TLS verification, allowing to inspect traffic via a proxy. | • armeabi-v7a<br>• arm64-v8a<br>• x86<br>• x86_64 |
-| [Hide VPN](#hide-vpn) | Hides active VPN. |  |
+| [Hide VPN](#hide-vpn) | Hides device VPN status. |  |
 | [Show app icon](#show-app-icon) | Shows the app icon in the Android launcher. | • Show in phone launcher<br>• Show in TV launcher |
 | [Strip PairIP checks](#strip-pairip-checks) | Strips Play Integrity API (pairip) client-side checks. |  |
 

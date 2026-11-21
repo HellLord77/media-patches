@@ -1,3 +1,9 @@
+## [1.6.0-dev.1](https://github.com/HellLord77/media-patches/compare/v1.5.1-dev.1...v1.6.0-dev.1) (2026-11-21)
+
+### ✨ New Features
+
+* **EpicOn:** Added access content patch ([b90dd05](https://github.com/HellLord77/media-patches/commit/b90dd05b481c68a6837db9021fac11bcf0a040b0))
+
 ## [1.5.1-dev.1](https://github.com/HellLord77/media-patches/compare/v1.5.0...v1.5.1-dev.1) (2026-11-13)
 
 ### 🐛 Bug Fixes
