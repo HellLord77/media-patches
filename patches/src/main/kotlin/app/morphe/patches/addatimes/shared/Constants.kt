@@ -16,7 +16,7 @@ object Constants {
             targets = listOf(AppTarget(version = "5849", versionCode = 51519, minSdk = 24)),
         )
 
-    val COMPATIBILITY_ADDATIMESTV =
+    val COMPATIBILITY_ADDATIMES_TV =
         Compatibility(
             name = "AddatimesTV",
             packageName = "com.addatimes.Addatimes",

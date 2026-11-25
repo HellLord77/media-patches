@@ -19,7 +19,7 @@ private fun intercept(
     (
         response.code != HttpURLConnection.HTTP_OK ||
             runCatching {
-                !(JSONObject(response.peekBody(1024).string())["success"] as Boolean)
+                !(JSONObject(response.peekBody(1024).string()).getBoolean("success"))
             }.getOrDefault(false)
     )
 

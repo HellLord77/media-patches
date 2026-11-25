@@ -7,7 +7,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
-import org.json.JSONArray
 import org.json.JSONObject
 import org.w3c.dom.Node
 import java.net.HttpURLConnection
@@ -24,13 +23,12 @@ internal class ContentRepository(
     }
 
     private val relatedMovieDetails: JSONObject by lazy {
-        val related = movieDetails["related"] as JSONArray
+        val related = movieDetails.getJSONArray("related")
         for (relatedMovie in related.objects()) {
-            val relatedMovieDetails = getMovieDetails(relatedMovie["id"].toString())
-            val relatedOfRelated = relatedMovieDetails["related"] as JSONArray
+            val relatedMovieDetails = getMovieDetails(relatedMovie.getInt("id").toString())
+            val relatedOfRelated = relatedMovieDetails.getJSONArray("related")
             for (relatedMovieOfRelated in relatedOfRelated.objects()) {
-                if (id == relatedMovieOfRelated["id"].toString()) {
-                    requireNotNull(relatedMovieOfRelated["download_video_file"])
+                if (id == relatedMovieOfRelated.getInt("id").toString()) {
                     return@lazy relatedMovieOfRelated
                 }
             }
@@ -39,7 +37,7 @@ internal class ContentRepository(
     }
 
     private val listBucketKey: Node by lazy {
-        val androidVideoFile = movieDetails["android_video_file"] as String
+        val androidVideoFile = movieDetails.getString("android_video_file")
         val sha1 =
             V3_MPD_FILE_PATTERN
                 .find(URI(androidVideoFile).path)!!
@@ -71,8 +69,8 @@ internal class ContentRepository(
     }
 
     internal val downloadVideoFile: String by lazy {
-        if (movieDetails["category_slug"] == "movie") {
-            relatedMovieDetails["download_video_file"] as String
+        if (movieDetails.getString("category_slug") == "movies") {
+            relatedMovieDetails.getString("download_video_file")
         } else {
             "https://cdn6.addatimes.com/${listBucketKey.textContent}"
         }

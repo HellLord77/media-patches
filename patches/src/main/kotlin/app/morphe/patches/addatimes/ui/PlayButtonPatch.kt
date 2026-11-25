@@ -2,7 +2,7 @@ package app.morphe.patches.addatimes.ui
 
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.addatimes.shared.Constants.COMPATIBILITY_ADDATIMES
-import app.morphe.patches.addatimes.shared.Constants.COMPATIBILITY_ADDATIMESTV
+import app.morphe.patches.addatimes.shared.Constants.COMPATIBILITY_ADDATIMES_TV
 import app.morphe.patches.addatimes.shared.morphe.com.addatimes.addatimes.data.model.get.ContentUserData
 import app.morphe.util.matchSingle
 import app.morphe.util.returnEarly
@@ -14,7 +14,7 @@ val playButtonPatch =
         description = "Change the play button label.",
         default = true,
     ) {
-        compatibleWith(COMPATIBILITY_ADDATIMES, COMPATIBILITY_ADDATIMESTV)
+        compatibleWith(COMPATIBILITY_ADDATIMES, COMPATIBILITY_ADDATIMES_TV)
 
         execute {
             ContentUserData.GetPlayButtonLabelFingerprint
