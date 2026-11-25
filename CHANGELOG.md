@@ -1,3 +1,9 @@
+## [1.6.0-dev.2](https://github.com/HellLord77/media-patches/compare/v1.6.0-dev.1...v1.6.0-dev.2) (2026-11-25)
+
+### ✨ New Features
+
+* **EpicOn:** Added support for tv ([3d7f94f](https://github.com/HellLord77/media-patches/commit/3d7f94fe2679cfd4e35a85372cb49a555cb974a4))
+
 ## [1.6.0-dev.1](https://github.com/HellLord77/media-patches/compare/v1.5.1-dev.1...v1.6.0-dev.1) (2026-11-21)
 
 ### ✨ New Features

@@ -19,7 +19,7 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.6.0-dev.1](https://github.com/HellLord77/media-patches/releases/tag/v1.6.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;64 patches total
+> **[v1.6.0-dev.2](https://github.com/HellLord77/media-patches/releases/tag/v1.6.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;67 patches total
 <details open>
 <summary>📦 Addatimes&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
 <br>
@@ -80,7 +80,7 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 </details>
 
 <details open>
-<summary>📦 EPIC ON&nbsp;&nbsp;•&nbsp;&nbsp;4 patches</summary>
+<summary>📦 EPIC ON&nbsp;&nbsp;•&nbsp;&nbsp;7 patches</summary>
 <br>
 
 **Package name:** `com.epicchannel.epicon`
@@ -93,8 +93,11 @@ Click the button below, or manually add this repo url to Morphe Manager: https:/
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Access content](#access-content) | Enables access to content. |  |
+| [Access content (TV)](#access-content-tv) | Enables access to content. |  |
 | [Bypass PairIP](#bypass-pairip) | Bypasses PairIP checks. |  |
+| [Default source](#default-source) | Use default media source for video player. |  |
 | [Free content](#free-content) | Marks content as free. |  |
+| [Free content (TV)](#free-content-tv) | Marks content as free. |  |
 | [Hide root](#hide-root) | Hides device root status. |  |
 
 </details>
