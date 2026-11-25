@@ -18,7 +18,11 @@ import retrofit2.Response;
 @SuppressWarnings("unused")
 public class AccessContentPatch {
     @Nullable
-    public static Object showURL(@NotNull EpicOnApiService self, @NotNull PlayUrlInputData playUrlInputData, @NotNull Continuation<Response<ShowUrlResponse>> continuation) {
+    public static Object showURL(
+            @NotNull EpicOnApiService self,
+            @NotNull PlayUrlInputData playUrlInputData,
+            @NotNull Continuation<Response<ShowUrlResponse>> continuation
+    ) {
         var contentId = playUrlInputData.getContent_id();
         Utils.showToastShort(String.format("contentId: %s", contentId));
 
@@ -33,7 +37,38 @@ public class AccessContentPatch {
             @Override
             public void resumeWith(@NotNull Object result) {
                 if (!(result instanceof Result.Failure)) {
-                    result = getResponse(contentId, (Response<ShowUrlResponse>) result);
+                    result = getResponse(contentId, (Response<ShowUrlResponse>) result, ShowUrlResponse.class);
+                }
+                continuation.resumeWith(result);
+            }
+        });
+    }
+
+    @Nullable
+    public static Object show_url(
+            @NotNull com.epicchannel.epicon.apiService.EpicOnApiService self,
+            @NotNull com.epicchannel.epicon.model.videoURL.PlayUrlInputData playUrlInputData,
+            @NotNull Continuation<Response<com.epicchannel.epicon.model.show_url.ShowUrlResponse>> continuation
+    ) {
+        var contentId = playUrlInputData.getContent_id();
+        Utils.showToastShort(String.format("contentId: %s", contentId));
+
+        return self.show_url(playUrlInputData, new Continuation<>() {
+            @NotNull
+            @Override
+            public CoroutineContext getContext() {
+                return continuation.getContext();
+            }
+
+            @SuppressWarnings({"unchecked", "KotlinInternalInJava"})
+            @Override
+            public void resumeWith(@NotNull Object result) {
+                if (!(result instanceof Result.Failure)) {
+                    result = getResponse(
+                            contentId,
+                            (Response<com.epicchannel.epicon.model.show_url.ShowUrlResponse>) result,
+                            com.epicchannel.epicon.model.show_url.ShowUrlResponse.class
+                    );
                 }
                 continuation.resumeWith(result);
             }
@@ -41,18 +76,19 @@ public class AccessContentPatch {
     }
 
     @NotNull
-    private static Response<ShowUrlResponse> getResponse(@NotNull String contentId, @NotNull Response<ShowUrlResponse> response) {
+    private static <T> Response<T> getResponse(@NotNull String contentId, @NotNull Response<T> response, @NotNull Class<T> classOfT) {
         var finalResponse = response;
         Logger.printDebug(() -> String.format("response: %s", finalResponse));
 
-        if (response.rawResponse.isSuccessful()) {
+        //noinspection resource
+        if (response.raw().isSuccessful()) {
             try {
-                var showUrlResponse = response.body;
+                var showUrlResponse = response.body();
                 Logger.printDebug(() -> String.format("showUrlResponse: %s", showUrlResponse));
 
                 var it = new ContentRepository(contentId);
                 Logger.printInfo(() -> String.format("episode: %s", it.getEpisode$epicon()));
-                response = it.getResponse$epicon(showUrlResponse);
+                response = it.getResponse$epicon(showUrlResponse, classOfT);
             } catch (Throwable e) {
                 Logger.printException(() -> "contentRepository failure", e);
             }

@@ -1,7 +1,6 @@
 package app.morphe.extension.epicon.repositories
 
 import app.morphe.extension.shared.extension.org.json.objects
-import com.epicchannel.epicon.data.model.showURL.ShowUrlResponse
 import com.goebl.david.Webb
 import com.google.gson.Gson
 import okhttp3.HttpUrl
@@ -69,12 +68,20 @@ internal class ContentRepository(
                     put("userDuration", remove("user_duration"))
                     put("skip_start_time", remove("intro_start_time"))
                     put("skip_end_time", remove("intro_end_time"))
+
+                    val videoUrl = getString("video_url")
+                    if ("://" !in videoUrl) {
+                        put("video_url", "https://source.epicon.in/$videoUrl")
+                    }
                 }
             }
         }
     }
 
-    internal fun getResponse(showUrlResponse: ShowUrlResponse?): Retrofit2Response<ShowUrlResponse> {
+    internal fun <T> getResponse(
+        showUrlResponse: T?,
+        classOfT: Class<T>,
+    ): Retrofit2Response<T> {
         showUrlResponse?.also {
             val oldUrls =
                 JSONObject(GSON.toJson(it))
@@ -87,13 +94,25 @@ internal class ContentRepository(
                     url
                         .put("subtitles", optJSONArray("subtitles"))
                         .put("promo_url", optString("promo_url"))
+
+                    val videoUrl = optString("video_url")
+                    if (videoUrl.isNotEmpty()) {
+                        url.put("video_url", videoUrl)
+                    }
                 }
             }
         }
         val json = JSONObject().put("success", true).put("url", JSONArray(urls.values))
 
-        val body = GSON.fromJson(json.toString(), ShowUrlResponse::class.java)
-        return Retrofit2Response(RESPONSE, body, null)
+        val body = GSON.fromJson(json.toString(), classOfT)
+        return runCatching {
+            Retrofit2Response::class.java.getMethod("success", Any::class.java).let {
+                { body: T? ->
+                    @Suppress("UNCHECKED_CAST")
+                    it.invoke(null, body) as Retrofit2Response<T>
+                }
+            }
+        }.getOrDefault(::successResponse)(body)
     }
 
     private companion object {
@@ -102,30 +121,32 @@ internal class ContentRepository(
         private val GSON = Gson()
         private val WEBB = Webb.create()
 
-        private val RESPONSE =
-            OkHttp3Response
-                .Builder()
-                .apply {
-                    request =
+        fun <T> successResponse(body: T?) =
+            Retrofit2Response(
+                OkHttp3Response
+                    .Builder()
+                    .request(
                         Request
                             .Builder()
-                            .apply {
-                                url =
-                                    HttpUrl(
-                                        "http",
-                                        "",
-                                        "",
-                                        "localhost",
-                                        -1,
-                                        arrayListOf(),
-                                        null,
-                                        null,
-                                        "http://localhost/",
-                                    )
-                            }.build()
-                    protocol = Protocol.HTTP_1_1
-                    code = HttpURLConnection.HTTP_OK
-                    message = "OK"
-                }.build()
+                            .url(
+                                HttpUrl(
+                                    "http",
+                                    "",
+                                    "",
+                                    "localhost",
+                                    -1,
+                                    arrayListOf(),
+                                    null,
+                                    null,
+                                    "http://localhost/",
+                                ),
+                            ).build(),
+                    ).protocol(Protocol.HTTP_1_1)
+                    .code(HttpURLConnection.HTTP_OK)
+                    .message("OK")
+                    .build(),
+                body,
+                null,
+            )
     }
 }

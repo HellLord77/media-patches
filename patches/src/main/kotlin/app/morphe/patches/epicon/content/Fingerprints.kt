@@ -17,28 +17,35 @@ import app.morphe.patches.shared.morphe.kotlin.coroutines.Continuation
 import app.morphe.patches.shared.morphe.kotlin.coroutines.CoroutineContext
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
+import app.morphe.patches.epicon.shared.morphe.com.epicchannel.epicon.model.videoURL.PlayUrlInputData as PlayUrlInputDataTv
 
-object ShowURLMethodCallFingerprint :
-    Fingerprint(
-        filters =
-            listOf(
-                methodCall(
-                    definingClass = EpicOnApiService.toString(),
-                    name = "showURL",
-                    parameters = listOf(PlayUrlInputData.toString(), "Lkotlin/coroutines/"),
-                    returnType = Object.toString(),
-                    opcode = Opcode.INVOKE_INTERFACE,
-                ),
+object ShowURLMethodCallFingerprint : Fingerprint(
+    filters =
+        listOf(
+            methodCall(
+                definingClass = EpicOnApiService.toString(),
+                name = "showURL",
+                parameters = listOf(PlayUrlInputData.toString(), "Lkotlin/coroutines/"),
+                returnType = Object.toString(),
+                opcode = Opcode.INVOKE_INTERFACE,
             ),
-        custom = ::isNotExtension,
-    )
+        ),
+    custom = ::isNotExtension,
+)
 
 object ContinuationClassFingerprint : Fingerprint(
-    definingClass = "Lkotlin/coroutines/",
     name = "resumeWith",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.ABSTRACT),
     returnType = Type.void,
     parameters = listOf(Object.toString()),
+    custom = { _, classDef -> classDef.type != Continuation.toString() },
+)
+
+object ContinuationGetContextFingerprint : Fingerprint(
+    name = "getContext",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.ABSTRACT),
+    returnType = "L",
+    parameters = emptyList(),
     custom = { _, classDef -> classDef.type != Continuation.toString() },
 )
 
@@ -52,7 +59,6 @@ object CoroutineContextClassFingerprint : Fingerprint(
 )
 
 object ResultFailureClassFingerprint : Fingerprint(
-    definingClass = "Lkotlin/",
     name = "toString",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = String.toString(),
@@ -68,13 +74,12 @@ object RealResponseBodyClassFingerprint : Fingerprint(
     parameters = listOf(Object.toString(), Type.long, "Lokio/", Type.int),
 )
 
-object HttpUrlClassFingerprint :
-    Fingerprint(
-        definingClass = "Lokhttp3/",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = URI.toString(),
-        parameters = emptyList(),
-    )
+object HttpUrlClassFingerprint : Fingerprint(
+    definingClass = "Lokhttp3/",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = URI.toString(),
+    parameters = emptyList(),
+)
 
 object ProtocolClassFingerprint : Fingerprint(
     definingClass = "Lokhttp3/",
@@ -133,66 +138,61 @@ object RequestBuilderUrlFieldAccessFingerprint : Fingerprint(
         ),
 )
 
-object OkHttp3ResponseBuilderCodeFieldAccessFingerprint :
-    Fingerprint(
-        classFingerprint = OkHttp3ResponseBuilderBuildFingerprint,
-        filters =
-            listOf(
-                fieldAccess(
-                    definingClass = "this",
-                    type = Type.int,
-                    opcode = Opcode.IPUT,
-                ),
+object OkHttp3ResponseBuilderCodeFieldAccessFingerprint : Fingerprint(
+    classFingerprint = OkHttp3ResponseBuilderBuildFingerprint,
+    filters =
+        listOf(
+            fieldAccess(
+                definingClass = "this",
+                type = Type.int,
+                opcode = Opcode.IPUT,
             ),
-    )
+        ),
+)
 
-object OkHttp3ResponseBuilderMessageFieldAccessFingerprint :
-    Fingerprint(
-        classFingerprint = OkHttp3ResponseBuilderBuildFingerprint,
-        filters =
-            listOf(
-                fieldAccess(
-                    definingClass = "this",
-                    type = String.toString(),
-                    opcode = Opcode.IGET_OBJECT,
-                ),
+object OkHttp3ResponseBuilderMessageFieldAccessFingerprint : Fingerprint(
+    classFingerprint = OkHttp3ResponseBuilderBuildFingerprint,
+    filters =
+        listOf(
+            fieldAccess(
+                definingClass = "this",
+                type = String.toString(),
+                opcode = Opcode.IGET_OBJECT,
             ),
-    )
+        ),
+)
 
-object Retrofit2ResponseRawResponseFieldAccessFingerprint :
-    Fingerprint(
-        classFingerprint = Retrofit2ResponseConstructorFingerprint,
-        filters =
-            listOf(
-                fieldAccess(
-                    definingClass = "this",
-                    type = "Lokhttp3/",
-                    opcode = Opcode.IGET_OBJECT,
-                ),
+object Retrofit2ResponseRawResponseFieldAccessFingerprint : Fingerprint(
+    classFingerprint = Retrofit2ResponseConstructorFingerprint,
+    filters =
+        listOf(
+            fieldAccess(
+                definingClass = "this",
+                type = "Lokhttp3/",
+                opcode = Opcode.IGET_OBJECT,
             ),
-    )
+        ),
+)
 
-object Retrofit2ResponseBodyFieldAccessFingerprint :
-    Fingerprint(
-        classFingerprint = Retrofit2ResponseConstructorFingerprint,
-        filters =
-            listOf(
-                fieldAccess(
-                    definingClass = "this",
-                    type = Object.toString(),
-                    opcode = Opcode.IPUT_OBJECT,
-                ),
+object Retrofit2ResponseBodyFieldAccessFingerprint : Fingerprint(
+    classFingerprint = Retrofit2ResponseConstructorFingerprint,
+    filters =
+        listOf(
+            fieldAccess(
+                definingClass = "this",
+                type = Object.toString(),
+                opcode = Opcode.IPUT_OBJECT,
             ),
-    )
+        ),
+)
 
-object RequestBuilderBuildFingerprint :
-    Fingerprint(
-        definingClass = "Lokhttp3/",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = "Lokhttp3/",
-        parameters = emptyList(),
-        strings = listOf("url == null"),
-    )
+object RequestBuilderBuildFingerprint : Fingerprint(
+    definingClass = "Lokhttp3/",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Lokhttp3/",
+    parameters = emptyList(),
+    strings = listOf("url == null"),
+)
 
 object OkHttp3ResponseIsSuccessfulFingerprint : Fingerprint(
     classFingerprint = OkHttp3ResponseClassFingerprint,
@@ -201,18 +201,42 @@ object OkHttp3ResponseIsSuccessfulFingerprint : Fingerprint(
     parameters = emptyList(),
 )
 
-object OkHttp3ResponseBuilderBuildFingerprint :
-    Fingerprint(
-        definingClass = "Lokhttp3/",
-        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-        returnType = "Lokhttp3/",
-        parameters = emptyList(),
-        strings = listOf("request == null", "protocol == null", "message == null"),
-    )
+object OkHttp3ResponseBuilderBuildFingerprint : Fingerprint(
+    definingClass = "Lokhttp3/",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Lokhttp3/",
+    parameters = emptyList(),
+    strings = listOf("request == null", "protocol == null", "message == null"),
+)
 
 object Retrofit2ResponseConstructorFingerprint : Fingerprint(
     definingClass = "Lretrofit2/",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
     returnType = Type.void,
     parameters = listOf("Lokhttp3/", Object.toString(), "Lokhttp3/"),
+)
+
+@Suppress("ktlint:standard:class-naming")
+object Show_UrlMethodCallFingerprint : Fingerprint(
+    filters =
+        listOf(
+            methodCall(
+                parameters = listOf(PlayUrlInputDataTv.toString(), "L"),
+                returnType = Object.toString(),
+                opcode = Opcode.INVOKE_INTERFACE,
+            ),
+        ),
+    custom = ::isNotExtension,
+)
+
+@Suppress("ktlint:standard:class-naming")
+object Show_UrlFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.ABSTRACT),
+    returnType = Object.toString(),
+    parameters = listOf(PlayUrlInputDataTv.toString(), "L"),
+    custom = { method, _ ->
+        method.annotations
+            .flatMap { it.elements }
+            .any { it.value.toString().endsWith("/index/pages/show_url\"") }
+    },
 )

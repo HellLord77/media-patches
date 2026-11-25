@@ -4,7 +4,7 @@ dependencies {
 
     api(libs.okhttp) {
         version {
-            strictly("4.12.0")
+            strictly("4.+")
         }
     }
 }

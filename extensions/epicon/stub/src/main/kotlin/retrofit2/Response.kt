@@ -5,7 +5,12 @@ import okhttp3.internal.http.RealResponseBody
 
 @Suppress("unused")
 class Response<T>(
-    @JvmField val rawResponse: Response,
-    @JvmField val body: T?,
+    private val rawResponse: Response,
+    private val body: T?,
     private val errorBody: RealResponseBody?,
-)
+) {
+    fun raw(): Response = throw NotImplementedError()
+
+    @Suppress("RedundantNullableReturnType")
+    fun body(): T? = throw NotImplementedError()
+}
