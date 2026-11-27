@@ -15,4 +15,25 @@ object Request {
             returnType = String.toString(),
             parameters = listOf(String.toString()),
         )
+
+    object ToStringFingerprint : Fingerprint(
+        definingClass = Request.toString(),
+        name = "toString",
+        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+        returnType = String.toString(),
+        parameters = emptyList(),
+    )
+
+    object Builder {
+        override fun toString() = $$"Lokhttp3/Request$Builder;"
+
+        object BuildFingerprint :
+            Fingerprint(
+                definingClass = Builder.toString(),
+                name = "build",
+                accessFlags = listOf(AccessFlags.PUBLIC),
+                returnType = Request.toString(),
+                parameters = emptyList(),
+            )
+    }
 }

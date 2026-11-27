@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.5.0",
+  "version": "1.6.0-dev.2",
   "patches": [
     {
       "name": "Access content",
@@ -300,6 +300,63 @@
       "category": null,
       "dependencies": [
         "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.epicchannel.epicon",
+          "name": "EPIC ON",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#6F048C",
+          "signatures": [
+            "ee0d9ea1ab9d9225ae5b150c1dbed8827eaa2742f5c39b43717abf6041bcc17d"
+          ],
+          "targets": [
+            {
+              "version": "4.0.24",
+              "versionCodes": {
+                "ARM64_V8A": 229,
+                "ARMEABI_V7A": 229,
+                "X86_64": 229,
+                "X86": 229
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "4.0.22",
+              "versionCodes": {
+                "ARM64_V8A": 227,
+                "ARMEABI_V7A": 227,
+                "X86_64": 227,
+                "X86": 227
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Access content",
+      "description": "Enables access to content.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "BytecodePatch",
         "BytecodePatch"
       ],
       "compatiblePackages": [
@@ -561,6 +618,46 @@
               },
               "isExperimental": false,
               "minSdk": 23,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Access content (TV)",
+      "description": "Enables access to content.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.epicchannel.epicon",
+          "name": "EPIC ON",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#6F048C",
+          "signatures": [
+            "ee0d9ea1ab9d9225ae5b150c1dbed8827eaa2742f5c39b43717abf6041bcc17d"
+          ],
+          "targets": [
+            {
+              "version": "1.1.89",
+              "versionCodes": {
+                "ARM64_V8A": 21109,
+                "ARMEABI_V7A": 21109,
+                "X86_64": 21109,
+                "X86": 21109
+              },
+              "isExperimental": false,
+              "minSdk": 24,
               "description": null
             }
           ]
@@ -1082,6 +1179,78 @@
       ],
       "compatiblePackages": [
         {
+          "packageName": "com.epicchannel.epicon",
+          "name": "EPIC ON",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#6F048C",
+          "signatures": [
+            "ee0d9ea1ab9d9225ae5b150c1dbed8827eaa2742f5c39b43717abf6041bcc17d"
+          ],
+          "targets": [
+            {
+              "version": "4.0.24",
+              "versionCodes": {
+                "ARM64_V8A": 229,
+                "ARMEABI_V7A": 229,
+                "X86_64": 229,
+                "X86": 229
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "4.0.22",
+              "versionCodes": {
+                "ARM64_V8A": 227,
+                "ARMEABI_V7A": 227,
+                "X86_64": 227,
+                "X86": 227
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        },
+        {
+          "packageName": "com.epicchannel.epicon",
+          "name": "EPIC ON",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#6F048C",
+          "signatures": [
+            "ee0d9ea1ab9d9225ae5b150c1dbed8827eaa2742f5c39b43717abf6041bcc17d"
+          ],
+          "targets": [
+            {
+              "version": "1.1.89",
+              "versionCodes": {
+                "ARM64_V8A": 21109,
+                "ARMEABI_V7A": 21109,
+                "X86_64": 21109,
+                "X86": 21109
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Bypass PairIP",
+      "description": "Bypasses PairIP checks.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
           "packageName": "com.kabbik.app",
           "name": "Kabbik",
           "description": null,
@@ -1124,9 +1293,7 @@
       "description": "Bypasses Play Integrity API (pairip) client-side license check.",
       "default": false,
       "category": null,
-      "dependencies": [
-        "BytecodePatch"
-      ],
+      "dependencies": [],
       "compatiblePackages": null,
       "options": []
     },
@@ -1368,7 +1535,9 @@
       "description": "Use default media source for video player.",
       "default": true,
       "category": null,
-      "dependencies": [],
+      "dependencies": [
+        "BytecodePatch"
+      ],
       "compatiblePackages": [
         {
           "packageName": "com.addatimes.Addatimes",
@@ -1414,6 +1583,42 @@
               },
               "isExperimental": false,
               "minSdk": 23,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Default source",
+      "description": "Use default media source for video player.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.epicchannel.epicon",
+          "name": "EPIC ON",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#6F048C",
+          "signatures": [
+            "ee0d9ea1ab9d9225ae5b150c1dbed8827eaa2742f5c39b43717abf6041bcc17d"
+          ],
+          "targets": [
+            {
+              "version": "1.1.89",
+              "versionCodes": {
+                "ARM64_V8A": 21109,
+                "ARMEABI_V7A": 21109,
+                "X86_64": 21109,
+                "X86": 21109
+              },
+              "isExperimental": false,
+              "minSdk": 24,
               "description": null
             }
           ]
@@ -1929,6 +2134,172 @@
       "description": "Marks content as free.",
       "default": true,
       "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.bongo.bongobd",
+          "name": "Bongo",
+          "description": null,
+          "apkFileType": "XAPK",
+          "appIconColor": "#D92534",
+          "signatures": [
+            "29ccbd820d40b90e7ab5206b20bcafa538508f842d21890aca39df9ee5aec9c6"
+          ],
+          "targets": [
+            {
+              "version": "6.11.3",
+              "versionCodes": {
+                "ARM64_V8A": 210061103,
+                "ARMEABI_V7A": 210061103,
+                "X86_64": 210061103,
+                "X86": 210061103
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.11.2",
+              "versionCodes": {
+                "ARM64_V8A": 210061102,
+                "ARMEABI_V7A": 210061102,
+                "X86_64": 210061102,
+                "X86": 210061102
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.11.1",
+              "versionCodes": {
+                "ARM64_V8A": 210061101,
+                "ARMEABI_V7A": 210061101,
+                "X86_64": 210061101,
+                "X86": 210061101
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.10.3",
+              "versionCodes": {
+                "ARM64_V8A": 210061003,
+                "ARMEABI_V7A": 210061003,
+                "X86_64": 210061003,
+                "X86": 210061003
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.10.2",
+              "versionCodes": {
+                "ARM64_V8A": 210061002,
+                "ARMEABI_V7A": 210061002,
+                "X86_64": 210061002,
+                "X86": 210061002
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.10.0",
+              "versionCodes": {
+                "ARM64_V8A": 210061000,
+                "ARMEABI_V7A": 210061000,
+                "X86_64": 210061000,
+                "X86": 210061000
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.9.2",
+              "versionCodes": {
+                "ARM64_V8A": 210060902,
+                "ARMEABI_V7A": 210060902,
+                "X86_64": 210060902,
+                "X86": 210060902
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.9.1",
+              "versionCodes": {
+                "ARM64_V8A": 210060901,
+                "ARMEABI_V7A": 210060901,
+                "X86_64": 210060901,
+                "X86": 210060901
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.9.0",
+              "versionCodes": {
+                "ARM64_V8A": 210060900,
+                "ARMEABI_V7A": 210060900,
+                "X86_64": 210060900,
+                "X86": 210060900
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.8.9",
+              "versionCodes": {
+                "ARM64_V8A": 210060809,
+                "ARMEABI_V7A": 210060809,
+                "X86_64": 210060809,
+                "X86": 210060809
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.8.8",
+              "versionCodes": {
+                "ARM64_V8A": 210060808,
+                "ARMEABI_V7A": 210060808,
+                "X86_64": 210060808,
+                "X86": 210060808
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            },
+            {
+              "version": "6.8.6",
+              "versionCodes": {
+                "ARM64_V8A": 210060806,
+                "ARMEABI_V7A": 210060806,
+                "X86_64": 210060806,
+                "X86": 210060806
+              },
+              "isExperimental": false,
+              "minSdk": 21,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Free content",
+      "description": "Marks content as free.",
+      "default": true,
+      "category": null,
       "dependencies": [
         "RawResourcePatch",
         "RawResourcePatch",
@@ -2078,6 +2449,52 @@
                 "ARMEABI_V7A": 204,
                 "X86_64": 204,
                 "X86": 204
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Free content",
+      "description": "Marks content as free.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.epicchannel.epicon",
+          "name": "EPIC ON",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#6F048C",
+          "signatures": [
+            "ee0d9ea1ab9d9225ae5b150c1dbed8827eaa2742f5c39b43717abf6041bcc17d"
+          ],
+          "targets": [
+            {
+              "version": "4.0.24",
+              "versionCodes": {
+                "ARM64_V8A": 229,
+                "ARMEABI_V7A": 229,
+                "X86_64": 229,
+                "X86": 229
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "4.0.22",
+              "versionCodes": {
+                "ARM64_V8A": 227,
+                "ARMEABI_V7A": 227,
+                "X86_64": 227,
+                "X86": 227
               },
               "isExperimental": false,
               "minSdk": 24,
@@ -2691,8 +3108,42 @@
       "options": []
     },
     {
+      "name": "Free content (TV)",
+      "description": "Marks content as free.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.epicchannel.epicon",
+          "name": "EPIC ON",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#6F048C",
+          "signatures": [
+            "ee0d9ea1ab9d9225ae5b150c1dbed8827eaa2742f5c39b43717abf6041bcc17d"
+          ],
+          "targets": [
+            {
+              "version": "1.1.89",
+              "versionCodes": {
+                "ARM64_V8A": 21109,
+                "ARMEABI_V7A": 21109,
+                "X86_64": 21109,
+                "X86": 21109
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Hide VPN",
-      "description": "Hides active VPN.",
+      "description": "Hides device VPN status.",
       "default": false,
       "category": null,
       "dependencies": [],
@@ -2701,7 +3152,7 @@
     },
     {
       "name": "Hide VPN",
-      "description": "Hides active VPN.",
+      "description": "Hides device VPN status.",
       "default": true,
       "category": null,
       "dependencies": [
@@ -2821,7 +3272,7 @@
     },
     {
       "name": "Hide VPN",
-      "description": "Hides active VPN.",
+      "description": "Hides device VPN status.",
       "default": true,
       "category": null,
       "dependencies": [
@@ -3112,6 +3563,52 @@
               },
               "isExperimental": false,
               "minSdk": 23,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide root",
+      "description": "Hides device root status.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.epicchannel.epicon",
+          "name": "EPIC ON",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#6F048C",
+          "signatures": [
+            "ee0d9ea1ab9d9225ae5b150c1dbed8827eaa2742f5c39b43717abf6041bcc17d"
+          ],
+          "targets": [
+            {
+              "version": "4.0.24",
+              "versionCodes": {
+                "ARM64_V8A": 229,
+                "ARMEABI_V7A": 229,
+                "X86_64": 229,
+                "X86": 229
+              },
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "4.0.22",
+              "versionCodes": {
+                "ARM64_V8A": 227,
+                "ARMEABI_V7A": 227,
+                "X86_64": 227,
+                "X86": 227
+              },
+              "isExperimental": false,
+              "minSdk": 24,
               "description": null
             }
           ]

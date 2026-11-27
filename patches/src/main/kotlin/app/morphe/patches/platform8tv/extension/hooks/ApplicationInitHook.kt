@@ -5,7 +5,7 @@ import app.morphe.patches.platform8tv.shared.morphe.digivive.platform8.androidtv
 import app.morphe.patches.platform8tv.shared.morphe.digivive.platform8.androidtv.home.Splash
 
 internal val platform8tvActivityOnCreateHook =
-    activityOnCreateExtensionHook(activityClassType = Splash.toString(), targetBundleMethod = true)
+    activityOnCreateExtensionHook(Splash.toString(), true)
 
 internal val platform8tvApplicationOnCreateHook =
-    activityOnCreateExtensionHook(activityClassType = NexgTvApplication.toString())
+    activityOnCreateExtensionHook(NexgTvApplication.toString(), false)

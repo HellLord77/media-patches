@@ -1,7 +1,9 @@
 package app.morphe.patches.all.pairip.bypass
 
 import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.patches.all.pairip.shared.patches.licensecheck.licenseClient.checkLicensePatch
+import app.morphe.patches.shared.morphe.com.pairip.licensecheck.LicenseClient
+import app.morphe.util.matchSingle
+import app.morphe.util.returnEarly
 
 @Suppress("unused")
 val bypassLicenseCheckPatch =
@@ -10,5 +12,10 @@ val bypassLicenseCheckPatch =
         description = "Bypasses Play Integrity API (pairip) client-side license check.",
         default = false,
     ) {
-        dependsOn(checkLicensePatch)
+        execute {
+            LicenseClient.CheckLicenseFingerprint
+                .matchSingle()
+                .method
+                .returnEarly()
+        }
     }

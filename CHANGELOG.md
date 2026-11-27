@@ -1,3 +1,21 @@
+## [1.6.0-dev.2](https://github.com/HellLord77/media-patches/compare/v1.6.0-dev.1...v1.6.0-dev.2) (2026-11-25)
+
+### ✨ New Features
+
+* **EpicOn:** Added support for tv ([3d7f94f](https://github.com/HellLord77/media-patches/commit/3d7f94fe2679cfd4e35a85372cb49a555cb974a4))
+
+## [1.6.0-dev.1](https://github.com/HellLord77/media-patches/compare/v1.5.1-dev.1...v1.6.0-dev.1) (2026-11-21)
+
+### ✨ New Features
+
+* **EpicOn:** Added access content patch ([b90dd05](https://github.com/HellLord77/media-patches/commit/b90dd05b481c68a6837db9021fac11bcf0a040b0))
+
+## [1.5.1-dev.1](https://github.com/HellLord77/media-patches/compare/v1.5.0...v1.5.1-dev.1) (2026-11-13)
+
+### 🐛 Bug Fixes
+
+* **Addatimes:** Added heuristically resolved older series ([134b6f4](https://github.com/HellLord77/media-patches/commit/134b6f4bab5c673b96b06b2e5a338e708615de58))
+
 ## [1.5.0](https://github.com/HellLord77/media-patches/compare/v1.4.0...v1.5.0) (2026-11-10)
 
 ### ✨ New Features

@@ -19,7 +19,7 @@ private fun intercept(
     (
         response.code != HttpURLConnection.HTTP_OK ||
             runCatching {
-                !(JSONObject(response.peekBody(1024).string())["success"] as Boolean)
+                !(JSONObject(response.peekBody(1024).string()).getBoolean("success"))
             }.getOrDefault(false)
     )
 
@@ -44,7 +44,7 @@ class PlayVideoInterceptor : Interceptor {
         try {
             ContentRepository(chain, id, playVideo).apply {
                 Logger.printInfo { "movieDetails: $movieDetails" }
-                Logger.printInfo { "relatedMovieDetails: $relatedMovieDetails" }
+                Logger.printInfo { "downloadVideoFile: $downloadVideoFile" }
                 response = getResponse(response)
             }
         } catch (e: Throwable) {

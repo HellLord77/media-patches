@@ -2,6 +2,7 @@ package app.morphe.patches.bongobd.content
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.methodCall
+import app.morphe.patches.bongobd.shared.moprhe.com.bongo.bongobd.view.network.ApiServiceSaas
 import app.morphe.patches.shared.Type
 import app.morphe.patches.shared.isNotExtension
 import app.morphe.patches.shared.morphe.com.google.gson.Gson
@@ -22,6 +23,7 @@ import app.morphe.patches.shared.morphe.kotlin.collections.Iterables
 import app.morphe.patches.shared.morphe.kotlin.collections.Sets
 import app.morphe.patches.shared.morphe.kotlin.collections._ArraysKt
 import app.morphe.patches.shared.morphe.kotlin.collections._Collections
+import app.morphe.patches.shared.morphe.kotlin.coroutines.Continuation
 import app.morphe.patches.shared.morphe.kotlin.text.Strings
 import app.morphe.patches.shared.morphe.okhttp3.Request
 import app.morphe.patches.shared.morphe.okhttp3.Response
@@ -33,10 +35,10 @@ object GetContentDetailsMethodCallFingerprint :
         filters =
             listOf(
                 methodCall(
-                    definingClass = "Lcom/bongo/bongobd/view/network/ApiServiceSaas;",
+                    definingClass = ApiServiceSaas.toString(),
                     name = "getContentDetails",
-                    parameters = listOf(Type.STRING, Type.CONTINUATION),
-                    returnType = Type.OBJECT,
+                    parameters = listOf(String.toString(), Continuation.toString()),
+                    returnType = Object.toString(),
                     opcode = Opcode.INVOKE_INTERFACE,
                 ),
             ),

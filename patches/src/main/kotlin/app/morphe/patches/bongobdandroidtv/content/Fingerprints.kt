@@ -4,7 +4,7 @@ import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.StringComparisonType
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.string
-import app.morphe.patches.shared.Type
+import app.morphe.patches.bongobdandroidtv.shared.morphe.saas.ott.smarttv.ui.details.data.DetailsEndPoint
 import app.morphe.patches.shared.isNotExtension
 import app.morphe.patches.shared.morphe.java.lang.String
 import app.morphe.patches.shared.morphe.okhttp3.Request
@@ -17,9 +17,9 @@ object GetVideoDetailsDataMethodCallFingerprint :
         filters =
             listOf(
                 methodCall(
-                    definingClass = "Lsaas/ott/smarttv/ui/details/data/DetailsEndPoint;",
+                    definingClass = DetailsEndPoint.toString(),
                     name = "getVideoDetailsData",
-                    parameters = listOf(Type.STRING),
+                    parameters = listOf(String.toString()),
                     returnType = Call.toString(),
                     opcode = Opcode.INVOKE_INTERFACE,
                 ),
@@ -27,7 +27,7 @@ object GetVideoDetailsDataMethodCallFingerprint :
         custom = ::isNotExtension,
     )
 
-object RequestFingerprint : Fingerprint(
+object ResponseRequestFingerprint : Fingerprint(
     classFingerprint =
         Fingerprint(
             definingClass = "Lokhttp3/",
@@ -42,7 +42,7 @@ object RequestFingerprint : Fingerprint(
     parameters = emptyList(),
 )
 
-object HeaderFingerprint :
+object RequestHeaderFingerprint :
     Fingerprint(
         definingClass = Request.toString(),
         accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),

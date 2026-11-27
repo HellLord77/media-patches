@@ -18,8 +18,21 @@ object Response {
     object ToStringFingerprint : Fingerprint(
         definingClass = Response.toString(),
         name = "toString",
-        accessFlags = listOf(AccessFlags.PUBLIC),
+        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
         returnType = String.toString(),
         parameters = emptyList(),
     )
+
+    object Builder {
+        override fun toString() = $$"Lokhttp3/Response$Builder;"
+
+        object BuildFingerprint :
+            Fingerprint(
+                definingClass = Builder.toString(),
+                name = "build",
+                accessFlags = listOf(AccessFlags.PUBLIC),
+                returnType = Response.toString(),
+                parameters = emptyList(),
+            )
+    }
 }

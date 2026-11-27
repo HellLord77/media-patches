@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -34,7 +33,7 @@ public class AccessContentPatch {
     private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
 
     @Nullable
-    public static Object getContentDetails(@NotNull ApiServiceSaas self, @Nullable String bongoId, @NotNull Continuation<Response<ContentDetailsResponse>> continuation) {
+    public static Object getContentDetails(@NotNull ApiServiceSaas self, @NotNull String bongoId, @NotNull Continuation<Response<ContentDetailsResponse>> continuation) {
         Utils.showToastShort(String.format("bongoId: %s", bongoId));
 
         return self.getContentDetails(bongoId, new Continuation<>() {
@@ -44,7 +43,7 @@ public class AccessContentPatch {
                 return continuation.getContext();
             }
 
-            @SuppressWarnings({"unchecked", "DataFlowIssue", "KotlinInternalInJava"})
+            @SuppressWarnings({"unchecked", "KotlinInternalInJava"})
             @Override
             public void resumeWith(@NotNull Object result) {
                 if (!(result instanceof Result.Failure)) {
@@ -126,7 +125,7 @@ public class AccessContentPatch {
         var finalResponse = response;
         Logger.printDebug(() -> String.format("response: %s", finalResponse));
 
-        if (response.code() != HttpURLConnection.HTTP_OK) {
+        if (!response.isSuccessful()) {
             try {
                 @SuppressWarnings("resource") var request = response.raw().request();
                 Logger.printDebug(() -> String.format("request: %s", request));

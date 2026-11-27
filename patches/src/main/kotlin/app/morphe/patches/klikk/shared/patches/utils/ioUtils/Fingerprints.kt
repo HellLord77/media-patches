@@ -2,6 +2,7 @@ package app.morphe.patches.klikk.shared.patches.utils.ioUtils
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patches.shared.Type
+import app.morphe.patches.shared.morphe.com.android.content.Context
 import com.android.tools.smali.dexlib2.AccessFlags
 
 internal object IsUserLoggedInFingerprint :
@@ -10,7 +11,7 @@ internal object IsUserLoggedInFingerprint :
         name = "isUserLoggedIn",
         accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
         returnType = Type.boolean,
-        parameters = listOf(Type.CONTEXT),
+        parameters = listOf(Context.toString()),
     )
 
 private object HasValidSubscriptionContextFingerprint :
@@ -19,7 +20,7 @@ private object HasValidSubscriptionContextFingerprint :
         name = "hasValidSubscription",
         accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
         returnType = Type.boolean,
-        parameters = listOf(Type.CONTEXT),
+        parameters = listOf(Context.toString()),
     )
 
 private object HasValidSubscriptionStringFingerprint :
@@ -52,7 +53,7 @@ internal object ValidateVideoFingerprint :
         parameters =
             listOf(
                 "Lcom/brightcove/player/model/Video;",
-                Type.CONTEXT,
+                Context.toString(),
                 "Lcom/angel/klikk/Database/Repository;",
             ),
     )

@@ -1,0 +1,27 @@
+package app.morphe.patches.epicon.shared.morphe.com.epicchannel.epicon.model.content
+
+import app.morphe.patcher.Fingerprint
+import app.morphe.patches.shared.morphe.java.lang.Boolean
+import com.android.tools.smali.dexlib2.AccessFlags
+
+object Content {
+    override fun toString() = "Lcom/epicchannel/epicon/model/content/Content;"
+
+    @Suppress("ktlint:standard:class-naming")
+    object GetFree_PremiumFingerprint : Fingerprint(
+        definingClass = Content.toString(),
+        name = "getFree_premium",
+        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+        returnType = Boolean.toString(),
+        parameters = emptyList(),
+    )
+
+    @Suppress("ktlint:standard:class-naming")
+    object Is_PremiumFingerprint : Fingerprint(
+        definingClass = Content.toString(),
+        name = "is_premium",
+        accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+        returnType = Boolean.toString(),
+        parameters = emptyList(),
+    )
+}
